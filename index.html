@@ -75,7 +75,7 @@ nav{
     background:var(--clr-primary);
     text-align:center;
     position:relative;
-    padding-top:1rem;               /* adjusted since search bar removed */
+    padding-top:3rem;               /* space for the ticker */
 }
 nav ul{
     list-style:none;
@@ -227,9 +227,131 @@ footer{
 /* -------------------------------------------------
    8️⃣ RESPONSIVE
    ------------------------------------------------- */
-@media (max-width:600px){
-    header{padding:4rem 1rem 2rem;}
-    header h1{font-size:2rem;}
+@media (max-width:768px){
+    /* Header adjustments */
+    header{
+        padding:5rem 1rem 3rem;
+    }
+    header h1{
+        font-size:2rem;
+    }
+    header p{
+        font-size:1rem;
+    }
+    
+    /* Stock ticker on mobile */
+    tv-ticker-tape{
+        height:35px;
+        font-size:0.8rem;
+    }
+    
+    /* Navigation adjustments */
+    nav{
+        padding-top:3rem; /* Make room for ticker */
+    }
+    nav ul{
+        flex-direction:column;
+        gap:0.5rem;
+    }
+    nav li{
+        margin:0;
+    }
+    nav a{
+        padding:0.5rem 1rem;
+        display:block;
+        text-align:center;
+    }
+    
+    /* Language switcher */
+    .lang-switcher{
+        top:0.5rem;
+        right:0.5rem;
+        flex-wrap:wrap;
+        gap:0.25rem;
+    }
+    .lang-switcher button{
+        padding:0.3rem 0.5rem;
+        font-size:0.8rem;
+    }
+    
+    /* Main content */
+    main{
+        padding:0 0.5rem;
+    }
+    .section{
+        padding:2rem 1rem;
+    }
+    
+    /* About section */
+    .about{
+        grid-template-columns:1fr;
+        gap:1.5rem;
+    }
+    .about img{
+        order:1;
+    }
+    
+    /* Menu section */
+    .menu{
+        grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    }
+    
+    /* Contact form */
+    .contact form{
+        padding:0;
+    }
+    .contact input,
+    .contact textarea{
+        font-size:1rem;
+        padding:0.8rem;
+    }
+    .contact button{
+        padding:0.8rem;
+        font-size:1rem;
+    }
+    
+    /* Footer */
+    .footer__grid{
+        grid-template-columns:1fr;
+        gap:2rem;
+        text-align:center;
+    }
+    .footer__col{
+        margin-bottom:1rem;
+    }
+    .social-icons{
+        justify-content:center;
+    }
+}
+
+@media (max-width:480px){
+    /* Extra small screens */
+    header{
+        padding:4rem 1rem 2rem;
+    }
+    header h1{
+        font-size:1.8rem;
+    }
+    
+    /* Menu items */
+    .menu{
+        grid-template-columns:1fr;
+    }
+    .menu-item{
+        padding:1rem 0.5rem;
+    }
+    
+    /* Navigation */
+    nav a{
+        padding:0.4rem 0.8rem;
+        font-size:0.9rem;
+    }
+    
+    /* Language buttons */
+    .lang-switcher button{
+        padding:0.25rem 0.4rem;
+        font-size:0.75rem;
+    }
 }
 
 /* -------------------------------------------------
