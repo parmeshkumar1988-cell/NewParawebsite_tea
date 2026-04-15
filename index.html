@@ -19,8 +19,6 @@
     --clr-light:#fff;
     --max-w:1100px;
     --gap:1.5rem;
-    --heading-min:1.5rem;   /* for fluid headings */
-    --heading-max:2.8rem;
 }
 html{scroll-behavior:smooth;}
 body{
@@ -46,7 +44,7 @@ body{
    3️⃣ HEADER – COFFEE MUG BACKGROUND
    ------------------------------------------------- */
 header{
-    background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5),
+    background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
                 url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80')
                 center/cover no-repeat;
     color:var(--clr-light);
@@ -163,8 +161,6 @@ main{flex:1;}
     border-radius:.5rem;
     object-fit:cover;
 }
-
-/* MENU */
 .menu{
     display:grid;
     gap:var(--gap);
@@ -178,26 +174,6 @@ main{flex:1;}
 }
 .menu-item h3{margin-bottom:.5rem;font-size:1.2rem;color:var(--clr-primary);}
 
-/* NEWS FEED (new) */
-.news-feed{
-    display:grid;
-    gap:var(--gap);
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-}
-.news-item{
-    border:1px solid #e0e0e0;
-    background:#fff;
-    padding:1rem;
-    border-radius:.4rem;
-}
-.news-item h3{margin-bottom:.4rem;font-size:1.1rem;color:var(--clr-primary);}
-.news-item .date{
-    font-size:.85rem;
-    color:#666;
-    margin-bottom:.5rem;
-}
-
-/* CONTACT */
 .contact form{
     max-width:500px;
     margin:auto;
@@ -223,7 +199,6 @@ main{flex:1;}
 }
 .contact button:hover{background:#333;}
 
-/* FEEDBACK */
 .feedback iframe{
     width:100%;height:600px;border:none;
 }
@@ -275,8 +250,12 @@ footer{
 }
 
 /* -------------------------------------------------
-   9️⃣ FLUID SECTION HEADINGS
+   9️⃣ NEW – FLUID SECTION HEADINGS
    ------------------------------------------------- */
+:root{
+    --heading-min:1.5rem;
+    --heading-max:2.8rem;
+}
 section > h2,
 .section > h2{
     font-size:clamp(var(--heading-min),5vw,var(--heading-max));
@@ -285,7 +264,7 @@ section > h2,
 }
 
 /* -------------------------------------------------
-   🔟 INTERACTIVE SEARCH BAR
+   10️⃣ NEW – INTERACTIVE SEARCH BAR
    ------------------------------------------------- */
 .search-bar{
     background:rgba(255,255,255,.9);
@@ -372,7 +351,6 @@ section > h2,
     <ul>
         <li><a href="#about"    class="tab-link active" data-i18n="navAbout">About</a></li>
         <li><a href="#menu"     class="tab-link"      data-i18n="navMenu">Menu</a></li>
-        <li><a href="#news"     class="tab-link"      data-i18n="navNews">News</a></li>
         <li><a href="#contact"  class="tab-link"      data-i18n="navContact">Contact</a></li>
         <li><a href="#feedback" class="tab-link"      data-i18n="navFeedback">Feedback</a></li>
     </ul>
@@ -414,14 +392,6 @@ section > h2,
             <div class="menu-item"><h3 data-i18n="menuCold">Cold Brew &amp; Iced Chai</h3><p data-i18n="menuColdDesc">Refreshingly cool, served over ice with a dash of lemon.</p></div>
             <div class="menu-item"><h3 data-i18n="menuSnacks">Snacks</h3><p data-i18n="menuSnacksDesc">Samosas, paneer tikka, cheese toast, brownies – perfect companions.</p></div>
             <div class="menu-item"><h3 data-i18n="menuDesserts">Desserts</h3><p data-i18n="menuDessertsDesc">Gulab jamun, rasgulla, kulfi‑style ice‑cream.</p></div>
-        </div>
-    </section>
-
-    <!-- NEWS (NEW SECTION) -->
-    <section id="news" class="section">
-        <h2 data-i18n="newsTitle">Latest News</h2>
-        <div class="news-feed" id="news-feed">
-            <!-- News items will be injected by JS -->
         </div>
     </section>
 
@@ -496,7 +466,6 @@ section > h2,
             <ul class="footer__list">
                 <li><a href="#about" data-i18n="navAbout">About</a></li>
                 <li><a href="#menu"  data-i18n="navMenu">Menu</a></li>
-                <li><a href="#news"  data-i18n="navNews">News</a></li>
                 <li><a href="#contact" data-i18n="navContact">Contact</a></li>
                 <li><a href="#feedback" data-i18n="navFeedback">Feedback</a></li>
             </ul>
@@ -526,7 +495,7 @@ section > h2,
                 <a href="https://instagram.com/your-profile" target="_blank" rel="noopener"
                    aria-label="Instagram">
                     <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.206.056 1.97.246 2.428.413a4.92 4.92 0 011.715 1.001 4.92 4.92 0 011.001 1.715c.167.458.357 1.222.413 2.428.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.056 1.206-.246 1.97-.413 2.428a4.92 4.92 0 01-1.001 1.715 4.92 4.92 0 01-1.715 1.001c-.458.167-1.222.357-2.428.413-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.206-.056-1.97-.246-2.428-.413a4.92 4.92 0 01-1.715-1.001 4.92 4.92 0 01-1.001-1.715c-.167-.458-.357-1.222-.413-2.428-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.848c.056-1.206.246-1.97.413-2.428a4.92 4.92 0 011.001-1.715 4.92 4.92 0 011.715-1.001c.458-.167 1.222-.357 2.428-.413 1.266-.058 1.646-.07 4.85-.07zm0-2.163C8.735 0 8.332.013 7.052.072 5.771.13 4.816.341 4.06.659c-.78.329-1.44.77-2.099 1.428-.658.658-1.099 1.318-1.428 2.099-.318.756-.529 1.711-.587 2.992C0 .332 0 .735 0 12c0 11.265.332 11.668.072 12.948 .058 1.281.269 2.236.587 2.992 .329 .78 .77 1.44 1.428 2.099 .658 .658 1.318 1.099 2.099 1.428 .756 .318 1.711 .529 2.992 .587 1.28 .06 1.68 .072 4.948 .06 3.28 -0.13 3 .678 .644 .143 .036E-06 .84 .09 .039 .9 .065 .044 .1 .001 .23 .000 .1 .023
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.206.056 1.97.246 2.428.413a4.92 4.92 0 011.715 1.001 4.92 4.92 0 011.001 1.715c.167.458.357 1.222.413 2.428.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.056 1.206-.246 1.97-.413 2.428a4.92 4.92 0 01-1.001 1.715 4.92 4.92 0 01-1.715 1.001c-.458.167-1.222.357-2.428.413-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.206-.056-1.97-.246-2.428-.413a4.92 4.92 0 01-1.715-1.001 4.92 4.92 0 01-1.001-1.715c-.167-.458-.357-1.222-.413-2.428-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.848c.056-1.206.246-1.97.413-2.428a4.92 4.92 0 011.001-1.715 4.92 4.92 0 011.715-1.001c.458-.167 1.222-.357 2.428-.413 1.266-.058 1.646-.07 4.85-.07zm0-2.163C8.735 0 8.332.013 7.052.072 5.771.13 4.816.341 4.06.659c-.78.329-1.44.77-2.099 1.428-.658.658-1.099 1.318-1.428 2.099-.318.756-.529 1.711-.587 2.992C0 .332 0 .735 0 12c0 11.265.332 11.668.072 12.948  .058 1.281.269 2.236.587 2.992 .329 .78 .77 1.44 1.428 2.099 .658 .658 1.318 1.099 2.099 1.428 .756 .318 1.711 .529 2.992 .587 1.28  .06 1.68 .072 4.948  .06 3.28 -0.13 3 .678 .644 .143 .036E-06 .84 .09 .039 .9 .065 .044 .1 .001 .23 .000 .1 .023
                     </svg>
                 </a>
 
@@ -561,7 +530,6 @@ const translations = {
         heroSubtitle: "Premium handcrafted chai • Cozy cafés • Free Wi‑Fi",
         navAbout: "About",
         navMenu: "Menu",
-        navNews: "News",
         navContact: "Contact",
         navFeedback: "Feedback",
         searchPlaceholder: "Search menu…",
@@ -582,7 +550,6 @@ const translations = {
         menuSnacksDesc: "Samosas, paneer tikka, cheese toast, brownies – perfect companions.",
         menuDesserts: "Desserts",
         menuDessertsDesc: "Gulab jamun, rasgulla, kulfi‑style ice‑cream.",
-        newsTitle: "Latest News",
         contactTitle: "Get in Touch",
         contactName: "Name",
         contactEmail: "Email",
@@ -603,7 +570,6 @@ const translations = {
         heroSubtitle: "प्रिमियम हस्तनिर्मित चाय • कोज़ी कैफ़े • फ्री वाई‑फ़ाई",
         navAbout: "हमारे बारे में",
         navMenu: "मेन्यू",
-        navNews: "समाचार",
         navContact: "संपर्क",
         navFeedback: "प्रतिक्रिया",
         searchPlaceholder: "मेन्यू खोजें…",
@@ -613,7 +579,7 @@ const translations = {
         aboutCall: "<strong>हमें आपका सहयोग चाहिए।</strong> चाहे आप एक बार आएँ, शब्द‑से‑शब्द कहें, या बस “धन्यवाद” कहें – हर योगदान से हम इस परम्परा को जारी रख सकते हैं। आइए, हमारे साथ चाय पिएँ और इस प्यार को फैलाएँ।",
         menuTitle: "हम क्या पेश करते हैं",
         menuClassic: "क्लासिक चाय",
-        menuClassicDesc: "परम्परागत असम् चाय, दूध, चीनी और हमारी विशेष मसाला मिश्रण के साथ।",
+        menuClassicDesc: "परम्परागत असम चाय, दूध, चीनी और हमारी विशेष मसाला मिश्रण के साथ।",
         menuMasala: "मसाला चाय",
         menuMasalaDesc: "इलायची, अदरक, दालचीनी, लौंग एवं काली मिर्च – क्लासिक इंडियन फ़ेवरिट।",
         menuSeasonal: "सीज़नल स्पेशल्स",
@@ -624,7 +590,6 @@ const translations = {
         menuSnacksDesc: "समोसा, पनीर टिक्का, चीज़ टोस्ट, ब्राउनी – परफेक्ट कॉम्पेनियन्स।",
         menuDesserts: "डेज़र्ट्स",
         menuDessertsDesc: "गुलाब जामुन, रसगुला, कुल्फी‑स्टाइल आइस‑क्रीम।",
-        newsTitle: "नवीनतम समाचार",
         contactTitle: "हमसे संपर्क करें",
         contactName: "नाम",
         contactEmail: "ई‑मेल",
@@ -645,14 +610,13 @@ const translations = {
         heroSubtitle: "ಹಸ್ತ ನಿರ್ಮಿತ ಪ್ರೀಮಿಯಮ್ ಚಾಯ್ • ಆರಾಮದಾಯಕ ಕಾಫೆಗಳು • ಫ್ರೀ ವಿ‑ಫೈ",
         navAbout: "ನಮ್ಮ ಬಗ್ಗೆ",
         navMenu: "ಮೆನು",
-        navNews: "ವಾರ್ತೆಗಳು",
         navContact: "ಸಂಪರ್ಕ",
         navFeedback: "ಪ್ರತಿಕ್ರಿಯೆ",
         searchPlaceholder: "ಮೆನು ಹುಡುಕಿ…",
         aboutTitle: "ನಮ್ಮ ಕಥೆ",
         aboutPara1: "ಬೆಂಗಾಳೂರಿನ ಮಳೆಯ ಸಾಯಂಕಾಲ, ಯುವ ಛಾಯ್‑ಪ್ರೇಮಿ <strong>ಪರ್ಮೇಶ್</strong> ಒಂದು ಸರಳ ಸ್ಟಾಲ್‌ದಿಂದ ಬಿಸಿ ಛಾಯ್‌ ಅನ್ನು ಖರೀದಿಸುವ ಮೂಲಕ ಮಂತ್ರವನ್ನು ಕಂಡುಹಿಡಿದರು. ಛಾಯ್ ತಾಪ, ಸುಗಂಧ ಮತ್ತು ಅಂಗಡಿ ಮಾಲೀಕರೊಂದಿಗಿನ ಸಂಭಾಷಣೆಯಿಂದ – “ಈ ಭಾವನೆಯನ್ನು ನಗರದ ಎಲ್ಲ ಮೂಲೆಗಳಲ್ಲೂ ಹಂಚಿಕೊಳ್ಳಬಹುದೇ?” ಎಂಬ ಕಲ್ಪನೆ ಹುಟ್ಟಿತು.",
         aboutPara2: "ಭಾರತದ ಛಾಯ್‑ತೋಟಗಳಲ್ಲಿ ಸಂಚರಿಸಿ, ರೈತರಿಂದ ಕಲಿತು, ಮಿಶ್ರಣವನ್ನು ಪರಿಪೂರ್ಣಗೊಳಿಸಿದ ನಂತರ, <strong>ಪರ್ಮೇಶ್</strong> ಒಂದು ಚಿಕ್ಕ ತಂಡವನ್ನು ಸೇರಿಸಿ ಈ ಕಲ್ಪನೆಯನ್ನು ವಾಸ್ತವಿಕತೆಗೊಳಿಸಿದರು. ಫಲಿತಾಂಶ <strong>ಪರ್ಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್</strong> – ಪ್ರತಿ ಕಪ್ ಒಂದು ಕಥೆ ಹೇಳುವ, ಜನರು ವಿರಾಮ, ಹಂಚಿಕೊಳ್ಳುವ ಮತ್ತು ಮನೆ‑ಹೋಲಿಕೆಯ ಅನುಭವ ಪಡೆಯುವ ಸ್ಥಳ.",
-        aboutCall: "<strong>ನಮ್ಮ ಬೆಂಬಲ ಬೇಕು.</strong> ನೀವು ಒಂದು ಬಾರಿ ಭೇಟಿ ನೀಡಿ, ಮಾತು‑ಮತ್ತು‑ಮತ್ತು ಹಂಚಿಕೊಳ್ಳಿ, ಅಥವಾ “ಧನ್ಯವಾದಗಳು” ಎಂದು ಹೇಳಿ – ಪ್ರತಿಯೊಂದು ಸಹಾಯವೂ ಈ ಪರಂಪರೆಯನ್ನು ಉಳಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಬನ್ನಿ, ನಮ್ಮ ಜೊತೆ ಛಾಯ್ ಕುಡಿಯಿರಿ ಮತ್ತು ಈ ಪ್ರೀತಿಯನ್ನು ಹಂಚಿಕೊಳ್ಳೋಣ.",
+        aboutCall: "<strong>ನಮ್ಮ ಬೆಂಬಲ ಬೇಕು.</strong> ನೀವು ಒಂದು ಬಾರಿ ಭೇಟಿ ನೀಡಿ, ಮಾತು‑ಮತ್ತು‑ಮಾತು ಹಂಚಿಕೊಳ್ಳಿ, ಅಥವಾ “ಧನ್ಯವಾದಗಳು” ಎಂದು ಹೇಳಿ – ಪ್ರತಿಯೊಂದು ಸಹಾಯವೂ ಈ ಪರಂಪರೆಯನ್ನು ಉಳಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಬನ್ನಿ, ನಮ್ಮ ಜೊತೆ ಛಾಯ್ ಕುಡಿಯಿರಿ ಮತ್ತು ಈ ಪ್ರೀತಿಯನ್ನು ಹಂಚಿಕೊಳ್ಳೋಣ.",
         menuTitle: "ನಾವು ಏನು ನೀಡುತ್ತೇವೆ",
         menuClassic: "ಕ್ಲಾಸಿಕ್ ಚಾಯ್",
         menuClassicDesc: "ಪಾರಂಪರಿಕ ಅಸ್ಸಾಂ ಚಾಯ್, ಹಾಲು, ಸಕ್ಕರೆ ಮತ್ತು ನಮ್ಮ ವಿಶೇಷ ಮಸಾಲಾ ಮಿಶ್ರಣದೊಂದಿಗೆ.",
@@ -661,12 +625,11 @@ const translations = {
         menuSeasonal: "ಸೀಸನಲ್ ಸ್ಪೆಷಲ್ಸ್",
         menuSeasonalDesc: "ರೋಸ್‑ಪೆಟಲ್, ತೂಲಸಿ‑ನಿಂಬೆ, ಮಾವು‑ಮಿಂಟ್ ಮುಂತಾದ ಋತುವಿನ ರುಚಿಗಳು.",
         menuCold: "ಕೋಲ್ಡ್ ಬ್ರೂ ಮತ್ತು ಐಸ್ ಚಾಯ್",
-        menuColdDesc: "ತಾಜಾ, ಐಸ್ ಮೇಲಿನ ನಿಂಬೆ ರುಚಿ.",
+        menuColdDesc: "ತಾಜಾ, ಐಸ್‌ ಮೇಲೆ ನಿಂಬೆ ರುಚಿ.",
         menuSnacks: "ಸ್ನ್ಯಾಕ್ಸ್",
-        menuSnacksDesc: "ಸಮೋಸಾ, ಪನೀರ್ ಟಿಕ್ಕಾ, ಚೀಸ್ ಟೋಸ್ಟ್, ಬ್ರೌನಿ – ಪರಿಪೂರ್ಣ ಸಂಗಾತಿಗಳು.",
+        menuSnacksDesc: "ಸಮೋಸಾ, ಪನೀರ್ ಟಿಕ್ಕಾ, ಚೀಸ್ ಟೋಸ್ಟ್, ಬ್ರೌನಿ – ಪರಿಪೂರ್ತ ಸಂಗಾತಿಗಳು.",
         menuDesserts: "ಡಿಸೆರ್ಟ್ಸ್",
         menuDessertsDesc: "ಗುಲಾಬ್ ಜಾಮುನ್, ರಸಗುಲ್ಲಾ, ಕುಲ್ಫಿ‑ಸ್ಟೈಲ್ ಐಸ್‑ಕ್ರೀಮ್.",
-        newsTitle: "ಇತ್ತೀಚಿನ ಸುದ್ದಿಗಳು",
         contactTitle: "ಸಂಪರ್ಕಿಸಿ",
         contactName: "ಹೆಸರು",
         contactEmail: "ಇ‑ಮೇಲ್",
@@ -676,7 +639,7 @@ const translations = {
         contactPhoneLabel: "ಫೋನ್:",
         contactEmailLabel: "ಇ‑ಮೇಲ್:",
         feedbackTitle: "ಗ್ರಾಹಕರ ಅಭಿಪ್ರಾಯ",
-        feedbackIntro: "ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವನ್ನು ನಾವು ಮೌಲ್ಯಮಾಡುತ್ತೇವೆ. ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಫಾರ್ಮ್ ಅನ್ನು ಭರ್ತಿ ಮಾಡಿ.",
+        feedbackIntro: "ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವನ್ನು ನಾವು ಕೀರ್ತಿಸುತ್ತೇವೆ. ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಫಾರ್ಮ್ ಪೂರ್ತಿ ಮಾಡಿ.",
         footerTagline: "ಪ್ರತಿ ಕಪ್‌ನಲ್ಲಿ ಸಂತೋಷವನ್ನು ನೀಡಿ ☕",
         footerLinksTitle: "ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು",
         footerContactTitle: "ಸಂಪರ್ಕ",
@@ -687,13 +650,12 @@ const translations = {
         heroSubtitle: "హ్యాండ్‌క్రాఫ్ట్‌డ్ ప్రీమియమ్ చాయ్ • కోజీ కేఫ్‌లు • ఫ్రీ వై‑ఫై",
         navAbout: "మా గురించి",
         navMenu: "మెను",
-        navNews: "వార్తలు",
         navContact: "సంప్రదించండి",
         navFeedback: "ఫీడ్బ్యాక్",
         searchPlaceholder: "మెను కోసం శోధించండి…",
         aboutTitle: "మా కథ",
-        aboutPara1: "బెంగళూరులో వర్షపు సాయంత్రం, యువ చాయ్‑ప్రేవి <strong>పర్మేశ్</strong> ఒక చిన్న స్టాల్‌ నుండి వేడి చాయ్‌ని సేవించడంలో మాయను కనుగొన్నారు. చాయ్ తాప, వాసన, స్టాల్ యజమానికి చిన్న సంభాషణ – “ఈ భావనను నగరంలో ప్రతి మూలకు తీసుకెళ్తే ఎలా ఉంటుంది?” అనే సరళమైన ఆలోచన ఏర్పడింది.",
-        aboutPara2: "భారతదేశ చాయ్‑తోటలలో ప్రయాణించి, రైతుల నుంచి నేర్చుకుని, మిశ్రమాన్ని పరిపూర్ణం చేసిన తర్వాత, <strong>పర్మేశ్</strong> ఒక చిన్న బృందాన్ని జమచేసి ఈ ఆలోచనను వాస్తవికంగా మార్చారు. ఫలితంగా <strong>పర్మేశ్ చాయ్ పాయింట్</strong> – ప్రతి కప్ ఒక కథ చెప్పే, ప్రజలు విరామం తీసుకోవడానికి, పంచుకోవడానికి, ఇంటిలాగా అనిపించే స్థలం.",
+        aboutPara1: "బెంగళూరులో వర్షపు సాయంత్రం, యువ చాయ్‑ప్రేమి <strong>పర్మేశ్</strong> ఒక చిన్న స్టాల్‌ నుండి వేడి చాయ్‌ని సేవించడంలో మాయను కనుగొన్నారు. చాయ్‌ వేడి, వాసన, స్టాల్ యజమానికి చిన్న సంభాషణ – “ఈ భావనను నగరంలో ప్రతి మూలకు తీసుకెళ్తే ఎలా ఉంటుంది?” అనే సరళమైన ఆలోచన ఏర్పడింది.",
+        aboutPara2: "భారతదేశ చాయ్‑తోటలలో ప్రయాణించి, రైతుల నుంచి నేర్చుకుని, మిశ్రమాన్ని పరిపూర్ణం చేసిన తర్వాత, <strong>పర్మేశ్</strong> ఒక చిన్న బృందాన్ని జమచేసి ఈ ఆలోచనను వాస్తవికంగా మార్చారు. ఫలితంగా <strong>పర్మేశ్ చాయ్ పాయింట్</strong> – ప్రతి కప్‌ ఒక కథ చెప్పే, ప్రజలు విరామం తీసుకోవడానికి, పంచుకోవడానికి, ఇంటిలాగా అనిపించే స్థలం.",
         aboutCall: "<strong>మీ సహాయము అవసరం.</strong> మీరు ఒకసారి వచ్చి, మాట‑మాట‑మాటు చెప్పండి, లేదా “ధన్యవాదాలు” అని చెప్పండి – ప్రతి సహకారం ఈ సంప్రదాయాన్ని కొనసాగించడంలో సహాయపడుతుంది. మనతో చాయ్ తాగండి, ఈ ప్రేమను పంచుకుందాం.",
         menuTitle: "మేము ఏమి అందిస్తాం",
         menuClassic: "క్లాసిక్ చాయ్",
@@ -708,7 +670,6 @@ const translations = {
         menuSnacksDesc: "సమోసాలు, paneer టిక్కా, చీస్ టోస్ట్, బrownies – పరిపూర్ణమైన తోడుదారులు.",
         menuDesserts: "డెజర్ట్స్",
         menuDessertsDesc: "గులాబ్ జామున్, రసగుల్లా, కుల్ఫీ‑స్టైల్ ఐస్‑క్రీమ్.",
-        newsTitle: "తాజా వార్తలు",
         contactTitle: "మమ్మల్ని సంప్రదించండి",
         contactName: "పేరు",
         contactEmail: "ఈ‑మెయిల్",
@@ -722,7 +683,7 @@ const translations = {
         footerTagline: "ప్రతి కప్పులో సంతోషాన్ని సేవించండి ☕",
         footerLinksTitle: "త్వరిత లింకులు",
         footerContactTitle: "సంప్రదించండి",
-        footerFollowTitle: "ఫాలో అవండి"
+        footerFollowTitle: "ఫాలో అవ్వండి"
     }
 };
 
@@ -731,11 +692,15 @@ function applyTranslations(lang) {
     const dict = translations[lang] || translations.en;
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.dataset.i18n;
-        if (key && dict[key]) el.innerHTML = dict[key];
+        if (key && dict[key]) {
+            el.innerHTML = dict[key];
+        }
     });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.dataset.i18nPlaceholder;
-        if (key && dict[key]) el.setAttribute('placeholder', dict[key]);
+        if (key && dict[key]) {
+            el.setAttribute('placeholder', dict[key]);
+        }
     });
     document.documentElement.lang = lang;
 }
@@ -745,12 +710,13 @@ document.querySelectorAll('.lang-switcher button').forEach(btn => {
     btn.addEventListener('click', () => {
         const lang = btn.dataset.lang;
         applyTranslations(lang);
-        document.querySelectorAll('.lang-switcher button')
-                .forEach(b => b.classList.toggle('active', b===btn));
+        document.querySelectorAll('.lang-switcher button').forEach(b => {
+            b.classList.toggle('active', b === btn);
+        });
     });
 });
 
-/* ---------- INITIAL LANGUAGE ---------- */
+/* ---------- INITIAL LANG ---------- */
 applyTranslations('en');
 
 /* ---------- TAB NAVIGATION ---------- */
@@ -760,14 +726,14 @@ const sections = document.querySelectorAll('.section');
 tabLinks.forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
-        const target = link.getAttribute('href').substring(1);
-        tabLinks.forEach(l => l.classList.toggle('active', l===link));
-        sections.forEach(sec => sec.classList.toggle('active', sec.id===target));
+        const targetId = link.getAttribute('href').substring(1);
+        tabLinks.forEach(l => l.classList.toggle('active', l === link));
+        sections.forEach(sec => sec.classList.toggle('active', sec.id === targetId));
     });
 });
 
 /* -------------------------------------------------
-   11️⃣ INTERACTIVE SEARCH FUNCTIONALITY
+   12️⃣ INTERACTIVE SEARCH FUNCTIONALITY
    ------------------------------------------------- */
 function debounce(fn, delay) {
     let timer;
@@ -790,17 +756,17 @@ let previousQuery = '';
 
 function runSearch(e) {
     const query = e.target.value.trim().toLowerCase();
-    if (query===previousQuery) return;
+    if (query === previousQuery) return;
     previousQuery = query;
 
-    /* Reset view */
+    /* reset view */
     menuItems.forEach(item => {
         item.style.display = '';
         removeHighlight(item.querySelector('h3'));
         removeHighlight(item.querySelector('p'));
     });
     suggestionBox.hidden = true;
-    searchInput.setAttribute('aria-expanded','false');
+    searchInput.setAttribute('aria-expanded', 'false');
 
     if (!query) return;
 
@@ -811,14 +777,15 @@ function runSearch(e) {
     });
 
     menuItems.forEach(item => {
-        if (!matches.includes(item)) item.style.display='none';
-        else {
+        if (!matches.includes(item)) {
+            item.style.display = 'none';
+        } else {
             highlight(item.querySelector('h3'), query);
-            highlight(item.querySelector('p'), query);
+            highlight(item.querySelector('p'),  query);
         }
     });
 
-    if (matches.length){
+    if (matches.length) {
         const html = matches.slice(0,5).map((item,i)=> {
             const idx   = menuItems.indexOf(item);
             const title = item.querySelector('h3').textContent;
@@ -831,31 +798,32 @@ function runSearch(e) {
 }
 searchInput.addEventListener('input', debounce(runSearch,200));
 
-/* Keyboard navigation inside suggestions */
+/* Keyboard navigation in suggestions */
 searchInput.addEventListener('keydown', e => {
     if (suggestionBox.hidden) return;
+
     const items = [...suggestionBox.querySelectorAll('li')];
     const active = suggestionBox.querySelector('[aria-selected="true"]');
     let curIdx = active ? items.indexOf(active) : -1;
 
-    if (e.key === 'ArrowDown'){
+    if (e.key === 'ArrowDown') {
         e.preventDefault();
-        const next = (curIdx+1) % items.length;
+        const next = (curIdx + 1) % items.length;
         if (active) active.removeAttribute('aria-selected');
         items[next].setAttribute('aria-selected','true');
         items[next].focus();
-    } else if (e.key === 'ArrowUp'){
+    } else if (e.key === 'ArrowUp') {
         e.preventDefault();
-        const prev = (curIdx-1 + items.length) % items.length;
+        const prev = (curIdx - 1 + items.length) % items.length;
         if (active) active.removeAttribute('aria-selected');
         items[prev].setAttribute('aria-selected','true');
         items[prev].focus();
-    } else if (e.key === 'Enter'){
-        if (active){
+    } else if (e.key === 'Enter') {
+        if (active) {
             e.preventDefault();
             activateSuggestion(active);
         }
-    } else if (e.key === 'Escape'){
+    } else if (e.key === 'Escape') {
         suggestionBox.hidden = true;
         searchInput.setAttribute('aria-expanded','false');
     }
@@ -866,7 +834,6 @@ suggestionBox.addEventListener('click', e => {
     if (e.target.matches('li')) activateSuggestion(e.target);
 });
 
-/* What happens when a suggestion is chosen */
 function activateSuggestion(el){
     const idx  = Number(el.dataset.index);
     const card = menuItems[idx];
@@ -886,59 +853,6 @@ document.addEventListener('click', e => {
         searchInput.setAttribute('aria-expanded','false');
     }
 });
-
-/* -------------------------------------------------
-   12️⃣ NEWS FEED (STATIC sample data)
-   ------------------------------------------------- */
-const newsData = [
-    {
-        title: "New Outlet Opens in Mumbai",
-        date: "2026-04-10",
-        summary: "We are thrilled to announce the grand opening of our brand‑new Mumbai outlet. Come taste the magic!",
-        link: "#"
-    },
-    {
-        title: "Parmesh Chai Point Wins ‘Best Café’ Award",
-        date: "2026-03-22",
-        summary: "Our dedication to quality and community earned us the prestigious Best Café award this year.",
-        link: "#"
-    },
-    {
-        title: "Introducing the Mango‑Mint Seasonal Special",
-        date: "2026-03-05",
-        summary: "A refreshing twist of mango and mint – available for a limited time.",
-        link: "#"
-    },
-    {
-        title: "Free Wi‑Fi Extended to All Outlets",
-        date: "2026-02-18",
-        summary: "Stay connected! All our cafés now offer fast, free Wi‑Fi for customers.",
-        link: "#"
-    },
-    {
-        title: "Charity Drive: Supporting Local Tea Farmers",
-        date: "2026-01-30",
-        summary: "We partnered with NGOs to support sustainable farming for our tea growers.",
-        link: "#"
-    }
-];
-
-function renderNews(){
-    const container = document.getElementById('news-feed');
-    const html = newsData.map(item=>`
-        <div class="news-item">
-            <h3>${item.title}</h3>
-            <div class="date">${new Date(item.date).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'})}</div>
-            <p>${item.summary}</p>
-            <a href="${item.link}" target="_blank" rel="noopener">Read more →</a>
-        </div>
-    `).join('');
-    container.innerHTML = html;
-}
-
-/* Run once on page load */
-renderNews();
-
 </script>
 
 </body>
