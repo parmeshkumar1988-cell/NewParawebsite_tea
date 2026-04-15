@@ -1,500 +1,668 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Parmesh Chai Point – Interactive Site</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description"
-          content="Parmesh Chai Point – handcrafted chai, cozy cafés and free Wi‑Fi across India.">
+<meta charset="UTF-8">
+<title>Parmesh Chai Point – Interactive Site</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description"
+      content="Parmesh Chai Point – handcrafted chai, cozy cafés and free Wi‑Fi across India.">
 
-    <style>
-             /* -------------------------------------------------
-        1️⃣ BASIC RESET & VARIABLES
-        ------------------------------------------------- */
-             *, *::before, *::after {
-                 box-sizing: border-box;
-                 margin: 0;
-                 padding: 0
-             }
+<style>
+/* -------------------------------------------------
+   1️⃣ BASIC RESET & VARIABLES
+   ------------------------------------------------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+    --font-main:"Arial",Helvetica,sans-serif;
+    --clr-primary:#4facfe;
+    --clr-bg:#fafafa;
+    --clr-dark:#111;
+    --clr-light:#fff;
+    --max-w:1100px;
+    --gap:1.5rem;
+}
+html{scroll-behavior:smooth;}
+body{
+    font-family:var(--font-main);
+    background:var(--clr-bg);
+    color:var(--clr-dark);
+    line-height:1.5;
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
 
-             :root {
-                 --font-main: "Arial",Helvetica,sans-serif;
-                 --clr-primary: #4facfe;
-                 --clr-bg: #fafafa;
-                 --clr-dark: #111;
-                 --clr-light: #fff;
-                 --max-w: 1100px;
-                 --gap: 1.5rem;
-             }
+/* -------------------------------------------------
+   2️⃣ SKIP LINK (accessibility)
+   ------------------------------------------------- */
+.skip-link{
+    position:absolute; left:-9999px; top:-9999px;
+    background:#000;color:#fff;padding:.5rem;z-index:1000;
+}
+.skip-link:focus{left:1rem;top:1rem}
 
-             html {
-                 scroll-behavior: smooth;
-             }
+/* -------------------------------------------------
+   3️⃣ HEADER – COFFEE MUG BACKGROUND
+   ------------------------------------------------- */
+header{
+    background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+                url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80')
+                center/cover no-repeat;
+    color:var(--clr-light);
+    text-align:center;
+    padding:6rem 1rem 4rem;
+}
+header h1{font-size:2.5rem;margin-bottom:.5rem;}
+header p{font-size:1.1rem;}
 
-             body {
-                 font-family: var(--font-main);
-                 background: var(--clr-bg);
-                 color: var(--clr-dark);
-                 line-height: 1.5;
-                 display: flex;
-                 flex-direction: column;
-                 min-height: 100vh;
-             }
+/* -------------------------------------------------
+   4️⃣ NAVIGATION (tabs) + Language selector
+   ------------------------------------------------- */
+nav{
+    background:var(--clr-primary);
+    text-align:center;
+    position:relative;
+}
+nav ul{
+    list-style:none;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    position:relative;
+    z-index:1;
+}
+nav li{margin:0 .75rem;}
+nav a{
+    display:block;
+    padding:.75rem 0;
+    color:var(--clr-light);
+    font-weight:bold;
+    cursor:pointer;
+}
+nav a.active,
+nav a:hover,
+nav a:focus{background:rgba(0,0,0,.2);}
 
-             /* -------------------------------------------------
-        2️⃣ SKIP LINK (accessibility)
-        ------------------------------------------------- */
-             .skip-link {
-                 position: absolute;
-                 left: -9999px;
-                 top: -9999px;
-                 background: #000;
-                 color: #fff;
-                 padding: .5rem;
-                 z-index: 1000;
-             }
+/* language switcher – top‑right */
+.lang-switcher{
+    position:absolute;
+    top:0.5rem; right:0.5rem;
+    display:flex;
+    gap:.5rem;
+    z-index:2;               /* above the nav list */
+    pointer-events:auto;
+}
+.lang-switcher button{
+    background:rgba(255,255,255,.2);
+    color:var(--clr-light);
+    border:none;
+    padding:.4rem .6rem;
+    cursor:pointer;
+    font-weight:bold;
+    border-radius:.3rem;
+}
+.lang-switcher button.active,
+.lang-switcher button:hover{background:rgba(255,255,255,.4);}
 
-                 .skip-link:focus {
-                     left: 1rem;
-                     top: 1rem
-                 }
+/* -------------------------------------------------
+   5️⃣ MAIN SECTIONS (only one visible)
+   ------------------------------------------------- */
+main{flex:1;}
+.section{
+    max-width:var(--max-w);
+    margin:auto;
+    padding:3rem 1rem;
+    display:none;               /* hidden by default */
+}
+.section.active{display:block;}
 
-             /* -------------------------------------------------
-        3️⃣ HEADER – COFFEE MUG BACKGROUND
-        ------------------------------------------------- */
-             header {
-                 background: linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)), url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
-                 color: var(--clr-light);
-                 text-align: center;
-                 padding: 6rem 1rem 4rem;
-             }
+/* -------------------------------------------------
+   6️⃣ CONTENT‑SPECIFIC STYLES
+   ------------------------------------------------- */
+.about{
+    display:grid;
+    gap:var(--gap);
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    align-items:start;
+}
+.about img{
+    width:100%;
+    border-radius:.5rem;
+    object-fit:cover;
+}
+.menu{
+    display:grid;
+    gap:var(--gap);
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+}
+.menu-item{
+    border:1px solid #e0e0e0;
+    padding:1rem;
+    border-radius:.4rem;
+    background:#fff;
+}
+.menu-item h3{margin-bottom:.5rem;font-size:1.2rem;color:var(--clr-primary);}
 
-                 header h1 {
-                     font-size: 2.5rem;
-                     margin-bottom: .5rem;
-                 }
+.contact form{
+    max-width:500px;
+    margin:auto;
+    display:grid;
+    gap:.75rem;
+}
+.contact label{font-weight:bold;}
+.contact input,
+.contact textarea{
+    width:100%;
+    padding:.6rem;
+    border:1px solid #ccc;
+    border-radius:.3rem;
+    font-family:inherit;
+}
+.contact button{
+    background:var(--clr-dark);
+    color:var(--clr-light);
+    border:none;
+    padding:.75rem;
+    cursor:pointer;
+    border-radius:.3rem;
+}
+.contact button:hover{background:#333;}
 
-                 header p {
-                     font-size: 1.1rem;
-                 }
+.feedback iframe{
+    width:100%;height:600px;border:none;
+}
 
-             /* -------------------------------------------------
-        4️⃣ NAVIGATION (tabs)
-        ------------------------------------------------- */
-             nav {
-                 background: var(--clr-primary);
-                 text-align: center;
-             }
+/* -------------------------------------------------
+   7️⃣ FOOTER
+   ------------------------------------------------- */
+footer{
+    background:#111;
+    color:#ccc;
+    text-align:center;
+    padding:2rem 1rem;
+    margin-top:auto;
+}
+.footer__grid{
+    display:grid;
+    gap:var(--gap);
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    max-width:var(--max-w);
+    margin:auto;
+}
+.footer__logo{width:80px;margin-bottom:.5rem;}
+.footer__list{list-style:none;padding:0;}
+.footer__list li{margin-bottom:.4rem;}
+.social-icons{
+    display:flex;
+    gap:.75rem;
+    justify-content:center;
+}
+.social-icons a{
+    display:inline-block;
+    width:24px;height:24px;
+    color:inherit;
+}
+.social-icons a:hover,
+.social-icons a:focus{opacity:.8;}
+.footer__bottom{
+    margin-top:2rem;
+    font-size:.85rem;
+    color:#aaa;
+}
 
-                 nav ul {
-                     list-style: none;
-                     display: flex;
-                     flex-wrap: wrap;
-                     justify-content: center;
-                 }
-
-                 nav li {
-                     margin: 0 .75rem;
-                 }
-
-                 nav a {
-                     display: block;
-                     padding: .75rem 0;
-                     color: var(--clr-light);
-                     font-weight: bold;
-                     cursor: pointer;
-                 }
-
-                     nav a.active,
-                     nav a:hover,
-                     nav a:focus {
-                         background: rgba(0,0,0,.2);
-                     }
-
-             /* -------------------------------------------------
-        5️⃣ MAIN SECTIONS (only one visible)
-        ------------------------------------------------- */
-             main {
-                 flex: 1;
-             }
-
-             .section {
-                 max-width: var(--max-w);
-                 margin: auto;
-                 padding: 3rem 1rem;
-                 display: none; /* hidden by default */
-             }
-
-                 .section.active {
-                     display: block;
-                 }
-
-             /* -------------------------------------------------
-        6️⃣ CONTENT‑SPECIFIC STYLES
-        ------------------------------------------------- */
-             .about {
-                 display: grid;
-                 gap: var(--gap);
-                 grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
-                 align-items: start;
-             }
-
-                 .about img {
-                     width: 100%;
-                     border-radius: .5rem;
-                     object-fit: cover;
-                 }
-
-             .menu {
-                 display: grid;
-                 gap: var(--gap);
-                 grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
-             }
-
-             .menu-item {
-                 border: 1px solid #e0e0e0;
-                 padding: 1rem;
-                 border-radius: .4rem;
-                 background: #fff;
-             }
-
-                 .menu-item h3 {
-                     margin-bottom: .5rem;
-                     font-size: 1.2rem;
-                     color: var(--clr-primary);
-                 }
-
-             .contact form {
-                 max-width: 500px;
-                 margin: auto;
-                 display: grid;
-                 gap: .75rem;
-             }
-
-             .contact label {
-                 font-weight: bold;
-             }
-
-             .contact input,
-             .contact textarea {
-                 width: 100%;
-                 padding: .6rem;
-                 border: 1px solid #ccc;
-                 border-radius: .3rem;
-                 font-family: inherit;
-             }
-
-             .contact button {
-                 background: var(--clr-dark);
-                 color: var(--clr-light);
-                 border: none;
-                 padding: .75rem;
-                 cursor: pointer;
-                 border-radius: .3rem;
-             }
-
-                 .contact button:hover {
-                     background: #333;
-                 }
-
-             .feedback iframe {
-                 width: 100%;
-                 height: 600px;
-                 border: none;
-             }
-
-             /* -------------------------------------------------
-        7️⃣ FOOTER
-        ------------------------------------------------- */
-             footer {
-                 background: #111;
-                 color: #ccc;
-                 text-align: center;
-                 padding: 2rem 1rem;
-                 margin-top: auto;
-             }
-
-             .footer__grid {
-                 display: grid;
-                 gap: var(--gap);
-                 grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
-                 max-width: var(--max-w);
-                 margin: auto;
-             }
-
-             .footer__logo {
-                 width: 80px;
-                 margin-bottom: .5rem;
-             }
-
-             .footer__list {
-                 list-style: none;
-                 padding: 0;
-             }
-
-                 .footer__list li {
-                     margin-bottom: .4rem;
-                 }
-
-             .social-icons {
-                 display: flex;
-                 gap: .75rem;
-                 justify-content: center;
-             }
-
-                 .social-icons a {
-                     display: inline-block;
-                     width: 24px;
-                     height: 24px;
-                     color: inherit;
-                 }
-
-                     .social-icons a:hover,
-                     .social-icons a:focus {
-                         opacity: .8;
-                     }
-
-             .footer__bottom {
-                 margin-top: 2rem;
-                 font-size: .85rem;
-                 color: #aaa;
-             }
-
-             /* -------------------------------------------------
-        8️⃣ RESPONSIVE
-        ------------------------------------------------- */
-             @media (max-width:600px) {
-                 header {
-                     padding: 4rem 1rem 2rem;
-                 }
-
-                     header h1 {
-                         font-size: 2rem;
-                     }
-             }
-    </style>
+/* -------------------------------------------------
+   8️⃣ RESPONSIVE
+   ------------------------------------------------- */
+@media (max-width:600px){
+    header{padding:4rem 1rem 2rem;}
+    header h1{font-size:2rem;}
+}
+</style>
 </head>
 
 <body>
 
-    <a href="#main" class="skip-link">Skip to main content</a>
+<a href="#main" class="skip-link">Skip to main content</a>
 
-    <!-- ==================== HERO ==================== -->
-    <header>
-        <h1>Parmesh Chai Point</h1>
-        <p>Premium handcrafted chai • Cozy cafés • Free Wi‑Fi</p>
-    </header>
+<!-- ==================== HEADER ==================== -->
+<header>
+    <h1 data-i18n="heroTitle">Parmesh Chai Point</h1>
+    <p data-i18n="heroSubtitle">Premium handcrafted chai • Cozy cafés • Free Wi‑Fi</p>
+</header>
 
-    <!-- ==================== NAV (TAB STYLE) ==================== -->
-    <nav aria-label="Primary navigation">
-        <ul>
-            <li><a href="#about" class="tab-link active">About</a></li>
-            <li><a href="#menu" class="tab-link">Menu</a></li>
-            <li><a href="#contact" class="tab-link">Contact</a></li>
-            <li><a href="#feedback" class="tab-link">Feedback</a></li>
-        </ul>
-    </nav>
+<!-- ==================== NAV (TAB STYLE) + LANG SWITCHER ==================== -->
+<nav aria-label="Primary navigation">
+    <!-- Language selector -->
+    <div class="lang-switcher">
+        <button data-lang="en" class="active">EN</button>
+        <button data-lang="hi">हिन्द</button>
+        <button data-lang="kn">ಕನ್ನಡ</button>
+        <button data-lang="te">తెలుగు</button>
+        <button data-lang="ta">தமிழ்</button>
+    </div>
 
-    <!-- ==================== MAIN (TAB CONTENT) ==================== -->
-    <main id="main">
+    <ul>
+        <li><a href="#about"    class="tab-link active" data-i18n="navAbout">About</a></li>
+        <li><a href="#menu"     class="tab-link"      data-i18n="navMenu">Menu</a></li>
+        <li><a href="#contact"  class="tab-link"      data-i18n="navContact">Contact</a></li>
+        <li><a href="#feedback" class="tab-link"      data-i18n="navFeedback">Feedback</a></li>
+    </ul>
+</nav>
 
-        <!-- ABOUT – SHORT STORY & CALL TO ACTION -->
-        <section id="about" class="section active">
-            <h2>Our Story</h2>
-            <div class="about">
-                <img src="https://picsum.photos/600/400?grayscale"
-                     alt="Cozy interior of a Parmesh Chai Point outlet"
-                     loading="lazy">
-                <div>
-                    <p>
-                        One rainy evening in Bangalore, a young tea‑lover named <strong>Arjun Parmesh</strong>
-                        discovered the magic of a steaming cup of chai served from a humble stall.
-                        The warmth, the aroma, and the brief conversation with the stall‑owner sparked a simple idea:
-                        <em>“What if we could bring that feeling to every corner of the city?”</em>
-                    </p>
+<!-- ==================== MAIN (TAB CONTENT) ==================== -->
+<main id="main">
 
-                    <p>
-                        After years of traveling India’s tea‑growing regions, learning from farmers,
-                        and perfecting the blend, Arjun gathered a small team to turn the idea into reality.
-                        The result is **Parmesh Chai Point** – a space where every cup tells a story,
-                        where people can pause, share, and feel at home.
-                    </p>
+    <!-- ABOUT – STORY -->
+    <section id="about" class="section active">
+        <h2 data-i18n="aboutTitle">Our Story</h2>
+        <div class="about">
+            <img src="https://picsum.photos/600/400?grayscale"
+                 alt="Cozy interior of a Parmesh Chai Point outlet"
+                 loading="lazy">
+            <div>
+                <p data-i18n="aboutPara1">
+                    One rainy evening in Bangalore, a young tea‑lover named <strong>Arjun Parmesh</strong> discovered the magic of a steaming cup of chai served from a humble stall. The warmth, the aroma, and the brief conversation with the stall‑owner sparked a simple idea: “What if we could bring that feeling to every corner of the city?”
+                </p>
 
-                    <p style="margin-top:1rem;">
-                        <strong>We need your support.</strong> Whether it’s a visit, a word‑of‑mouth,
-                        or a simple “thank you”, every bit helps us keep the tradition alive.
-                        Join us, sip with us, and let’s spread the love for chai together.
-                    </p>
-                </div>
+                <p data-i18n="aboutPara2">
+                    After years of traveling India’s tea‑growing regions, learning from farmers, and perfecting the blend, Arjun gathered a small team to turn the idea into reality. The result is <strong>Parmesh Chai Point</strong> – a space where every cup tells a story, where people can pause, share, and feel at home.
+                </p>
+
+                <p data-i18n="aboutCall" style="margin-top:1rem;">
+                    <strong>We need your support.</strong> Whether it’s a visit, a word‑of‑mouth, or a simple “thank you”, every bit helps us keep the tradition alive. Join us, sip with us, and let’s spread the love for chai together.
+                </p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- MENU -->
-        <section id="menu" class="section">
-            <h2>What We Serve</h2>
-            <div class="menu">
-                <div class="menu-item"><h3>Classic Chai</h3><p>Traditional Assam tea with milk, sugar and our signature spice blend.</p></div>
-                <div class="menu-item"><h3>Masala Chai</h3><p>Cardamom, ginger, cinnamon, clove &amp; pepper – the classic Indian favorite.</p></div>
-                <div class="menu-item"><h3>Seasonal Specials</h3><p>Rotating flavors like Rose‑Petal, Tulsi‑Lemon, Mango‑Mint.</p></div>
-                <div class="menu-item"><h3>Cold Brew &amp; Iced Chai</h3><p>Refreshingly cool, served over ice with a dash of lemon.</p></div>
-                <div class="menu-item"><h3>Snacks</h3><p>Samosas, paneer tikka, cheese toast, brownies – perfect companions.</p></div>
-                <div class="menu-item"><h3>Desserts</h3><p>Gulab jamun, rasgulla, kulfi‑style ice‑cream.</p></div>
-            </div>
-        </section>
+    <!-- MENU -->
+    <section id="menu" class="section">
+        <h2 data-i18n="menuTitle">What We Serve</h2>
+        <div class="menu">
+            <div class="menu-item"><h3 data-i18n="menuClassic">Classic Chai</h3><p data-i18n="menuClassicDesc">Traditional Assam tea with milk, sugar and our signature spice blend.</p></div>
+            <div class="menu-item"><h3 data-i18n="menuMasala">Masala Chai</h3><p data-i18n="menuMasalaDesc">Cardamom, ginger, cinnamon, clove &amp; pepper – the classic Indian favorite.</p></div>
+            <div class="menu-item"><h3 data-i18n="menuSeasonal">Seasonal Specials</h3><p data-i18n="menuSeasonalDesc">Rotating flavors like Rose‑Petal, Tulsi‑Lemon, Mango‑Mint.</p></div>
+            <div class="menu-item"><h3 data-i18n="menuCold">Cold Brew &amp; Iced Chai</h3><p data-i18n="menuColdDesc">Refreshingly cool, served over ice with a dash of lemon.</p></div>
+            <div class="menu-item"><h3 data-i18n="menuSnacks">Snacks</h3><p data-i18n="menuSnacksDesc">Samosas, paneer tikka, cheese toast, brownies – perfect companions.</p></div>
+            <div class="menu-item"><h3 data-i18n="menuDesserts">Desserts</h3><p data-i18n="menuDessertsDesc">Gulab jamun, rasgulla, kulfi‑style ice‑cream.</p></div>
+        </div>
+    </section>
 
-        <!-- CONTACT -->
-        <section id="contact" class="section">
-            <h2>Get in Touch</h2>
-            <form action="https://formspree.io/f/xbdqlgnv"
-                  method="POST"
-                  class="contact"
-                  novalidate
-                  aria-describedby="form-status">
-                <label for="name">Name</label>
-                <input id="name" name="name" type="text" placeholder="Your name" required>
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+        <h2 data-i18n="contactTitle">Get in Touch</h2>
+        <form action="https://formspree.io/f/xbdqlgnv"
+              method="POST"
+              class="contact"
+              novalidate
+              aria-describedby="form-status">
+            <label for="name" data-i18n="contactName">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" required>
 
-                <label for="email">Email</label>
-                <input id="email" name="email" type="email"
-                       placeholder="you@example.com" required>
+            <label for="email" data-i18n="contactEmail">Email</label>
+            <input id="email" name="email" type="email"
+                   placeholder="you@example.com" required>
 
-                <label for="msg">Message</label>
-                <textarea id="msg" name="message"
-                          placeholder="How can we help?" rows="4" required></textarea>
+            <label for="msg" data-i18n="contactMessage">Message</label>
+            <textarea id="msg" name="message"
+                      placeholder="How can we help?" rows="4" required></textarea>
 
-                <!-- Honeypot (spam protection) -->
-                <div style="position:absolute;left:-9999px;">
-                    <label>Leave empty <input name="_gotcha"></label>
-                </div>
-
-                <button type="submit">Send Message</button>
-                <p id="form-status" aria-live="polite"></p>
-            </form>
-
-            <p style="margin-top:1.5rem; text-align:center;">
-                <strong>Address:</strong> Bangalore, India &nbsp;|&nbsp;
-                <strong>Phone:</strong> +91 7760 887 077 &nbsp;|&nbsp;
-                <strong>Email:</strong> <a href="mailto:sasvadash@gmail.com">sasvadash@gmail.com</a>
-            </p>
-        </section>
-
-        <!-- FEEDBACK -->
-        <section id="feedback" class="section">
-            <h2>Customer Feedback</h2>
-            <p>We value your thoughts. Please fill out the short form below.</p>
-
-            <div class="feedback">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc19WAQGvHrXOz3lKsCxBnISWNiNh0EA1ZNJL7WnMfEqnfU0g/viewform?embedded=true"
-                        loading="lazy"
-                        title="Customer feedback form">
-                </iframe>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- ==================== FOOTER ==================== -->
-    <footer>
-        <div class="footer__grid">
-
-            <!-- LOGO / BRIEF -->
-            <div class="footer__col">
-                <svg class="footer__logo" viewBox="0 0 100 100" aria-labelledby="logoTitle" role="img">
-                    <title id="logoTitle">Parmesh Chai Point logo</title>
-                    <circle cx="50" cy="50" r="48" stroke="#fff" stroke-width="4" fill="none" />
-                    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
-                          font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#fff">PCP</text>
-                </svg>
-                <p>Serving happiness in every cup ☕</p>
+            <!-- Honeypot (spam protection) -->
+            <div style="position:absolute;left:-9999px;">
+                <label>Leave empty <input name="_gotcha"></label>
             </div>
 
-            <!-- QUICK LINKS -->
-            <div class="footer__col">
-                <h4>Quick Links</h4>
-                <ul class="footer__list">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#menu">Menu</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#feedback">Feedback</a></li>
-                </ul>
-            </div>
+            <button type="submit" data-i18n="contactSend">Send Message</button>
+            <p id="form-status" aria-live="polite"></p>
+        </form>
 
-            <!-- CONTACT INFO -->
-            <div class="footer__col">
-                <h4>Contact</h4>
-                <p>📍 Bangalore, India</p>
-                <p>📞 +91 7760 887 077</p>
-                <p>📧 <a href="mailto:sasvadash@gmail.com">sasvadash@gmail.com</a></p>
-            </div>
+        <p style="margin-top:1.5rem; text-align:center;">
+            <strong data-i18n="contactAddrLabel">Address:</strong> Bangalore, India &nbsp;|&nbsp;
+            <strong data-i18n="contactPhoneLabel">Phone:</strong> +91 7760 887 077 &nbsp;|&nbsp;
+            <strong data-i18n="contactEmailLabel">Email:</strong> <a href="mailto:sasvadash@gmail.com">sasvadash@gmail.com</a>
+        </p>
+    </section>
 
-            <!-- SOCIAL MEDIA -->
-            <div class="footer__col">
-                <h4>Follow Us</h4>
-                <div class="social-icons">
-                    <!-- Facebook -->
-                    <a href="https://facebook.com/your-page" target="_blank" rel="noopener"
-                       aria-label="Facebook">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24h11.493V14.709h-3.13v-3.622h3.13V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.466.099 2.797.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.762v2.31h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.326-.597 1.326-1.326V1.326C24 .597 23.403 0 22.675 0z" />
-                        </svg>
-                    </a>
+    <!-- FEEDBACK -->
+    <section id="feedback" class="section">
+        <h2 data-i18n="feedbackTitle">Customer Feedback</h2>
+        <p data-i18n="feedbackIntro">We value your thoughts. Please fill out the short form below.</p>
 
-                    <!-- Instagram -->
-                    <a href="https://instagram.com/your-profile" target="_blank" rel="noopener"
-                       aria-label="Instagram">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.206.056 1.97.246 2.428.413a4.92 4.92 0 011.715 1.001 4.92 4.92 0 011.001 1.715c.167.458.357 1.222.413 2.428.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.056 1.206-.246 1.97-.413 2.428a4.92 4.92 0 01-1.001 1.715 4.92 4.92 0 01-1.715 1.001c-.458.167-1.222.357-2.428.413-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.206-.056-1.97-.246-2.428-.413a4.92 4.92 0 01-1.715-1.001 4.92 4.92 0 01-1.001-1.715c-.167-.458-.357-1.222-.413-2.428-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.848c.056-1.206.246-1.97.413-2.428a4.92 4.92 0 011.001-1.715 4.92 4.92 0 011.715-1.001c.458-.167 1.222-.357 2.428-.413 1.266-.058 1.646-.07 4.85-.07zm0-2.163C8.735 0 8.332.013 7.052.072 5.771.13 4.816.341 4.06.659c-.78.329-1.44.77-2.099 1.428-.658.658-1.099 1.318-1.428 2.099-.318.756-.529 1.711-.587 2.992C0 .332 0 .735 0 12c0 11.265.332 11.668.072 12.948.058 1.281.269 2.236.587 2.992.329.78.77 1.44 1.428 2.099.658.658 1.318 1.099 2.099 1.428.756.318 1.711.529 2.992.587C8.332 24 8.735 24 12 24s3.668-.013 4.948-.072c1.281-.058 2.236-.269 2.992-.587.78-.329 1.44-.77 2.099-1.428.658-.658 1.099-1.318 1.428-2.099.318-.756.529-1.711.587-2.992.06-1.28.072-1.683.072-4.948s-.013-3.668-.072-4.948c-.058-1.281-.269-2.236-.587-2.992a5.378 5.378 0 00-1.428-2.099 5.378 5.378 0 00-2.099-1.428c-.756-.318-1.711-.529-2.992-.587C15.668 0 15.265 0 12 0z" />
-                            <path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zM18.406 4.594a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z" />
-                        </svg>
-                    </a>
+        <div class="feedback">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc19WAQGvHrXOz3lKsCxBnISWNiNh0EA1ZNJL7WnMfEqnfU0g/viewform?embedded=true"
+                    loading="lazy"
+                    title="Customer feedback form">
+            </iframe>
+        </div>
+    </section>
 
-                    <!-- Twitter -->
-                    <a href="https://twitter.com/your-handle" target="_blank" rel="noopener"
-                       aria-label="Twitter">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M23.954 4.569c-.885.392-1.83.656-2.825.775 1.014-.608 1.794-1.574 2.163-2.724-.951.564-2.005.974-3.127 1.195-.897-.959-2.178-1.559-3.594-1.559-2.724 0-4.928 2.204-4.928 4.928 0 .386.045.762.127 1.124-4.094-.205-7.725-2.165-10.152-5.144-.424.724-.666 1.562-.666 2.457 0 1.697.862 3.192 2.174 4.069-.8-.025-1.555-.245-2.212-.612v.062c0 2.367 1.684 4.342 3.918 4.788-.41.111-.842.171-1.287.171-.314 0-.618-.03-.916-.086.619 1.931 2.416 3.335 4.543 3.376-1.666 1.306-3.765 2.084-6.045 2.084-.393 0-.779-.023-1.158-.069 2.157 1.381 4.716 2.188 7.475 2.188 8.973 0 13.878-7.43 13.878-13.872 0-.211-.004-.423-.014-.633.954-.689 1.78-1.55 2.438-2.531z" />
-                        </svg>
-                    </a>
+</main>
 
-                    <!-- LinkedIn -->
-                    <a href="https://linkedin.com/company/your-company" target="_blank" rel="noopener"
-                       aria-label="LinkedIn">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M20.447 20.452h-3.554v-5.569c0-1.327-.024-3.036-1.85-3.036-1.851 0-2.136 1.445-2.136 2.94v5.665h-3.554V9h3.412v1.561h.049c.475-.9 1.637-1.85 3.368-1.85 3.603 0 4.268 2.369 4.268 5.452v6.289zM5.337 7.433c-1.144 0-2.069-.925-2.069-2.069S4.193 3.295 5.337 3.295c1.144 0 2.069.925 2.069 2.069s-.925 2.069-2.069 2.069zm1.777 13.019H3.558V9h3.556v11.452zM22.225 0H1.771C.792 0 0 .771 0 1.723v20.554C0 23.229.792 24 1.771 24h20.451c.979 0 1.777-.771 1.777-1.723V1.723C24 .771 23.204 0 22.225 0z" />
-                        </svg>
-                    </a>
-                </div>
-            </div>
+<!-- ==================== FOOTER ==================== -->
+<footer>
+    <div class="footer__grid">
 
+        <!-- LOGO / BRIEF -->
+        <div class="footer__col">
+            <svg class="footer__logo" viewBox="0 0 100 100" aria-labelledby="logoTitle" role="img">
+                <title id="logoTitle">Parmesh Chai Point logo</title>
+                <circle cx="50" cy="50" r="48" stroke="#fff" stroke-width="4" fill="none"/>
+                <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle"
+                      font-family="Arial, Helvetica, sans-serif" font-size="38" fill="#fff">PCP</text>
+            </svg>
+            <p data-i18n="footerTagline">Serving happiness in every cup ☕</p>
         </div>
 
-        <p class="footer__bottom">© 2026 Parmesh Chai Point – All rights reserved.</p>
-    </footer>
+        <!-- QUICK LINKS -->
+        <div class="footer__col">
+            <h4 data-i18n="footerLinksTitle">Quick Links</h4>
+            <ul class="footer__list">
+                <li><a href="#about" data-i18n="navAbout">About</a></li>
+                <li><a href="#menu"  data-i18n="navMenu">Menu</a></li>
+                <li><a href="#contact" data-i18n="navContact">Contact</a></li>
+                <li><a href="#feedback" data-i18n="navFeedback">Feedback</a></li>
+            </ul>
+        </div>
 
-    <!-- -------------------------------------------------
-         9️⃣ MINIMAL JS – Tab switching & form status
-         ------------------------------------------------- -->
-    <script>
-        /* ----- TAB SWITCHING ----- */
-        document.querySelectorAll('.tab-link').forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();                    // stop normal hash jump
-                const target = link.getAttribute('href').substring(1); // “about”, “menu”, …
-                // 1️⃣ Nav styling
-                document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
-                link.classList.add('active');
-                // 2️⃣ Show the correct section
-                document.querySelectorAll('.section').forEach(sec => {
-                    sec.classList.toggle('active', sec.id === target);
-                });
-            });
-        });
+        <!-- CONTACT INFO -->
+        <div class="footer__col">
+            <h4 data-i18n="footerContactTitle">Contact</h4>
+            <p>📍 Bangalore, India</p>
+            <p>📞 +91 7760 887 077</p>
+            <p>📧 <a href="mailto:sasvadash@gmail.com">sasvadash@gmail.com</a></p>
+        </div>
 
-        /* ----- FORMSPREE STATUS ----- */
-        const form = document.querySelector('.contact');
-        const status = document.getElementById('form-status');
-        if (form) {
-            form.addEventListener('submit', () => { status.textContent = 'Sending…'; });
-        }
-    </script>
+        <!-- SOCIAL MEDIA -->
+        <div class="footer__col">
+            <h4 data-i18n="footerFollowTitle">Follow Us</h4>
+            <div class="social-icons">
+                <!-- Facebook -->
+                <a href="https://facebook.com/your-page" target="_blank" rel="noopener"
+                   aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24h11.493V14.709h-3.13v-3.622h3.13V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.466.099 2.797.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.762v2.31h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.326-.597 1.326-1.326V1.326C24 .597 23.403 0 22.675 0z"/>
+                    </svg>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/your-profile" target="_blank" rel="noopener"
+                   aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.206.056 1.97.246 2.428.413a4.92 4.92 0 011.715 1.001 4.92 4.92 0 011.001 1.715c.167.458.357 1.222.413 2.428.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.056 1.206-.246 1.97-.413 2.428a4.92 4.92 0 01-1.001 1.715 4.92 4.92 0 01-1.715 1.001c-.458.167-1.222.357-2.428.413-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.206-.056-1.97-.246-2.428-.413a4.92 4.92 0 01-1.715-1.001 4.92 4.92 0 01-1.001-1.715c-.167-.458-.357-1.222-.413-2.428-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.848c.056-1.206.246-1.97.413-2.428a4.92 4.92 0 011.001-1.715 4.92 4.92 0 011.715-1.001c.458-.167 1.222-.357 2.428-.413 1.266-.058 1.646-.07 4.85-.07zm0-2.163C8.735 0 8.332.013 7.052.072 5.771.13 4.816.341 4.06.659c-.78.329-1.44.77-2.099 1.428-.658.658-1.099 1.318-1.428 2.099-.318.756-.529 1.711-.587 2.992C0 .332 0 .735 0 12c0 11.265.332 11.668.072 12.948.058 1.281.269 2.236.587 2.992.329.78.77 1.44 1.428 2.099.658.658 1.318 1.099 2.099 1.428.756.318 1.711.529 2.992.587C8.332 24 8.735 24 12 24s3.668-.013 4.948-.072c1.281-.058 2.236-.269 2.992-.587.78-.329 1.44-.77 2.099-1.428.658-.658 1.099-1.318 1.428-2.099.318-.756.529-1.711.587-2.992.06-1.28.072-1.683.072-4.948s-.013-3.668-.072-4.948c-.058-1.281-.269-2.236-.587-2.992a5.378 5.378 0 00-1.428-2.099 5.378 5.378 0 00-2.099-1.428c-.756-.318-1.711-.529-2.992-.587C15.668 0 15.265 0 12 0z"/>
+                        <path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zM18.406 4.594a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
+                    </svg>
+                </a>
+
+                <!-- Twitter -->
+                <a href="https://twitter.com/your-handle" target="_blank" rel="noopener"
+                   aria-label="Twitter">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.954 4.569c-.885.392-1.83.656-2.825.775 1.014-.608 1.794-1.574 2.163-2.724-.951.564-2.005.974-3.127 1.195-.897-.959-2.178-1.559-3.594-1.559-2.724 0-4.928 2.204-4.928 4.928 0 .386.045.762.127 1.124-4.094-.205-7.725-2.165-10.152-5.144-.424.724-.666 1.562-.666 2.457 0 1.697.862 3.192 2.174 4.069-.8-.025-1.555-.245-2.212-.612v.062c0 2.367 1.684 4.342 3.918 4.788-.41.111-.842.171-1.287.171-.314 0-.618-.03-.916-.086.619 1.931 2.416 3.335 4.543 3.376-1.666 1.306-3.765 2.084-6.045 2.084-.393 0-.779-.023-1.158-.069 2.157 1.381 4.716 2.188 7.475 2.188 8.973 0 13.878-7.43 13.878-13.872 0-.211-.004-.423-.014-.633.954-.689 1.78-1.55 2.438-2.531z"/>
+                    </svg>
+                </a>
+
+                <!-- LinkedIn -->
+                <a href="https://linkedin.com/company/your-company" target="_blank" rel="noopener"
+                   aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.327-.024-3.036-1.85-3.036-1.851 0-2.136 1.445-2.136 2.94v5.665h-3.554V9h3.412v1.561h.049c.475-.9 1.637-1.85 3.368-1.85 3.603 0 4.268 2.369 4.268 5.452v6.289zM5.337 7.433c-1.144 0-2.069-.925-2.069-2.069S4.193 3.295 5.337 3.295c1.144 0 2.069.925 2.069 2.069s-.925 2.069-2.069 2.069zm1.777 13.019H3.558V9h3.556v11.452zM22.225 0H1.771C.792 0 0 .771 0 1.723v20.554C0 23.229.792 24 1.771 24h20.451c.979 0 1.777-.771 1.777-1.723V1.723C24 .771 23.204 0 22.225 0z"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <p class="footer__bottom">© 2026 Parmesh Chai Point – All rights reserved.</p>
+</footer>
+
+<!-- -------------------------------------------------
+     9️⃣ MINIMAL JS – Language switcher + Tab switching
+     ------------------------------------------------- -->
+<script>
+/* ---------- TRANSLATIONS ---------- */
+const translations = {
+    en: {
+        heroTitle: "Parmesh Chai Point",
+        heroSubtitle: "Premium handcrafted chai • Cozy cafés • Free Wi‑Fi",
+        navAbout: "About",
+        navMenu: "Menu",
+        navContact: "Contact",
+        navFeedback: "Feedback",
+        aboutTitle: "Our Story",
+        aboutPara1: "One rainy evening in Bangalore, a young tea‑lover named <strong>Arjun Parmesh</strong> discovered the magic of a steaming cup of chai served from a humble stall. The warmth, the aroma, and the brief conversation with the stall‑owner sparked a simple idea: “What if we could bring that feeling to every corner of the city?”",
+        aboutPara2: "After years of traveling India’s tea‑growing regions, learning from farmers, and perfecting the blend, Arjun gathered a small team to turn the idea into reality. The result is <strong>Parmesh Chai Point</strong> – a space where every cup tells a story, where people can pause, share, and feel at home.",
+        aboutCall: "<strong>We need your support.</strong> Whether it’s a visit, a word‑of‑mouth, or a simple “thank you”, every bit helps us keep the tradition alive. Join us, sip with us, and let’s spread the love for chai together.",
+        menuTitle: "What We Serve",
+        menuClassic: "Classic Chai",
+        menuClassicDesc: "Traditional Assam tea with milk, sugar and our signature spice blend.",
+        menuMasala: "Masala Chai",
+        menuMasalaDesc: "Cardamom, ginger, cinnamon, clove & pepper – the classic Indian favorite.",
+        menuSeasonal: "Seasonal Specials",
+        menuSeasonalDesc: "Rotating flavors like Rose‑Petal, Tulsi‑Lemon, Mango‑Mint.",
+        menuCold: "Cold Brew & Iced Chai",
+        menuColdDesc: "Refreshingly cool, served over ice with a dash of lemon.",
+        menuSnacks: "Snacks",
+        menuSnacksDesc: "Samosas, paneer tikka, cheese toast, brownies – perfect companions.",
+        menuDesserts: "Desserts",
+        menuDessertsDesc: "Gulab jamun, rasgulla, kulfi‑style ice‑cream.",
+        contactTitle: "Get in Touch",
+        contactName: "Name",
+        contactEmail: "Email",
+        contactMessage: "Message",
+        contactSend: "Send Message",
+        contactAddrLabel: "Address:",
+        contactPhoneLabel: "Phone:",
+        contactEmailLabel: "Email:",
+        feedbackTitle: "Customer Feedback",
+        feedbackIntro: "We value your thoughts. Please fill out the short form below.",
+        footerTagline: "Serving happiness in every cup ☕",
+        footerLinksTitle: "Quick Links",
+        footerContactTitle: "Contact",
+        footerFollowTitle: "Follow Us"
+    },
+    hi: {
+        heroTitle: "पर्मेश चाय पॉइंट",
+        heroSubtitle: "प्रीमियम हस्तनिर्मित चाय • कोज़ी कैफ़े • फ्री वाई‑फ़ाई",
+        navAbout: "हमारे बारे में",
+        navMenu: "मेन्यू",
+        navContact: "संपर्क",
+        navFeedback: "प्रतिक्रिया",
+        aboutTitle: "हमारी कहानी",
+        aboutPara1: "बेंगलुरु की बारिश वाली शाम में, एक युवा चाय‑प्रेमी <strong>अर्जुन परमेश</strong> ने एक साधारण स्टॉल से गरम चाय के जादू को महसूस किया। चाय की गर्मी, खुशबू और दुकानदारी की छोटी‑सी बातचीत ने एक सरल विचार को जन्म दिया: “क्या हम इस अहसास को शहर के हर कोने में ला सकते हैं?”",
+        aboutPara2: "भारत के चाय‑बागों में कई सालों तक यात्रा करने, किसानयों से सीखने और मिश्रण को परिपूर्ण करने के बाद, अर्जुन ने एक छोटी टीम इकट्ठा करके इस विचार को हकीकत में बदला। परिणाम है <strong>पर्मेश चाय पॉइंट</strong> – एक ऐसी जगह जहाँ हर कप एक कहानी बताता है, जहाँ लोग रुक‑सकते, बात‑चीत कर‑सकते और घर जैसा महसूस कर‑सकते हैं।",
+        aboutCall: "<strong>हमें आपका सहयोग चाहिए।</strong> चाहे आप एक बार आएँ, मुंह‑से‑मुंह बताएँ, या बस “धन्यवाद” कहें—हर योगदान से हम इस परम्परा को जीवित रख सकते हैं। आएँ, हमारे साथ चाय पिएँ और इस प्यार को फैलाएँ।",
+        menuTitle: "हम क्या पेश करते हैं",
+        menuClassic: "क्लासिक चाय",
+        menuClassicDesc: "परम्परागत असम चाय, दूध, चीनी और हमारी विशेष मसाला मिश्रण के साथ।",
+        menuMasala: "मसाला चाय",
+        menuMasalaDesc: "इलायची, अदरक, दालचीनी, लौंग एवं काली मिर्च – क्लासिक भारतीय पसंद।",
+        menuSeasonal: "सीज़नल स्पेशल्स",
+        menuSeasonalDesc: "रोज‑पेटल, तुलसी‑नींबू, मैंगो‑मिंट जैसी मौसमी फ्लेवर।",
+        menuCold: "कोल्ड ब्रू एवं आइस चाय",
+        menuColdDesc: "ठंडा और ताज़ा, बर्फ़ के साथ नींबू का एक छींटा।",
+        menuSnacks: "स्नैक्स",
+        menuSnacksDesc: "समोसे, पनीर टिक्का, चीज़ टोस्ट, ब्राउनी – परफेक्ट साथी।",
+        menuDesserts: "डेज़र्ट्स",
+        menuDessertsDesc: "गुलाब जामुन, रसगुल्ला, कु्ल्फी‑स्टाइल आइस‑क्रीम।",
+        contactTitle: "हमसे संपर्क करें",
+        contactName: "नाम",
+        contactEmail: "ई‑मेल",
+        contactMessage: "संदेश",
+        contactSend: "भेजें",
+        contactAddrLabel: "पता:",
+        contactPhoneLabel: "फ़ोन:",
+        contactEmailLabel: "ई‑मेल:",
+        feedbackTitle: "ग्राहक प्रतिक्रिया",
+        feedbackIntro: "हम आपके विचारों की क़द्र करते हैं। कृपया नीचे छोटा फ़ॉर्म भरें।",
+        footerTagline: "हर कप में ख़ुशी सर्व करें ☕",
+        footerLinksTitle: "त्वरित लिंक",
+        footerContactTitle: "संपर्क",
+        footerFollowTitle: "फ़ॉलो करें"
+    },
+    kn: {
+        heroTitle: "ಪರ್ಮೇಶ್ ಚಾಿ ಪಾಯಿಂಟ್",
+        heroSubtitle: "ಹಸ್ತ ನಿರ್ಮಿತ ಪ್ರೀಮಿಯಮ್ ಛಾಯಿ • ಆರಾಮದಾಯಕ ಕಾಫೇಗಳು • ಉಚಿತ ವಿ‑ಫೈ",
+        navAbout: "ನಮ್ಮ ಬಗ್ಗೆ",
+        navMenu: "ಮೆನು",
+        navContact: "ಸಂಪರ್ಕ",
+        navFeedback: "ಪ್ರತಿಕ್ರಿಯೆ",
+        aboutTitle: "ನಮ್ಮ ಕಥೆ",
+        aboutPara1: "ಬೆಂಗಳೂರು ನಗರದಲ್ಲಿ ಮಳೆಯ ಹನಿಗಳೊಂದಿಗೆ ಒಂದು ಮಳೆಯ ಸಂಜೆ, ಯುವ ಛಾಯಿ ಪ್ರೇಮಿ <strong>ಅರ್ಜುನ್ ಪರ್ಮೇಶ್</strong> ಒಂದು ಸರಳ ಸ್ಟಾಲ್‌ನಲ್ಲಿ ಬಿಸಿ ಛಾಯಿಯನ್ನು ಕುಡಿಯುವ ಮೂಲಕ ಮಾಯೆಯನ್ನು ಕಂಡುಹಿಡಿದರು. ಅದರ ಉಷ್ಣ, ಸುಗಂಧ ಹಾಗೂ ದುಕಾಣ ಮಾಡಲು ಮಾತು ಹೇಳುವ ಹಂತ ಮನುಷ್ಯರಲ್ಲಿ ನುಡಿದರೂ, “ಈ ಭಾವನೆ ಸಮಗ್ರ ನಗರದಲ್ಲಿ ಹಂಚುವೆ?!” ಎಂಬ ಸರಳ ಕಲ್ಪನಾ ಜನಿಸಿದೆ.",
+        aboutPara2: "ಭಾರತದ ಛಾಯಿ ತೋಟಗಳಾದ ಅಸ್ಸಾಂ, ದರಜೀಲಿಂಗ್, ನಿಲ್ಗಿರಿ ಇತ್ಯಾದಿ ಸ್ಥಳಗಳಲ್ಲಿ ಪ್ರಾಯೋಗಿಕ ಪಯಣಗಳ ಮಾಹಿತಿ, ಸ್ಥಳೀಯ ರೈತರಿಂದ ಗೋಧಿಯ ಗುಣಮಟ್ಟ, ಮಸಾಲೆಯ ಹಗರಣ ಕಲಿತ ಮೇಲೆ, ಅರ್ಜುನ್ ಒಂದು ತಂಡವನ್ನು ಸಂಗ್ರಹಿಸಿ ಈ ಕಲ್ಪನೆಯನ್ನು ವ್ಯವಹಾರವಾಗಿ ಬದಲಾಯಿಸಿದನು. ಇದರಿಂದ <strong>ಪರ್ಮೇಶ್ ಛಾಿ ಪಾಯಿಂಟ್</strong> ಉದ್ಭವಿಸಿತು – ಪ್ರತಿ ಕಪ್ ಒಂದು ಕಥೆ ಹೇಳುವ, ಜನರು ನಿಲ್ಲಿಸಿ ಮಾತನಾಡಿ, ಮನೆಯಂತೆ ಅನುಭವಿಸುವ ಸ್ಥಳ.",
+        aboutCall: "<strong>ನಾವು ನಿಮ್ಮ ಬೆಂಬಲವನ್ನು ಅಗತ್ಯಪಡಿಸುತ್ತೇವೆ.</strong> ಒಮ್ಮೆ ಭೇಟಿ ನೀಡುವುದು, ಶಬ್ದ‑ವಾಯು, ಅಥವಾ “ಧನ್ಯವಾದಗಳು” ಎಂಬ ಕಿರು ಹೇಳಿಕೆ – ಈ ಎಲ್ಲವೂ ಪರಂಪರೆಯನ್ನು ಉಳಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಸೇರಿ, ಛಾಯನ್ನು ಸವಿದು, ಪ್ರೀತಿಯನ್ನು ಹಂಚಿಕೊಳ್ಳೋಣ.",
+        menuTitle: "ನಾವು ಏನು ನೀಡುತ್ತೇವೆ",
+        menuClassic: "ಕ್ಲಾಸಿಕ್ ಛಾಯಿ",
+        menuClassicDesc: "ಪಾರಂಪರಿಕ ಅಸ್ಸಾಂ ಛಾಯಿ, ಹಾಲು, ಸಕ್ಕರೆ ಮತ್ತು ನಮ್ಮ ವಿಶೇಷ ಮಸಾಲೆ ಸಂಯೋಜನೆ.",
+        menuMasala: "ಮಸಾಲಾ ಛಾಯಿ",
+        menuMasalaDesc: "ಏಲಕ್ಕಿ, ಶುಂಠಿ, ದಾಲ್ಚಿನ್ನಿ, ಲವೆಂಗ ಹಾಗೂ ಮೆಣಸು – ಪ್ರಚಲಿತ ಭಾರತೀಯ ಸೂಪರ್ ಛಾಯಿ.",
+        menuSeasonal: "ಋತುವಿನ ವಿಶೇಷಗಳು",
+        menuSeasonalDesc: "ರೋಸ್‑ಪೆಟಲ್, ತುಲಸಿ‑ನಿಮ್ಮ, ಮಂಗೋ‑ಮಿಂಟ್ ಮುಂತಾದ ಪರಿವರ್ತನೀಯ ರುಚಿಗಳು.",
+        menuCold: "ಕೋಲ್ಡ್ ಬ್ರೂ ಹಾಗೂ ಐಸ್ ಛಾಯಿ",
+        menuColdDesc: "ತಾಜಾ, ಹಿಮದ ಮೇಲೆ ಇಲಂಗಿ ಕೀಳಿನ ಜೊತೆಗೆ.",
+        menuSnacks: "ಸ್ನ್ಯಾಕ್‌ಗಳು",
+        menuSnacksDesc: "ಸಮೋಸಾ, ಪನೀರ್ ಟಿಕ್ಕಾ, ಚೀಸ್ ಟೋಸ್ಟ್, ಬ್ರೌನಿ – ಸೂಕ್ತ ಸಂಗಾತಿಗಳು.",
+        menuDesserts: "ಡೆಸರ್ಟ್‌ಗಳು",
+        menuDessertsDesc: "ಗುಲಾಬ್​ ಜಾಮುನ್, ರಸಗುಲ್ಲಾ, ಕುಲ್ಫಿ‑ಶೈಲಿ ಐಸ್‍ಕ್ರೀಮ್.",
+        contactTitle: "ಸಂಪರ್ಕಿಸಿ",
+        contactName: "ಹೆಸರು",
+        contactEmail: "ಇಮೇಲ್",
+        contactMessage: "ಸಂದೇಶ",
+        contactSend: "ಕಳುಹಿಸಿ",
+        contactAddrLabel: "ವಿಳಾಸ:",
+        contactPhoneLabel: "ಫೋನ್:",
+        contactEmailLabel: "ಇಮೇಲ್:",
+        feedbackTitle: "ಗ್ರಾಹಕ ಪ್ರತಿಕ್ರಿಯೆ",
+        feedbackIntro: "ನಮ್ಮೊಂದಿಗೆ ನಿಮ್ಮ ಅಭಿಪ್ರಾಯ ನಮ್ಮಗೆ ಮಹತ್ವದ್ದೆ. ದಯವಿಟ್ಟು ಕೆಳಗೆ ಸಂಕ್ಷಿಪ್ತ ಫಾರ್ಮನ್ನು ತುಂಬಿ.",
+        footerTagline: "ಪ್ರತಿ ಕಪ್‌ನಲ್ಲಿ ಸಂತೋಷ ನೀಡಿ ☕",
+        footerLinksTitle: "ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು",
+        footerContactTitle: "ಸಂಪರ್ಕ",
+        footerFollowTitle: "ಫಾಲೋ ಮಾಡಿ"
+    },
+    te: {
+        heroTitle: "పర్మేశ్ చాయ్ పాయింట్",
+        heroSubtitle: "హ్యాండ్‌క్రాఫ్ట్‌డ్ చాయ్ • సౌకర్యవంతమైన కేఫ్‌లు • ఉచిత Wi‑Fi",
+        navAbout: "మా గురించి",
+        navMenu: "మెను",
+        navContact: "సంపర్కం",
+        navFeedback: "ఫీడ్‌బ్యాక్",
+        aboutTitle: "మా కథ",
+        aboutPara1: "బెంగళూరులో ఒక వర్షపు సాయంత్రం, యువ చాయ్‑ప్రేమికుడు <strong>అర్జున్ పర్మేష్</strong> ఒక చిన్న స్టాల్‌ నుండి బాగుండా ఐశ్వర్య చాయ్‌ను పిక్కుకునే మాయను కనుగొన్నారు. చాయ్ వాసన, వేడి, మరియు స్టాల్ యజమాని తో చిన్న సంభాషణ – ఒక సులభమైన ఆలోచనను సృష్టించింది: “ఈ భావనను నగరమంతా పంచవచ్చు?”",
+        aboutPara2: "భారతదేశంలోని వివిధ చాయ్ తోటల (అస్సాం, ఢార్జిల్లింగ్, నీలిగిరి) లో పర్యటించి, రైతులతో మాట్లాడి, బ్లెండ్‌ను పరిపూర్ణం చేసిన తర్వాత, అల్లు ఒక చిన్న బృందాన్ని చేర్చుకుని ఈ ఆలోచనను వాస్తవంగా మార్చారు. ఫలితంగా <strong>పర్మేష్ చాయ్ పాయింట్</strong> స్థాపించబడింది – ప్రతి కప్పు ఒక కథను చెబుతుంది, అక్కడ ప్రజలు ఆ డై‌స్ లో నిలబడి, మాట్లాడి, ఇంటిపొద్దు అనుభూతి పొందుతారు.",
+        aboutCall: "<strong>మీ సహాయం అవసరం.</strong> మీరు ఒకసారి వచ్చి, మాట‑మాట, లేదా “ధన్యవాదాలు” అనే చిన్న మాట కూడా ఈ సంప్రదాయాన్ని కొనసాగించడంలో సహాయపడుతుంది. మనతో చాయ్ తాగి, ఈ స్నేహాన్ని పంచుకుందాం.",
+        menuTitle: "మేము అందించే వంటకాలు",
+        menuClassic: "క్లాసిక్ చాయ్",
+        menuClassicDesc: "అసాంలోని సంప్రదాయ చాయ్, పాలు, చక్కెర, మా ప్రత్యేక మసాలా మిశ్రమంతో.",
+        menuMasala: "మసాలా చాయ్",
+        menuMasalaDesc: "ఏలకులు, అల్లం, దాల్చిన చెక్క, లవంగం, మిరియాలు – సాంప్రదాయ భారతీయ ఇష్టమైనది.",
+        menuSeasonal: "సీజనల్ స్పెషల్స్",
+        menuSeasonalDesc: "రోస్‑పెట్టల్, తులసి‑లెమన్, మామిడి‑మింట్ వంటి మారుతున్న రుచులు.",
+        menuCold: "కోల్‑బ్రూ & ఐస్ చాయ్",
+        menuColdDesc: "తాజాగా, ఐస్ మీద పానీయం, నిమ్మరసం చిటుకా.",
+        menuSnacks: "స్నాక్స్",
+        menuSnacksDesc: "సమోసా, పనీర్ టిక్కా, చీజ్ టోస్ట్, బrownies – తగిన సహచరులు.",
+        menuDesserts: "డెజర్ట్స్",
+        menuDessertsDesc: "గులాబ్ జామున్, రసగుల్లా, కుల్ఫీ‑స్టైల్ ఐస్‌క్రీమ్.",
+        contactTitle: "మమ్మల్ని సంప్రదించండి",
+        contactName: "పేరు",
+        contactEmail: "ఇ‑మెయిల్",
+        contactMessage: "సందేశం",
+        contactSend: "పంపండి",
+        contactAddrLabel: "చిరునామా:",
+        contactPhoneLabel: "ఫోన్:",
+        contactEmailLabel: "ఇ‑మెయిల్:",
+        feedbackTitle: "కస్టమర్ ఫీడ్‌బ్యాక్",
+        feedbackIntro: "మీ అభిప్రాయాన్ని మేము విలువిస్తాం. దయవు చేసి క్రింది ఫారమ్‌ను పూరించండి.",
+        footerTagline: "ప్రతి కప్పులో ఆనందాన్ని అందించండి ☕",
+        footerLinksTitle: "త్వరిత లింక్స్",
+        footerContactTitle: "సంపర్కం",
+        footerFollowTitle: "ఫాలో చేయండి"
+    },
+    ta: {
+        heroTitle: "பார்மேஷ் சாய் பாயிண்ட்",
+        heroSubtitle: "கைமுறையாக 만든 பிரீமியம் சாய் • சுகமாக்கும் கஃபேகள் • இலவச Wi‑Fi",
+        navAbout: "எங்களைப் பற்றி",
+        navMenu: "மெனு",
+        navContact: "தொடர்பு",
+        navFeedback: "பின்னூட்டம்",
+        aboutTitle: "எங்களின் கதைய்",
+        aboutPara1: "பெங்களூரில் ஒரு மழை மாலை, இளம் சாய்‑இஷ்டமான <strong>அர்ஜுன் பார்மேஷ்</strong> ஒரு சாதாரண கடை விட செய்த சூடான சாய் வாணிகத்தை கண்டார். அவரின் உஷ்ணம், வாசனை, முன்னிறப்பு உரையாடல் – “இந்த உணர்வை நகரம் ஒவ்வொரு மூலையிலும் கொண்டு வரலாம்” என்ற சுருக்கமான யோசனை உண்டாக்கியது.",
+        aboutPara2: "இந்தியாவின் தேயிலை வேளாண்மை பகுதிகளில் (ஆஸாம், டார்ஜில்லிங், நீல்கிரி) பயணம் செய்து, விவசாயிகள் பேசித் தெரிந்தது, கலவை பொருந்தியன, அர்ஜுன் சிறிய குழுவை ஒன்று கூட்டு‑இந்த யோசனையை நிஜமாக்கினார். விளைவு: <strong>பார்மேஷ் சாய் பாயிண்ட்</strong> – ஒவ்வொரு கோப்பையும் ஒரு கதையை சொல்வது, மக்கள் நிற்க, பேச, வீட்டைப் போன்ற உணர்வு பெறும் இடம்.",
+        aboutCall: "<strong>உங்கள் ஆதரவு அவசியம்.</strong> ஒன்றுமுறை வர, வாய்மொழி பரப்பு, “நன்றி” என்று சொல்வது மூலமும், பாரம்பரியத்தைப் பூர்த்தி செய்ய உதவுகின்றன. எங்களுடன் சாய் குடித்து, இந்த அன்பை மெல்லியாய் பகிர்ந்து கொள்ளுங்கள்.",
+        menuTitle: "நாங்கள் வழங்கும்",
+        menuClassic: "கிளாசிக் சாய்",
+        menuClassicDesc: "பாரம்பரிய அஸ்ஸாம் சாய், பால், சர்க்கரை மற்றும் எங்கள் குறிப்பிட்ட மசாலா கலவை.",
+        menuMasala: "மசாலா சாய்",
+        menuMasalaDesc: "எலுமிச்சை, இஞ்சி, இலவங்கப்பட்டை, கிராம்பு & மிளகு – பாரம்பரிய இந்திய விருப்பம்.",
+        menuSeasonal: "காலநிலை ஸ்பெஷல்கள்",
+        menuSeasonalDesc: "ரோஸ்‑பெட்டல், துளசி‑நெல்க், மாம்பழ‑மின்ட் போன்ற மாற்றும் சுவைகள்.",
+        menuCold: "குளிர் பிரூ & ஐஸ் சாய்",
+        menuColdDesc: "அதிகம் குளிராக, பனி மீது எலுமிச்சை இளஞ்சிவப்பு.",
+        menuSnacks: "உப்புமெனிகள்",
+        menuSnacksDesc: "சமோசா, பனீர் டிக்கா, சீஸ் டோஸ்ட், ப்ரவுன் – சரியான துணை.",
+        menuDesserts: "இனிப்புகள்",
+        menuDessertsDesc: "குளாப் ஜாமுன், ரச்குல்லா, கூற்‑ஸ்டைல் ஐஸ்‑க்ரீம்.",
+        contactTitle: "எங்களை தொடர்பு கொள்ளுங்கள்",
+        contactName: "பெயர்",
+        contactEmail: "மின்னஞ்சல்",
+        contactMessage: "செய்தி",
+        contactSend: "அனுப்பு",
+        contactAddrLabel: "முகவரி:",
+        contactPhoneLabel: "தொலைபேசி:",
+        contactEmailLabel: "மின்னஞ்சல்:",
+        feedbackTitle: "வாடிக்கையாளர் பின்னூட்டம்",
+        feedbackIntro: "உங்கள் கருத்தை மதிக்கிறோம். தயவுசெய்து கீழேயுள்ள சிறிய படிவத்தை பூர்த்தி செய்யவும்.",
+        footerTagline: "ஒவ்வொரு கோப்பிலும் மகிழ்ச்சி வழங்குங்கள் ☕",
+        footerLinksTitle: "விரைவு இணைப்புகள்",
+        footerContactTitle: "தொடர்பு",
+        footerFollowTitle: "எங்களை பின்தொடர்க"
+    }
+};
+
+/* ---------- LANGUAGE SWITCHER ---------- */
+function setLanguage(lang) {
+    const dict = translations[lang];
+    if (!dict) return;
+    // Replace every element that has a data‑i18n key
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (dict[key]) el.innerHTML = dict[key];
+    });
+    // Update active button UI
+    document.querySelectorAll('.lang-switcher button')
+            .forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    // Remember choice
+    localStorage.setItem('lang', lang);
+}
+
+/* Load saved language on page load */
+document.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('lang') || 'en';
+    setLanguage(saved);
+});
+
+/* Click on language buttons */
+document.querySelectorAll('.lang-switcher button')
+        .forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
+
+/* ---------- TAB SWITCHING ---------- */
+document.querySelectorAll('.tab-link').forEach(link => {
+    link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = link.getAttribute('href').substring(1);
+        document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        document.querySelectorAll('.section')
+                .forEach(sec => sec.classList.toggle('active', sec.id === target));
+    });
+});
+
+/* ---------- FORMSPREE STATUS ---------- */
+const form = document.querySelector('.contact');
+const status = document.getElementById('form-status');
+if (form) {
+    form.addEventListener('submit', () => { status.textContent = 'Sending…'; });
+}
+</script>
 </body>
 </html>
