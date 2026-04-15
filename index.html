@@ -6,6 +6,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Parmesh Chai Point – handcrafted chai, cozy cafés and free Wi‑Fi across India.">
 
+<!-- TradingView Stock Ticker Widget -->
+<script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+{
+  "symbols": [
+    {
+      "proName": "FOREXCOM:SPXUSD",
+      "title": "S&P 500"
+    },
+    {
+      "proName": "FOREXCOM:NSXUSD",
+      "title": "Nasdaq 100"
+    },
+    {
+      "proName": "FX_IDC:EURUSD",
+      "title": "EUR/USD"
+    },
+    {
+      "proName": "BITSTAMP:BTCUSD",
+      "title": "Bitcoin"
+    },
+    {
+      "proName": "BITSTAMP:ETHUSD",
+      "title": "Ethereum"
+    }
+  ],
+  "showSymbolLogo": true,
+  "colorTheme": "light",
+  "isTransparent": false,
+  "displayMode": "adaptive",
+  "locale": "en"
+}
+</script>
+
 <style>
 /* -------------------------------------------------
    1️⃣ BASIC RESET & VARIABLES
@@ -50,9 +83,23 @@ header{
     color:var(--clr-light);
     text-align:center;
     padding:6rem 1rem 4rem;
+    position:relative;
 }
 header h1{font-size:2.5rem;margin-bottom:.5rem;}
 header p{font-size:1.1rem;}
+
+/* Stock Ticker Styles */
+.tradingview-widget-container{
+    position:absolute;
+    bottom:0;
+    left:0;
+    right:0;
+    background:rgba(255,255,255,0.9);
+    padding:0.5rem;
+}
+.tradingview-widget-container__widget{
+    height:40px;
+}
 
 /* -------------------------------------------------
    4️⃣ NAVIGATION (tabs) + Language selector + Search
@@ -61,7 +108,7 @@ nav{
     background:var(--clr-primary);
     text-align:center;
     position:relative;
-    padding-top:2.5rem;               /* space for the search bar */
+    padding-top:1rem;               /* adjusted since search bar removed */
 }
 nav ul{
     list-style:none;
@@ -242,6 +289,10 @@ section > h2,
 <header>
     <h1 data-i18n="heroTitle">Parmesh Chai Point</h1>
     <p data-i18n="heroSubtitle">Premium handcrafted chai • Cozy cafés • Free Wi‑i</p>
+    <!-- Stock Market Ticker -->
+    <div class="tradingview-widget-container">
+      <div class="tradingview-widget-container__widget"></div>
+    </div>
 </header>
 
 <!-- ==================== NAV (TAB STYLE) + SEARCH + LANG SWITCHER ==================== -->
