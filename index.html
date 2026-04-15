@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <title>Parmesh Chai Point – Interactive Site</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Parmesh Chai Point – handcrafted chai, cozy cafés and free Wi‑Fi across India.">
+<meta name="description"
+      content="Parmesh Chai Point – handcrafted chai, cozy cafés and free Wi‑Fi across India.">
 
 <style>
 /* -------------------------------------------------
@@ -55,13 +56,12 @@ header h1{font-size:2.5rem;margin-bottom:.5rem;}
 header p{font-size:1.1rem;}
 
 /* -------------------------------------------------
-   4️⃣ NAVIGATION (tabs) + Language selector + Search
+   4️⃣ NAVIGATION (tabs) + Language selector
    ------------------------------------------------- */
 nav{
     background:var(--clr-primary);
     text-align:center;
     position:relative;
-    padding-top:2.5rem;               /* space for the search bar */
 }
 nav ul{
     list-style:none;
@@ -83,38 +83,7 @@ nav a.active,
 nav a:hover,
 nav a:focus{background:rgba(0,0,0,.2);}
 
-/* ---- SEARCH BAR – modern look ---- */
-.search-bar{
-    max-width:340px;
-    margin:0 auto 0.5rem;
-    position:relative;   /* for the SVG icon */
-}
-.search-bar input{
-    width:100%;
-    padding:.5rem .75rem .5rem 2.5rem;   /* left padding for icon */
-    border:none;
-    border-radius:.4rem;
-    font-family:inherit;
-    background:#fff;
-    font-size:1rem;
-    transition:box-shadow .2s, background .2s;
-}
-.search-bar input:focus{
-    outline:none;
-    background:#fafafa;
-    box-shadow:0 0 8px rgba(0,0,0,.15);
-}
-.search-bar svg{
-    position:absolute;
-    left:.7rem;
-    top:50%;
-    transform:translateY(-50%);
-    width:1rem;
-    height:1rem;
-    fill:#777;
-}
-
-/* ---- LANGUAGE SWITCHER – top‑right ---- */
+/* language switcher – top‑right */
 .lang-switcher{
     position:absolute;
     top:0.5rem; right:0.5rem;
@@ -248,66 +217,6 @@ footer{
     header{padding:4rem 1rem 2rem;}
     header h1{font-size:2rem;}
 }
-
-/* -------------------------------------------------
-   9️⃣ NEW – FLUID SECTION HEADINGS
-   ------------------------------------------------- */
-:root{
-    --heading-min:1.5rem;
-    --heading-max:2.8rem;
-}
-section > h2,
-.section > h2{
-    font-size:clamp(var(--heading-min),5vw,var(--heading-max));
-    line-height:1.2;
-    margin-bottom:1rem;
-}
-
-/* -------------------------------------------------
-   10️⃣ NEW – INTERACTIVE SEARCH BAR
-   ------------------------------------------------- */
-.search-bar{
-    background:rgba(255,255,255,.9);
-    backdrop-filter:blur(4px);
-    border-radius:.4rem;
-    box-shadow:0 2px 6px rgba(0,0,0,.1);
-}
-.search-suggestions{
-    position:absolute;
-    top:100%; left:0; right:0;
-    max-height:220px;
-    overflow-y:auto;
-    margin:0; padding:0;
-    list-style:none;
-    background:#fff;
-    border:1px solid #ddd;
-    border-top:none;
-    border-radius:0 0 .4rem .4rem;
-    box-shadow:0 4px 8px rgba(0,0,0,.1);
-    z-index:10;
-}
-.search-suggestions li{
-    padding:.5rem .75rem;
-    cursor:pointer;
-}
-.search-suggestions li:hover,
-.search-suggestions li[aria-selected="true"]{
-    background:#f0f0f0;
-}
-.menu-item mark{
-    background:#fffb7d;
-    border-radius:.2rem;
-    padding:0 .2rem;
-}
-.menu-item.highlighted{
-    outline:2px solid var(--clr-primary);
-    outline-offset:4px;
-    animation:pulse 1.6s ease-in-out infinite alternate;
-}
-@keyframes pulse{
-    from{outline-color:var(--clr-primary);}
-    to{outline-color:#6ab1ff;}
-}
 </style>
 </head>
 
@@ -318,27 +227,11 @@ section > h2,
 <!-- ==================== HEADER ==================== -->
 <header>
     <h1 data-i18n="heroTitle">Parmesh Chai Point</h1>
-    <p data-i18n="heroSubtitle">Premium handcrafted chai • Cozy cafés • Free Wi‑i</p>
+    <p data-i18n="heroSubtitle">Premium handcrafted chai • Cozy cafés • Free Wi‑Fi</p>
 </header>
 
-<!-- ==================== NAV (TAB STYLE) + SEARCH + LANG SWITCHER ==================== -->
+<!-- ==================== NAV (TAB STYLE) + LANG SWITCHER ==================== -->
 <nav aria-label="Primary navigation">
-    <!-- Search bar (filters the Menu) -->
-    <div class="search-bar" role="combobox" aria-haspopup="listbox"
-         aria-owns="search-suggestions" aria-expanded="false">
-        <svg viewBox="0 0 24 24"><path d="M21 20l-5.5-5.5a7 7 0 10-1.5 1.5L20 21zM10 4a6 6 0 110 12 6 6 0 010-12z"/></svg>
-        <input type="search"
-               id="search"
-               placeholder="Search menu…"
-               data-i18n-placeholder="searchPlaceholder"
-               autocomplete="off"
-               aria-label="Search menu">
-        <ul class="search-suggestions"
-            id="search-suggestions"
-            role="listbox"
-            hidden></ul>
-    </div>
-
     <!-- Language selector -->
     <div class="lang-switcher">
         <button data-lang="en" class="active">EN</button>
@@ -359,9 +252,9 @@ section > h2,
 <!-- ==================== MAIN (TAB CONTENT) ==================== -->
 <main id="main">
 
-    <!-- ABOUT -->
+    <!-- ABOUT – STORY -->
     <section id="about" class="section active">
-        <h2 data-i18n="aboutTitle">About Us</h2>
+        <h2 data-i18n="aboutTitle">Our Story</h2>
         <div class="about">
             <img src="https://picsum.photos/600/400?grayscale"
                  alt="Cozy interior of a Parmesh Chai Point outlet"
@@ -495,7 +388,8 @@ section > h2,
                 <a href="https://instagram.com/your-profile" target="_blank" rel="noopener"
                    aria-label="Instagram">
                     <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.206.056 1.97.246 2.428.413a4.92 4.92 0 011.715 1.001 4.92 4.92 0 011.001 1.715c.167.458.357 1.222.413 2.428.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.056 1.206-.246 1.97-.413 2.428a4.92 4.92 0 01-1.001 1.715 4.92 4.92 0 01-1.715 1.001c-.458.167-1.222.357-2.428.413-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.206-.056-1.97-.246-2.428-.413a4.92 4.92 0 01-1.715-1.001 4.92 4.92 0 01-1.001-1.715c-.167-.458-.357-1.222-.413-2.428-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.848c.056-1.206.246-1.97.413-2.428a4.92 4.92 0 011.001-1.715 4.92 4.92 0 011.715-1.001c.458-.167 1.222-.357 2.428-.413 1.266-.058 1.646-.07 4.85-.07zm0-2.163C8.735 0 8.332.013 7.052.072 5.771.13 4.816.341 4.06.659c-.78.329-1.44.77-2.099 1.428-.658.658-1.099 1.318-1.428 2.099-.318.756-.529 1.711-.587 2.992C0 .332 0 .735 0 12c0 11.265.332 11.668.072 12.948  .058 1.281.269 2.236.587 2.992 .329 .78 .77 1.44 1.428 2.099 .658 .658 1.318 1.099 2.099 1.428 .756 .318 1.711 .529 2.992 .587 1.28  .06 1.68 .072 4.948  .06 3.28 -0.13 3 .678 .644 .143 .036E-06 .84 .09 .039 .9 .065 .044 .1 .001 .23 .000 .1 .023
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.206.056 1.97.246 2.428.413a4.92 4.92 0 011.715 1.001 4.92 4.92 0 011.001 1.715c.167.458.357 1.222.413 2.428.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.056 1.206-.246 1.97-.413 2.428a4.92 4.92 0 01-1.001 1.715 4.92 4.92 0 01-1.715 1.001c-.458.167-1.222.357-2.428.413-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.206-.056-1.97-.246-2.428-.413a4.92 4.92 0 01-1.715-1.001 4.92 4.92 0 01-1.001-1.715c-.167-.458-.357-1.222-.413-2.428-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.848c.056-1.206.246-1.97.413-2.428a4.92 4.92 0 011.001-1.715 4.92 4.92 0 011.715-1.001c.458-.167 1.222-.357 2.428-.413 1.266-.058 1.646-.07 4.85-.07zm0-2.163C8.735 0 8.332.013 7.052.072 5.771.13 4.816.341 4.06.659c-.78.329-1.44.77-2.099 1.428-.658.658-1.099 1.318-1.428 2.099-.318.756-.529 1.711-.587 2.992C0 .332 0 .735 0 12c0 11.265.332 11.668.072 12.948.058 1.281.269 2.236.587 2.992.329.78.77 1.44 1.428 2.099.658.658 1.318 1.099 2.099 1.428.756.318 1.711.529 2.992.587C8.332 24 8.735 24 12 24s3.668-.013 4.948-.072c1.281-.058 2.236-.269 2.992-.587.78-.329 1.44-.77 2.099-1.428.658-.658 1.099-1.318 1.428-2.099.318-.756.529-1.711.587-2.992.06-1.28.072-1.683.072-4.948s-.013-3.668-.072-4.948c-.058-1.281-.269-2.236-.587-2.992a5.378 5.378 0 00-1.428-2.099 5.378 5.378 0 00-2.099-1.428c-.756-.318-1.711-.529-2.992-.587C15.668 0 15.265 0 12 0z"/>
+                        <path d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998zM18.406 4.594a1.44 1.44 0 11-2.88 0 1.44 1.44 0 012.88 0z"/>
                     </svg>
                 </a>
 
@@ -511,7 +405,7 @@ section > h2,
                 <a href="https://linkedin.com/company/your-company" target="_blank" rel="noopener"
                    aria-label="LinkedIn">
                     <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.447 20.452h-3.554v-5.569c0-1.327-.024-3.036-1.85-3.036-1.851 0-2.136 1.445-2.136 2.94v5.665h-3.554V9h3.412v1.561h.049c.475-.9 1.637-1.85 3.368-1.85 3.603 0 4.268 2.369 4.268 5.452v6.289zM5.337 7.433H3.558V9h1.779V7.433zm-.889 12.019c.617 0 1.119-.502 1.119-1.119 0-.618-.502-1.119-1.119-1.119-.618 0-1.119.501-1.119 1.119 0 .617.501 1.119 1.119 1.119zM22.225 0H1.771C.792 0 0 .597 0 1.326v21.348C0 23.403.792 24 1.771 24h20.451c.73 0 1.326-.597 1.326-1.326V1.326C24 .597 23.403 0 22.225 0z"/>
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.327-.024-3.036-1.85-3.036-1.851 0-2.136 1.445-2.136 2.94v5.665h-3.554V9h3.412v1.561h.049c.475-.9 1.637-1.85 3.368-1.85 3.603 0 4.268 2.369 4.268 5.452v6.289zM5.337 7.433c-1.144 0-2.069-.925-2.069-2.069S4.193 3.295 5.337 3.295c1.144 0 2.069.925 2.069 2.069s-.925 2.069-2.069 2.069zm1.777 13.019H3.558V9h3.556v11.452zM22.225 0H1.771C.792 0 0 .771 0 1.723v20.554C0 23.229.792 24 1.771 24h20.451c.979 0 1.777-.771 1.777-1.723V1.723C24 .771 23.204 0 22.225 0z"/>
                     </svg>
                 </a>
             </div>
@@ -522,6 +416,9 @@ section > h2,
     <p class="footer__bottom">© 2026 Parmesh Chai Point – All rights reserved.</p>
 </footer>
 
+<!-- -------------------------------------------------
+     9️⃣ MINIMAL JS – Language switcher + Tab switching
+     ------------------------------------------------- -->
 <script>
 /* ---------- TRANSLATIONS ---------- */
 const translations = {
@@ -532,8 +429,7 @@ const translations = {
         navMenu: "Menu",
         navContact: "Contact",
         navFeedback: "Feedback",
-        searchPlaceholder: "Search menu…",
-        aboutTitle: "About Us",
+        aboutTitle: "Our Story",
         aboutPara1: "One rainy evening in Bangalore, a young tea‑lover named <strong>Parmesh</strong> discovered the magic of a steaming cup of chai served from a humble stall. The warmth, the aroma, and the brief conversation with the stall‑owner sparked a simple idea: “What if we could bring that feeling to every corner of the city?”",
         aboutPara2: "After years of traveling India’s tea‑growing regions, learning from farmers, and perfecting the blend, <strong>Parmesh</strong> gathered a small team to turn the idea into reality. The result is <strong>Parmesh Chai Point</strong> – a space where every cup tells a story, where people can pause, share, and feel at home.",
         aboutCall: "<strong>We need your support.</strong> Whether it’s a visit, a word‑of‑mouth, or a simple “thank you”, every bit helps us keep the tradition alive. Join us, sip with us, and let’s spread the love for chai together.",
@@ -567,29 +463,28 @@ const translations = {
     },
     hi: {
         heroTitle: "पर्मेश चाय पॉइंट",
-        heroSubtitle: "प्रिमियम हस्तनिर्मित चाय • कोज़ी कैफ़े • फ्री वाई‑फ़ाई",
+        heroSubtitle: "प्रीमियम हस्तनिर्मित चाय • कोज़ी कैफ़े • फ्री वाई‑फ़ाई",
         navAbout: "हमारे बारे में",
         navMenu: "मेन्यू",
         navContact: "संपर्क",
         navFeedback: "प्रतिक्रिया",
-        searchPlaceholder: "मेन्यू खोजें…",
-        aboutTitle: "हमारे बारे में",
-        aboutPara1: "बेंगलुरु की बारिश वाली शाम में, एक युवा चाय‑प्रेमी <strong>परमेश</strong> ने एक साधारण स्टाल से गरम चाय के जादू को महसूस किया। चाय की गर्मी, खुशबू और दुकान‑मालिक की छोटी‑सी बातचीत – “क्या हम इस भावना को पूरा शहर में फैला सकते हैं?”",
-        aboutPara2: "भारत के चाय‑बागों में यात्रा करने, किसानों से सीखने और मिश्रण को परिपूर्ण करने के बाद, <strong>परमेश</strong> ने एक छोटी टीम इकट्ठा करके इस विचार को वास्तविकता में बदला। परिणाम: <strong>परमेश चाय पॉइंट</strong> – एक ऐसी जगह जहाँ हर कप एक कहानी बताता है, जहाँ लोग रुक‑सकते, बात‑सकते और घर जैसा महसूस कर‑सकते हैं।",
-        aboutCall: "<strong>हमें आपका सहयोग चाहिए।</strong> चाहे आप एक बार आएँ, शब्द‑से‑शब्द कहें, या बस “धन्यवाद” कहें – हर योगदान से हम इस परम्परा को जारी रख सकते हैं। आइए, हमारे साथ चाय पिएँ और इस प्यार को फैलाएँ।",
+        aboutTitle: "हमारी कहानी",
+        aboutPara1: "बेंगलुरु की बारिश वाली शाम में, एक युवा चाय‑प्रेमी <strong>परमेश</strong> ने एक साधारण स्टॉल से गरम चाय के जादू को महसूस किया। चाय की गर्मी, खुशबू और दुकानदारी की छोटी‑सी बातचीत ने एक सरल विचार को जन्म दिया: “क्या हम इस अहसास को शहर के हर कोने में ला सकते हैं?”",
+        aboutPara2: "भारत के चाय‑बागों में विभिन्न क्षेत्रों (असम, डार्जिलिंग, नीलिगिरी) में यात्रा करके, किसानों से सीखकर और मिश्रण को परिपूर्ण करने के बाद, <strong>परमेश</strong> ने एक छोटी टीम इकट्ठा करके इस विचार को हकीकत में बदला। परिणाम है <strong>परमेश चाय पॉइंट</strong> – एक ऐसी जगह जहाँ हर कप एक कहानी बताता है, जहाँ लोग रुक‑सकते, बात‑चीत कर‑सकते और घर जैसा महसूस कर‑सकते हैं।",
+        aboutCall: "<strong>हमें आपका सहयोग चाहिए।</strong> चाहे आप एक बार आएँ, मुंह‑से‑मुंह बताएँ, या बस “धन्यवाद” कहें—हर योगदान से हम इस परम्परा को जीवित रख सकते हैं। आएँ, हमारे साथ चाय पिएँ और इस प्यार को फैलाएँ।",
         menuTitle: "हम क्या पेश करते हैं",
         menuClassic: "क्लासिक चाय",
         menuClassicDesc: "परम्परागत असम चाय, दूध, चीनी और हमारी विशेष मसाला मिश्रण के साथ।",
         menuMasala: "मसाला चाय",
-        menuMasalaDesc: "इलायची, अदरक, दालचीनी, लौंग एवं काली मिर्च – क्लासिक इंडियन फ़ेवरिट।",
+        menuMasalaDesc: "इलायची, अदरक, दालचीनी, लौंग एवं काली मिर्च – क्लासिक भारतीय पसंद।",
         menuSeasonal: "सीज़नल स्पेशल्स",
-        menuSeasonalDesc: "रोज‑पेटल, तुलसी‑नींबू, मैंगो‑मिंट जैसी मौसमी फ्लेवर्स।",
+        menuSeasonalDesc: "रोज‑पेटल, तुलसी‑नींबू, मैंगो‑मिंट जैसी मौसमी फ्लेवर।",
         menuCold: "कोल्ड ब्रू एवं आइस चाय",
-        menuColdDesc: "ताज़ा, बर्फ़ पर नींबू की साथ परोसना।",
-        menuSnacks: "स्नैक्‍स",
-        menuSnacksDesc: "समोसा, पनीर टिक्का, चीज़ टोस्ट, ब्राउनी – परफेक्ट कॉम्पेनियन्स।",
+        menuColdDesc: "ठंडा और ताज़ा, बर्फ़ के साथ नींबू का एक छींटा।",
+        menuSnacks: "स्नैक्स",
+        menuSnacksDesc: "समोसे, पनीर टिक्का, चीज़ टोस्ट, ब्राउनी – परफेक्ट साथी।",
         menuDesserts: "डेज़र्ट्स",
-        menuDessertsDesc: "गुलाब जामुन, रसगुला, कुल्फी‑स्टाइल आइस‑क्रीम।",
+        menuDessertsDesc: "गुलाब जामुन, रसगुल्ला, कु्ल्फी‑स्टाइल आइस‑क्रीम।",
         contactTitle: "हमसे संपर्क करें",
         contactName: "नाम",
         contactEmail: "ई‑मेल",
@@ -599,7 +494,7 @@ const translations = {
         contactPhoneLabel: "फ़ोन:",
         contactEmailLabel: "ई‑मेल:",
         feedbackTitle: "ग्राहक प्रतिक्रिया",
-        feedbackIntro: "हम आपके विचारों को महत्व देते हैं। नीचे फ़ॉर्म भरें।",
+        feedbackIntro: "हम आपके विचारों की क़द्र करते हैं। कृपया नीचे छोटा फ़ॉर्म भरें।",
         footerTagline: "हर कप में ख़ुशी सर्व करें ☕",
         footerLinksTitle: "त्वरित लिंक",
         footerContactTitle: "संपर्क",
@@ -607,253 +502,164 @@ const translations = {
     },
     kn: {
         heroTitle: "ಪರ್ಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್",
-        heroSubtitle: "ಹಸ್ತ ನಿರ್ಮಿತ ಪ್ರೀಮಿಯಮ್ ಚಾಯ್ • ಆರಾಮದಾಯಕ ಕಾಫೆಗಳು • ಫ್ರೀ ವಿ‑ಫೈ",
+        heroSubtitle: "ಹಸ್ತ ನಿರ್ಮಿತ ಪ್ರೀಮಿಯಮ್ ಛಾಯಿ • ಆರಾಮದಾಯಕ ಕಾಫೆಗಳು • ಉಚಿತ Wi‑Fi",
         navAbout: "ನಮ್ಮ ಬಗ್ಗೆ",
         navMenu: "ಮೆನು",
         navContact: "ಸಂಪರ್ಕ",
         navFeedback: "ಪ್ರತಿಕ್ರಿಯೆ",
-        searchPlaceholder: "ಮೆನು ಹುಡುಕಿ…",
         aboutTitle: "ನಮ್ಮ ಕಥೆ",
-        aboutPara1: "ಬೆಂಗಾಳೂರಿನ ಮಳೆಯ ಸಾಯಂಕಾಲ, ಯುವ ಛಾಯ್‑ಪ್ರೇಮಿ <strong>ಪರ್ಮೇಶ್</strong> ಒಂದು ಸರಳ ಸ್ಟಾಲ್‌ದಿಂದ ಬಿಸಿ ಛಾಯ್‌ ಅನ್ನು ಖರೀದಿಸುವ ಮೂಲಕ ಮಂತ್ರವನ್ನು ಕಂಡುಹಿಡಿದರು. ಛಾಯ್ ತಾಪ, ಸುಗಂಧ ಮತ್ತು ಅಂಗಡಿ ಮಾಲೀಕರೊಂದಿಗಿನ ಸಂಭಾಷಣೆಯಿಂದ – “ಈ ಭಾವನೆಯನ್ನು ನಗರದ ಎಲ್ಲ ಮೂಲೆಗಳಲ್ಲೂ ಹಂಚಿಕೊಳ್ಳಬಹುದೇ?” ಎಂಬ ಕಲ್ಪನೆ ಹುಟ್ಟಿತು.",
-        aboutPara2: "ಭಾರತದ ಛಾಯ್‑ತೋಟಗಳಲ್ಲಿ ಸಂಚರಿಸಿ, ರೈತರಿಂದ ಕಲಿತು, ಮಿಶ್ರಣವನ್ನು ಪರಿಪೂರ್ಣಗೊಳಿಸಿದ ನಂತರ, <strong>ಪರ್ಮೇಶ್</strong> ಒಂದು ಚಿಕ್ಕ ತಂಡವನ್ನು ಸೇರಿಸಿ ಈ ಕಲ್ಪನೆಯನ್ನು ವಾಸ್ತವಿಕತೆಗೊಳಿಸಿದರು. ಫಲಿತಾಂಶ <strong>ಪರ್ಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್</strong> – ಪ್ರತಿ ಕಪ್ ಒಂದು ಕಥೆ ಹೇಳುವ, ಜನರು ವಿರಾಮ, ಹಂಚಿಕೊಳ್ಳುವ ಮತ್ತು ಮನೆ‑ಹೋಲಿಕೆಯ ಅನುಭವ ಪಡೆಯುವ ಸ್ಥಳ.",
-        aboutCall: "<strong>ನಮ್ಮ ಬೆಂಬಲ ಬೇಕು.</strong> ನೀವು ಒಂದು ಬಾರಿ ಭೇಟಿ ನೀಡಿ, ಮಾತು‑ಮತ್ತು‑ಮಾತು ಹಂಚಿಕೊಳ್ಳಿ, ಅಥವಾ “ಧನ್ಯವಾದಗಳು” ಎಂದು ಹೇಳಿ – ಪ್ರತಿಯೊಂದು ಸಹಾಯವೂ ಈ ಪರಂಪರೆಯನ್ನು ಉಳಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಬನ್ನಿ, ನಮ್ಮ ಜೊತೆ ಛಾಯ್ ಕುಡಿಯಿರಿ ಮತ್ತು ಈ ಪ್ರೀತಿಯನ್ನು ಹಂಚಿಕೊಳ್ಳೋಣ.",
+        aboutPara1: "ಬೆಂಗಾಳೂರಿನ ಮಳೆಯ ಸಾಯಂಕಾಲ, ಯುವ ಛಾಯಿ ಪ್ರೇಮಿ <strong>ಪರ್ಮೇಶ್</strong> ಒಂದು ಸರಳ ಸ್ಟಾಲ್‌ದಿಂದ ಬಿಸಿ ಛಾಯಿಯನ್ನು ಕುಡಿಯುವ ಮೂಲಕ ಮಾಯೆ ಕಂಡುಹಿಡಿದರು. ಛಾಯಿಯ ತಾಪ, ಸುಗಂಧ ಹಾಗೂ ಅಂಗಡಿ ಮಾಲೀಕರೊಂದಿಗೆ ಚಿಕ್ಕ ಸಂಭಾಷಣೆ – “ಈ ಭಾವನೆಯನ್ನು ಎಲ್ಲಾ ನಗರದ ಮೂಲೆಗಳಲ್ಲಿ ಹಂಚಬಹುದೇ?” ಎಂಬ ಸರಳ ಕಲ್ಪನೆ ಉಂಟಾಯಿತು.",
+        aboutPara2: "ಭಾರತದ ಛಾಯಿ ತೋಟಗಳಾದ ಅಸ್ಸಾಂ, ಡಾರ್ಜಿಲ್ಲಿಂಗ್, ನೀಲಿಗಿರಿಗಳಲ್ಲಿ ಪಯಣಿಸಿ, ರೈತರಿಂದ ಕಲಿತು, ಮಿಶ್ರಣವನ್ನು ಪರಿಪೂರ್ಣಗೊಳಿಸಿದ ನಂತರ, <strong>ಪರ್ಮೇಶ್</strong> ಒಂದು ಚಿಕ್ಕ ತಂಡವನ್ನು ಸೇರಿಸಿ ಈ ಕಲ್ಪನೆಯನ್ನು ವಾಸ್ತವಗೊಳಿಸಿದರು. ಫಲಿತಾಂಶ: <strong>ಪರ್ಮೇಶ್ ಛಾಯಿ ಪಾಯಿಂಟ್</strong> – ಪ್ರತಿ ಕಪ್ ಒಂದು ಕಥೆ ಹೇಳುವ, ಜನರು ನಿಲ್ಲಿಸಿ, ಮಾತನಾಡಿ, ಮನೆ ಸೂಕ್ತ ಅನುಭವಿಸುವ ಸ್ಥಳ.",
+        aboutCall: "<strong>ನಾವು ನಿಮ್ಮ ಬೆಂಬಲವನ್ನು ಅಗತ್ಯಪಡಿಸುತ್ತೇವೆ.</strong> ಒಂದೇ ಭೇಟಿ, ಮಾತು‑ಮತ್ತು‑ಮಾತು, “ಧನ್ಯವಾಡು” ಎಂಬ ಸರಳ ಹೇಳಿಕೆಯೂ ಈ ಪರಂಪರೆಯನ್ನು ಉಳಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಸೇರಿ, ಛಾಯನ್ನು ಸವಿದು, ಈ ಪ್ರೀತಿಯನ್ನು ಹಂಚಿಕೊಳ್ಳೋಣ.",
         menuTitle: "ನಾವು ಏನು ನೀಡುತ್ತೇವೆ",
-        menuClassic: "ಕ್ಲಾಸಿಕ್ ಚಾಯ್",
-        menuClassicDesc: "ಪಾರಂಪರಿಕ ಅಸ್ಸಾಂ ಚಾಯ್, ಹಾಲು, ಸಕ್ಕರೆ ಮತ್ತು ನಮ್ಮ ವಿಶೇಷ ಮಸಾಲಾ ಮಿಶ್ರಣದೊಂದಿಗೆ.",
-        menuMasala: "ಮಸಾಲಾ ಚಾಯ್",
-        menuMasalaDesc: "ಈಲಕ್ಕಿ, ಶುಂಟಿ, ದಾಲ್ಚಿನ್ನಿ, ಲವಂಗ ಮತ್ತು ಮೆಣಸು – ಕ್ಲಾಸಿಕ್ ಇಂಡಿಯನ್ ಪ್ರಿಯ.",
-        menuSeasonal: "ಸೀಸನಲ್ ಸ್ಪೆಷಲ್ಸ್",
-        menuSeasonalDesc: "ರೋಸ್‑ಪೆಟಲ್, ತೂಲಸಿ‑ನಿಂಬೆ, ಮಾವು‑ಮಿಂಟ್ ಮುಂತಾದ ಋತುವಿನ ರುಚಿಗಳು.",
-        menuCold: "ಕೋಲ್ಡ್ ಬ್ರೂ ಮತ್ತು ಐಸ್ ಚಾಯ್",
-        menuColdDesc: "ತಾಜಾ, ಐಸ್‌ ಮೇಲೆ ನಿಂಬೆ ರುಚಿ.",
-        menuSnacks: "ಸ್ನ್ಯಾಕ್ಸ್",
-        menuSnacksDesc: "ಸಮೋಸಾ, ಪನೀರ್ ಟಿಕ್ಕಾ, ಚೀಸ್ ಟೋಸ್ಟ್, ಬ್ರೌನಿ – ಪರಿಪೂರ್ತ ಸಂಗಾತಿಗಳು.",
-        menuDesserts: "ಡಿಸೆರ್ಟ್ಸ್",
+        menuClassic: "ಕ್ಲಾಸಿಕ್ ಛಾಯಿ",
+        menuClassicDesc: "ಪಾರಂಪರಿಕ ಅಸ್ಸಾಂ ಛಾಯಿ, ಹಾಲು, ಸಕ್ಕರೆ ಹಾಗೂ ನಮ್ಮ ವಿಶೇಷ ಮಸಾಲಾ ಮಿಶ್ರಣ.",
+        menuMasala: "ಮಸಾಲಾ ಛಾಯಿ",
+        menuMasalaDesc: "ಏಲಕ್ಕಿ, ಹ ginger, ದಾಲ್ಚಿನ್ನಿ, ಲವಂಗ ಹಾಗೂ ಮೆಣಸು – ಪ್ರಾಚೀನ ಭಾರತೀಯ ಪ್ರಿಯ.",
+        menuSeasonal: "ಕಾಲದ ವಿಶೇಷಗಳು",
+        menuSeasonalDesc: "ರೋಸ್‑ಪೆಟಲ್, ತುಲಸಿ‑ನಿಂಬೆ, ಮ್ಯಾಂಗೋ‑ಮಿಂಟ್ ಮುಂತಾದ ಋತುವಿನ ರುಚಿಗಳು.",
+        menuCold: "ಕೋಲ್ಡ್ ಬ್ರೂ & ಐಸ್ ಛಾಯಿ",
+        menuColdDesc: "ತಾಜಾ, ಹಿಮದ ಮೇಲೆ ನಿಂಬೆ ರುಚಿ.",
+        menuSnacks: "ಸ್ನ್ಯಾಕ್‌ಗಳು",
+        menuSnacksDesc: "ಸಮೋಸಾ, ಪನೀರ್ ಟಿಕ್ಕಾ, ಚೀಸ್ ಟೋಸ್ಟ್, ಬ್ರೌನಿ – ಸೂಕ್ತ ಸಂಗಾತಿಗಳು.",
+        menuDesserts: "ಡೆಸೆರ್ಟ್‌ಗಳು",
         menuDessertsDesc: "ಗುಲಾಬ್ ಜಾಮುನ್, ರಸಗುಲ್ಲಾ, ಕುಲ್ಫಿ‑ಸ್ಟೈಲ್ ಐಸ್‑ಕ್ರೀಮ್.",
         contactTitle: "ಸಂಪರ್ಕಿಸಿ",
         contactName: "ಹೆಸರು",
-        contactEmail: "ಇ‑ಮೇಲ್",
+        contactEmail: "ಇಮೇಲ್",
         contactMessage: "ಸಂದೇಶ",
         contactSend: "ಕಳುಹಿಸಿ",
         contactAddrLabel: "ವಿಳಾಸ:",
         contactPhoneLabel: "ಫೋನ್:",
-        contactEmailLabel: "ಇ‑ಮೇಲ್:",
-        feedbackTitle: "ಗ್ರಾಹಕರ ಅಭಿಪ್ರಾಯ",
-        feedbackIntro: "ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವನ್ನು ನಾವು ಕೀರ್ತಿಸುತ್ತೇವೆ. ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಫಾರ್ಮ್ ಪೂರ್ತಿ ಮಾಡಿ.",
-        footerTagline: "ಪ್ರತಿ ಕಪ್‌ನಲ್ಲಿ ಸಂತೋಷವನ್ನು ನೀಡಿ ☕",
+        contactEmailLabel: "ಇಮೇಲ್:",
+        feedbackTitle: "ಗ್ರಾಹಕ ಪ್ರತಿಕ್ರಿಯೆ",
+        feedbackIntro: "ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವನ್ನು ನಾವು ಮೌಲ್ಯಮಾಪನ ಮಾಡುತ್ತೇವೆ. ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಸಂಕ್ಷಿಪ್ತ ಫಾರ್ಮ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.",
+        footerTagline: "ಪ್ರತಿ ಕಪ್‌ನಲ್ಲಿ ಸಂತೋಷ ನೀಡಿ ☕",
         footerLinksTitle: "ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು",
         footerContactTitle: "ಸಂಪರ್ಕ",
         footerFollowTitle: "ಫಾಲೋ ಮಾಡಿ"
     },
     te: {
         heroTitle: "పర్మేశ్ చాయ్ పాయింట్",
-        heroSubtitle: "హ్యాండ్‌క్రాఫ్ట్‌డ్ ప్రీమియమ్ చాయ్ • కోజీ కేఫ్‌లు • ఫ్రీ వై‑ఫై",
+        heroSubtitle: "హ్యాండ్‌క్రాఫ్ట్‌డ్ ప్రీమియమ్ చాయ్ • సౌకర్యవంతమైన కేఫ్‌లు • ఉచిత Wi‑Fi",
         navAbout: "మా గురించి",
         navMenu: "మెను",
-        navContact: "సంప్రదించండి",
-        navFeedback: "ఫీడ్బ్యాక్",
-        searchPlaceholder: "మెను కోసం శోధించండి…",
+        navContact: "సంపర్కం",
+        navFeedback: "ఫీడ్‌బ్యాక్",
         aboutTitle: "మా కథ",
-        aboutPara1: "బెంగళూరులో వర్షపు సాయంత్రం, యువ చాయ్‑ప్రేమి <strong>పర్మేశ్</strong> ఒక చిన్న స్టాల్‌ నుండి వేడి చాయ్‌ని సేవించడంలో మాయను కనుగొన్నారు. చాయ్‌ వేడి, వాసన, స్టాల్ యజమానికి చిన్న సంభాషణ – “ఈ భావనను నగరంలో ప్రతి మూలకు తీసుకెళ్తే ఎలా ఉంటుంది?” అనే సరళమైన ఆలోచన ఏర్పడింది.",
-        aboutPara2: "భారతదేశ చాయ్‑తోటలలో ప్రయాణించి, రైతుల నుంచి నేర్చుకుని, మిశ్రమాన్ని పరిపూర్ణం చేసిన తర్వాత, <strong>పర్మేశ్</strong> ఒక చిన్న బృందాన్ని జమచేసి ఈ ఆలోచనను వాస్తవికంగా మార్చారు. ఫలితంగా <strong>పర్మేశ్ చాయ్ పాయింట్</strong> – ప్రతి కప్‌ ఒక కథ చెప్పే, ప్రజలు విరామం తీసుకోవడానికి, పంచుకోవడానికి, ఇంటిలాగా అనిపించే స్థలం.",
-        aboutCall: "<strong>మీ సహాయము అవసరం.</strong> మీరు ఒకసారి వచ్చి, మాట‑మాట‑మాటు చెప్పండి, లేదా “ధన్యవాదాలు” అని చెప్పండి – ప్రతి సహకారం ఈ సంప్రదాయాన్ని కొనసాగించడంలో సహాయపడుతుంది. మనతో చాయ్ తాగండి, ఈ ప్రేమను పంచుకుందాం.",
-        menuTitle: "మేము ఏమి అందిస్తాం",
+        aboutPara1: "బెంగాళూరు పట్టణంలో వర్షపు సాయంత్రం, యువ ఛాయి‑ప్రేమికుడు <strong>పర్మేశ్</strong> ఒక చిన్న స్టాల్‌ నుండి బాగుండి ఐశ్వర్య చాయ్‌ను పిక్కుకునే మాయను కనుగొన్నారు. చాయ్ వాసన, వేడి, స్టాల్ యజమాని తో చిన్న సంభాషణ – “ఈ భావనను నగరమంతా పంచవచ్చు?” అనే సరళమైన ఆలోచన సృష్టించింది.",
+        aboutPara2: "భారతదేశంలోని వివిధ చాయ్ తోటల (అస్సాం, డ్రిజిల్లింగ్, నీలిగిరి) లో పర్యటించి, రైతులతో మాట్లాడి, మిశ్రమాన్ని పరిపూర్ణం చేసిన తరువాత, <strong>పర్మేశ్</strong> ఒక చిన్న టీమ్‌ను చేర్చుకుని ఈ ఆలోచనను వాస్తవంగా మార్చారు. ఫలితం: <strong>పర్మేశ్ చాయ్ పాయింట్</strong> – ప్రతి కప్ ఒక కథను చెబుతుంది, అక్కడ ప్రజలు నిలబడి, మాట్లాడి, ఇంటిగల అనుభూతి పొందుతారు.",
+        aboutCall: "<strong>మీ సహాయం అవసరం.</strong> మీరు ఒక్కసారి వచ్చి, మాట‑మాట, లేదా “ధన్యవాదాలు” అనే చిన్న మాట కూడా ఈ సంప్రదాయాన్ని కొనసాగించడంలో సహాయపడుతుంది. మనతో చాయ్ తాగి, ఈ స్నేహాన్ని పంచుకుందాం.",
+        menuTitle: "మేము అందించే వంటకాలు",
         menuClassic: "క్లాసిక్ చాయ్",
-        menuClassicDesc: "పారంపర్య అసాం చాయ్, పాలు, చక్కెర, మా ప్రత్యేక మసాలా మిశ్రమంతో.",
+        menuClassicDesc: "అస్సాం ప్రాంతపు సంప్రదాయ చాయ్, పాలు, చక్కెర, మా ప్రత్యేక మసాలా కలయికతో.",
         menuMasala: "మసాలా చాయ్",
-        menuMasalaDesc: "ఎలకలు, అల్లం, దాల్చినచెక్క, లవంగ & మిరియాలు – క్లాసిక్ ఇండియన్ ఇష్టమైనది.",
+        menuMasalaDesc: "ఏలకులు, అల్లం, దాల్చిన చెక్క, లవంగం, మిరపకాయి – క్లాసిక్ ఇండియన్ ఇష్టమైనది.",
         menuSeasonal: "సీజనల్ స్పెషల్స్",
-        menuSeasonalDesc: "రోస్‑పెట్టల్, తులసి‑నిమ్మకాయ, మామిడి‑మింట్ వంటి రుచులు.",
-        menuCold: "కాల్డ్ బ్రూ & ఐస్ చాయ్",
-        menuColdDesc: "తాజా, ఐస్‌పై నిమ్మరసం చుక్క.",
+        menuSeasonalDesc: "రోస్‑పెట్టల్, తులసి‑నిమ్మ, మామిడి‑మింట్ వంటి మారుతున్న రుచి.",
+        menuCold: "కోల్‑బ్రూత్ & ఐస్ చాయ్",
+        menuColdDesc: "తాజాగా, ఐస్ మీద పానీయం, నిమ్మరసం చిటుకా.",
         menuSnacks: "స్నాక్స్",
-        menuSnacksDesc: "సమోసాలు, paneer టిక్కా, చీస్ టోస్ట్, బrownies – పరిపూర్ణమైన తోడుదారులు.",
+        menuSnacksDesc: "సమోసా, పనీర్ టిక్కా, చీజ్ టోస్ట్, బrownies – తగిన సహచరులు.",
         menuDesserts: "డెజర్ట్స్",
-        menuDessertsDesc: "గులాబ్ జామున్, రసగుల్లా, కుల్ఫీ‑స్టైల్ ఐస్‑క్రీమ్.",
+        menuDessertsDesc: "గులాబ్ జామున్, రసగుల్లా, కుల్ఫీ‑స్టైల్ ఐస్‌క్రీమ్.",
         contactTitle: "మమ్మల్ని సంప్రదించండి",
         contactName: "పేరు",
-        contactEmail: "ఈ‑మెయిల్",
+        contactEmail: "ఇ‑మెయిల్",
         contactMessage: "సందేశం",
         contactSend: "పంపండి",
         contactAddrLabel: "చిరునామా:",
         contactPhoneLabel: "ఫోన్:",
-        contactEmailLabel: "ఈ‑మెయిల్:",
-        feedbackTitle: "కస్టమర్ ఫీడ్బ్యాక్",
-        feedbackIntro: "మీ అభిప్రాయాన్ని మేము విలువైనదిగా భావిస్తున్నాం. దయచేసి క్రింది ఫార్మ్‌ని నింపండి.",
-        footerTagline: "ప్రతి కప్పులో సంతోషాన్ని సేవించండి ☕",
-        footerLinksTitle: "త్వరిత లింకులు",
-        footerContactTitle: "సంప్రదించండి",
-        footerFollowTitle: "ఫాలో అవ్వండి"
+        contactEmailLabel: "ఇ‑మెయిల్:",
+        feedbackTitle: "కస్టమర్ ఫీడ్‌బ్యాక్",
+        feedbackIntro: "మీ అభిప్రాయాన్ని మేము విలువిస్తాం. దయవు చేసి క్రింది ఫారమ్‌ను పూరించండి.",
+        footerTagline: "ప్రతి కప్పులో ఆనందాన్ని అందించండి ☕",
+        footerLinksTitle: "త్వరిత లింక్స్",
+        footerContactTitle: "సంపర్కం",
+        footerFollowTitle: "ఫాలో చేయండి"
+    },
+    ta: {
+        heroTitle: "பார்மேஷ் சாய் பாயிண்ட்",
+        heroSubtitle: "கைமுறையாக 만든 பிரீமியம் சாய் • சுகமாக்கும் கஃபேகள் • இலவச Wi‑Fi",
+        navAbout: "எங்களைப் பற்றி",
+        navMenu: "மெனு",
+        navContact: "தொடர்பு",
+        navFeedback: "பின்னூட்டம்",
+        aboutTitle: "எங்களின் கதைய்",
+        aboutPara1: "பெங்களூரில் ஒரு மழை மாலை, இளம் சாய்‑இஷ்டமான <strong>பார்மேஷ்</strong> ஒரு சாதாரண கடை விட செய்த சூடான சாய் வாணிகத்தை கண்டார். அவரின் உஷ்ணம், வாசனை, முன்னிறப்பு உரையாடல் – “இந்த உணர்வை நகரம் ஒவ்வொரு மூலையிலும் கொண்டு வரலாம்?” என்ற சுருக்கமான யோசனை உருவானது.",
+        aboutPara2: "இந்தியாவின் தேயிலை வேளாண்மை பகுதிகளில் (அஸ்ஸாம், டார்ஜில்லிங், நீல்கிரி) பயணம் செய்து, விவசாயிகளுடன் பேசிக் கற்றுவித்து, கலவை பொருந்திய பின்பு, <strong>பார்மேஷ்</strong> ஒரு சிறிய குழுவை ஒன்று கூட்டு‑இந்த யோசனையை நிஜமாக்கினார். விளைவு: <strong>பார்மேஷ் சாய் பாயிண்ட்</strong> – ஒவ்வொரு கோப்பையும் ஒரு கதையை சொல்லும், மக்கள் நிற்க, பேச, வீட்டைப் போன்ற உணர்வு பெறும் இடம்.",
+        aboutCall: "<strong>உங்கள் ஆதரவு அவசியம்.</strong> ஒருமுறை வர, வாய்மொழி பரப்பு, “நன்றி” என்று சொல்லியதும், இந்த பரம்பரையைப் பாதுகாப்பதற்கு உதவுகிறது. எங்களுடன் சாய் குடித்து, இந்த அன்பை பகிர்ந்து கொள்ளுங்கள்.",
+        menuTitle: "நாங்கள் வழங்குவது",
+        menuClassic: "கிளாசிக் சாய்",
+        menuClassicDesc: "பாரம்பரிய அஸ்ஸாம் சாய், பால், சர்க்கரை மற்றும் எங்கள் குறிப்பிட்ட மசாலா கலவை.",
+        menuMasala: "மசாலா சாய்",
+        menuMasalaDesc: "எலுமிச்சை, இஞ்சி, இலவங்கப்பட்டை, கிராம்பு & மிளகு – பாரம்பரிய இந்திய விருப்பம்.",
+        menuSeasonal: "காலநிலை ஸ்பெஷல்கள்",
+        menuSeasonalDesc: "ரோஸ்‑பெட்டல், துளசி‑லெமன், மாம்பழ‑மின்ட் போன்ற மாற்றும் சுவைகள்.",
+        menuCold: "குளிர் பிரூ & ஐஸ் சாய்",
+        menuColdDesc: "அதிகம் குளிராக, பனி மீது எலுமிச்சை இளஞ்சிவப்பு.",
+        menuSnacks: "உப்புமெனிகள்",
+        menuSnacksDesc: "சமோசா, பனீர் டிக்கா, சீஸ் டோஸ்ட், ப்ரவுனி – சரியான துணை.",
+        menuDesserts: "இனிப்புகள்",
+        menuDessertsDesc: "குளாப் ஜாமுன், ரச்குல்லா, கூற்‑ஸ்டைல் ஐஸ்‑க்ரீம்.",
+        contactTitle: "எங்களை தொடர்பு கொள்ளுங்கள்",
+        contactName: "பெயர்",
+        contactEmail: "மின்னஞ்சல்",
+        contactMessage: "செய்தி",
+        contactSend: "அனுப்பு",
+        contactAddrLabel: "முகவரி:",
+        contactPhoneLabel: "தொலைபேசி:",
+        contactEmailLabel: "மின்னஞ்சல்:",
+        feedbackTitle: "வாடிக்கையாளர் பின்னூட்டம்",
+        feedbackIntro: "உங்கள் கருத்தை மதிக்கிறோம். தயவுசெய்து கீழேயுள்ள சிறிய படிவத்தை பூர்த்தி செய்யவும்.",
+        footerTagline: "ஒவ்வொரு கோப்பிலும் மகிழ்ச்சி வழங்குங்கள் ☕",
+        footerLinksTitle: "விரைவு இணைப்புகள்",
+        footerContactTitle: "தொடர்பு",
+        footerFollowTitle: "எங்களை பின்தொடர்க"
     }
 };
 
-/* ---------- APPLY TRANSLATIONS ---------- */
-function applyTranslations(lang) {
-    const dict = translations[lang] || translations.en;
+/* ---------- LANGUAGE SWITCHER ---------- */
+function setLanguage(lang) {
+    const dict = translations[lang];
+    if (!dict) return;
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.dataset.i18n;
-        if (key && dict[key]) {
-            el.innerHTML = dict[key];
-        }
+        if (dict[key]) el.innerHTML = dict[key];
     });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.dataset.i18nPlaceholder;
-        if (key && dict[key]) {
-            el.setAttribute('placeholder', dict[key]);
-        }
-    });
-    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-switcher button')
+            .forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    localStorage.setItem('lang', lang);
 }
 
-/* ---------- LANGUAGE SWITCHER ---------- */
-document.querySelectorAll('.lang-switcher button').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const lang = btn.dataset.lang;
-        applyTranslations(lang);
-        document.querySelectorAll('.lang-switcher button').forEach(b => {
-            b.classList.toggle('active', b === btn);
-        });
-    });
+/* Load saved language */
+document.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('lang') || 'en';
+    setLanguage(saved);
 });
 
-/* ---------- INITIAL LANG ---------- */
-applyTranslations('en');
+/* Click on language buttons */
+document.querySelectorAll('.lang-switcher button')
+        .forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
 
-/* ---------- TAB NAVIGATION ---------- */
-const tabLinks = document.querySelectorAll('.tab-link');
-const sections = document.querySelectorAll('.section');
-
-tabLinks.forEach(link => {
+/* ---------- TAB SWITCHING ---------- */
+document.querySelectorAll('.tab-link').forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
-        tabLinks.forEach(l => l.classList.toggle('active', l === link));
-        sections.forEach(sec => sec.classList.toggle('active', sec.id === targetId));
+        const target = link.getAttribute('href').substring(1);
+        document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        document.querySelectorAll('.section')
+                .forEach(sec => sec.classList.toggle('active', sec.id === target));
     });
 });
 
-/* -------------------------------------------------
-   12️⃣ INTERACTIVE SEARCH FUNCTIONALITY
-   ------------------------------------------------- */
-function debounce(fn, delay) {
-    let timer;
-    return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => fn.apply(this, args), delay);
-    };
+/* ---------- FORMSPREE STATUS ---------- */
+const form = document.querySelector('.contact');
+const status = document.getElementById('form-status');
+if (form) {
+    form.addEventListener('submit', () => { status.textContent = 'Sending…'; });
 }
-function escapeRegExp(s){ return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
-function highlight(el, term){
-    const re = new RegExp(`(${escapeRegExp(term)})`, 'gi');
-    el.innerHTML = el.textContent.replace(re, '<mark>$1</mark>');
-}
-function removeHighlight(el){ el.textContent = el.textContent; }
-
-const searchInput   = document.getElementById('search');
-const suggestionBox = document.getElementById('search-suggestions');
-const menuItems    = [...document.querySelectorAll('.menu-item')];
-let previousQuery = '';
-
-function runSearch(e) {
-    const query = e.target.value.trim().toLowerCase();
-    if (query === previousQuery) return;
-    previousQuery = query;
-
-    /* reset view */
-    menuItems.forEach(item => {
-        item.style.display = '';
-        removeHighlight(item.querySelector('h3'));
-        removeHighlight(item.querySelector('p'));
-    });
-    suggestionBox.hidden = true;
-    searchInput.setAttribute('aria-expanded', 'false');
-
-    if (!query) return;
-
-    const matches = menuItems.filter(item => {
-        const title = item.querySelector('h3').textContent.toLowerCase();
-        const desc  = item.querySelector('p').textContent.toLowerCase();
-        return title.includes(query) || desc.includes(query);
-    });
-
-    menuItems.forEach(item => {
-        if (!matches.includes(item)) {
-            item.style.display = 'none';
-        } else {
-            highlight(item.querySelector('h3'), query);
-            highlight(item.querySelector('p'),  query);
-        }
-    });
-
-    if (matches.length) {
-        const html = matches.slice(0,5).map((item,i)=> {
-            const idx   = menuItems.indexOf(item);
-            const title = item.querySelector('h3').textContent;
-            return `<li role="option" data-index="${idx}" id="suggest-${i}" tabindex="-1">${title}</li>`;
-        }).join('');
-        suggestionBox.innerHTML = html;
-        suggestionBox.hidden = false;
-        searchInput.setAttribute('aria-expanded','true');
-    }
-}
-searchInput.addEventListener('input', debounce(runSearch,200));
-
-/* Keyboard navigation in suggestions */
-searchInput.addEventListener('keydown', e => {
-    if (suggestionBox.hidden) return;
-
-    const items = [...suggestionBox.querySelectorAll('li')];
-    const active = suggestionBox.querySelector('[aria-selected="true"]');
-    let curIdx = active ? items.indexOf(active) : -1;
-
-    if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        const next = (curIdx + 1) % items.length;
-        if (active) active.removeAttribute('aria-selected');
-        items[next].setAttribute('aria-selected','true');
-        items[next].focus();
-    } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        const prev = (curIdx - 1 + items.length) % items.length;
-        if (active) active.removeAttribute('aria-selected');
-        items[prev].setAttribute('aria-selected','true');
-        items[prev].focus();
-    } else if (e.key === 'Enter') {
-        if (active) {
-            e.preventDefault();
-            activateSuggestion(active);
-        }
-    } else if (e.key === 'Escape') {
-        suggestionBox.hidden = true;
-        searchInput.setAttribute('aria-expanded','false');
-    }
-});
-
-/* Mouse click on a suggestion */
-suggestionBox.addEventListener('click', e => {
-    if (e.target.matches('li')) activateSuggestion(e.target);
-});
-
-function activateSuggestion(el){
-    const idx  = Number(el.dataset.index);
-    const card = menuItems[idx];
-    if (!card) return;
-    card.scrollIntoView({behavior:'smooth', block:'center'});
-    card.classList.add('highlighted');
-    setTimeout(()=>card.classList.remove('highlighted'),1800);
-    searchInput.value = el.textContent;
-    suggestionBox.hidden = true;
-    searchInput.setAttribute('aria-expanded','false');
-}
-
-/* Click outside closes dropdown */
-document.addEventListener('click', e => {
-    if (!searchInput.contains(e.target) && !suggestionBox.contains(e.target)){
-        suggestionBox.hidden = true;
-        searchInput.setAttribute('aria-expanded','false');
-    }
-});
 </script>
-
 </body>
 </html>
