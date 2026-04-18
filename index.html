@@ -9,7 +9,7 @@
 
 <!-- Open‑Graph / Twitter meta (unchanged) -->
 <meta property="og:title" content="Parmesh Chai Point – Interactive Site">
-<meta property="og:description" content="Premium handcrafted chai • Cozy cafés • Free Wi‑Fi">
+<meta property="og:description" content="Premium handcrafted chai • Cozy cafés • Free Wi‑FI">
 <meta property="og:image" content="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80">
 <meta property="og:url" content="https://example.com/">
 <meta name="twitter:card" content="summary_large_image">
@@ -25,7 +25,9 @@
     --clr-bg:#fafafa;
     --clr-dark:#111;
     --clr-light:#fff;
-    --clr-section-header:#003366;      /* ← NEW – deep‑navy, professional */
+    --clr-section-header:#003366;      /* deep‑navy for headings */
+    --clr-footer-bg:#2c3e50;          /* ← NEW – professional footer colour */
+    --clr-footer-text:#fff;           /* ← NEW – white footer text */
     --max-w:1100px;
     --gap:1.5rem;
 }
@@ -41,7 +43,7 @@ body{
 }
 
 /* -------------------------------------------------
-   2️⃣ SKIP LINK
+   2️⃣ SKIP LINK (accessibility)
    ------------------------------------------------- */
 .skip-link{
     position:absolute; left:-9999px; top:-9999px;
@@ -147,7 +149,7 @@ section.active{display:block;}
    6️⃣ SECTION HEADINGS – PROFESSIONAL COLOUR
    ------------------------------------------------- */
 section h2{
-    color:var(--clr-section-header);   /* ← applied here */
+    color:var(--clr-section-header);
     margin-bottom:1.5rem;
 }
 
@@ -210,11 +212,11 @@ section h2{
 }
 
 /* -------------------------------------------------
-   8️⃣ FOOTER
+   8️⃣ FOOTER – PROFESSIONAL COLOURS
    ------------------------------------------------- */
 footer{
-    background:#111;
-    color:#ccc;
+    background:var(--clr-footer-bg);       /* ← NEW */
+    color:var(--clr-footer-text);          /* ← NEW */
     text-align:center;
     padding:2rem 1rem;
     margin-top:auto;
@@ -244,7 +246,7 @@ footer{
 .footer__bottom{
     margin-top:2rem;
     font-size:.85rem;
-    color:#aaa;
+    color:rgba(255,255,255,.8);   /* slightly lighter for contrast */
 }
 
 /* -------------------------------------------------
@@ -256,8 +258,8 @@ footer{
 }
 
 /* -------------------------------------------------
-   10️⃣ GLOBAL FOCUS OUTLINE (helps keyboard users)
-   ------------------------------------------------- */
+  10️⃣ GLOBAL FOCUS OUTLINE (helps keyboard users)
+  ------------------------------------------------- */
 a, button, input, textarea{outline:none;}
 a:focus, button:focus, input:focus, textarea:focus{
     outline:2px solid var(--clr-primary);
@@ -515,25 +517,24 @@ function setLanguage(lang){
         btn.setAttribute('aria-pressed',active);
     });
 
-    // Refresh clock label immediately on language change
+    // Refresh clock label instantly on language change
     renderClock();
 
     localStorage.setItem('lang',lang);
 }
 
-/* ---------- HELPERS ----------
-   zero‑pad helper used by the clock */
+/* ---------- ZERO‑PAD HELPER ---------- */
 function pad2(n){ return n<10 ? '0'+n : ''+n; }
 
 /* ---------- INITIALISATION ----------
-   – language, lazy background, UI events, clock interval   */
+   • Language, lazy background, UI events, clock interval */
 document.addEventListener('DOMContentLoaded',()=>{
 
     // Load saved language (default EN)
     const saved = localStorage.getItem('lang') || 'en';
     setLanguage(saved);
 
-    // Lazy‑load hero background image
+    // Lazy‑load hero background
     const header = $('header');
     if ('IntersectionObserver' in window){
         const obs = new IntersectionObserver((entries,observer)=>{
@@ -576,7 +577,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         form.addEventListener('submit',()=>{ status.textContent='Sending…';});
     }
 
-    // Start the 12‑hour digital clock
+    // Start the 12‑hour clock
     renderClock();               // immediate first render
     setInterval(renderClock,1000);
 });
