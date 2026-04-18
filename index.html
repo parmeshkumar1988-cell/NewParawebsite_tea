@@ -48,9 +48,7 @@ body{
     position:absolute; left:-9999px; top:-9999px;
     background:#000;color:#fff;padding:.5rem;z-index:1000;
 }
-.skip-link:focus{
-    left:1rem;top:1rem;
-}
+.skip-link:focus{left:1rem;top:1rem}
 
 /* -------------------------------------------------
    3️⃣ HEADER – COFFEE MUG BACKGROUND
@@ -67,7 +65,7 @@ header h1{font-size:2.5rem;margin-bottom:.5rem;}
 header p{font-size:1.1rem;}
 
 /* -------------------------------------------------
-   10️⃣ TIMER STYLES
+   10️⃣ TIMER (now DIGITAL CLOCK) STYLES
    ------------------------------------------------- */
 .timer{
     margin-top:1rem;
@@ -116,7 +114,7 @@ nav a:focus{background:rgba(0,0,0,.2);}
     top:0.5rem; right:0.5rem;
     display:flex;
     gap:.5rem;
-    z-index:2;               /* above the nav list */
+    z-index:2;
 }
 .lang-switcher button{
     background:rgba(255,255,255,.2);
@@ -141,7 +139,7 @@ main{flex:1;}
     max-width:var(--max-w);
     margin:auto;
     padding:3rem 1rem;
-    display:none;               /* hidden by default */
+    display:none;
 }
 .section.active{display:block;}
 
@@ -267,7 +265,7 @@ a:focus, button:focus, input:focus, textarea:focus{
     <h1 data-i18n="heroTitle">Parmesh Chai Point</h1>
     <p data-i18n="heroSubtitle">Premium handcrafted chai • Cozy cafés • Free Wi‑Fi</p>
 
-    <!-- ★ NEW TIMER ★ -->
+    <!-- ★ DIGITAL CLOCK ★ -->
     <div id="timer" class="timer" aria-live="polite" role="timer"></div>
 </header>
 
@@ -458,16 +456,15 @@ a:focus, button:focus, input:focus, textarea:focus{
 </footer>
 
 <!-- -------------------------------------------------
-     9️⃣ ENHANCED JS – accessibility, lazy‑load, Formspree feedback,
-     language <html lang=""> sync, graceful fallback, **timer**
+     9️⃣ ENHANCED JS – language switcher + digital clock
   ------------------------------------------------- -->
 <script>
 /* ---------- 0️⃣ HELPERS ---------- */
-const $  = sel => document.querySelector(sel);
-const $$ = sel => Array.from(document.querySelectorAll(sel));
+const $  = s => document.querySelector(s);
+const $$ = s => Array.from(document.querySelectorAll(s));
 
 /* ---------- 1️⃣ TRANSLATIONS ----------
-   Added timer‑related keys for every language */
+   Added clock‑specific strings (timerLabel & timerClock) */
 const translations = {
     en:{
         heroTitle:"Parmesh Chai Point",
@@ -507,11 +504,9 @@ const translations = {
         footerLinksTitle:"Quick Links",
         footerContactTitle:"Contact",
         footerFollowTitle:"Follow Us",
-        /* Timer strings */
-        timerLabel:"Open in:",
-        timerCountdown:"%d days %02d:%02d:%02d",
-        timerClock:"%02d:%02d:%02d",
-        timerFinished:"We’re open now!"
+        /* Clock strings */
+        timerLabel:"Current time:",
+        timerClock:"%02d:%02d:%02d"
     },
     hi:{
         heroTitle:"पर्मेश चाय पॉइंट",
@@ -551,11 +546,8 @@ const translations = {
         footerLinksTitle:"त्वरित लिंक",
         footerContactTitle:"संपर्क",
         footerFollowTitle:"फ़ॉलो करें",
-        /* Timer strings */
-        timerLabel:"खुलने का समय:",
-        timerCountdown:"%d दिन %02d:%02d:%02d",
-        timerClock:"%02d:%02d:%02d",
-        timerFinished:"हम अभी खुले हैं!"
+        timerLabel:"वर्तमान समय:",
+        timerClock:"%02d:%02d:%02d"
     },
     kn:{
         heroTitle:"ಪರ್ಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್",
@@ -591,19 +583,16 @@ const translations = {
         contactEmailLabel:"ಇಮೇಲ್:",
         feedbackTitle:"ಗ್ರಾಹಕ ಪ್ರತಿಕ್ರಿಯೆ",
         feedbackIntro:"ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವನ್ನು ಮೌಲ್ಯಮಾಪನ ಮಾಡುತ್ತೇವೆ. ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಫಾರ್ಮ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.",
-        footerTagline:"ಪ್ರತಿ ಕಪ್‌ನಲ್ಲಿ ಸಂತೋಷ ನೀಡಿ ☕",
+        footerTagline:"ಪ್ರತಿ ಕಪ್ಪಿನಲ್ಲಿ ಸಂತೋಷ ನೀಡಿ ☕",
         footerLinksTitle:"ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು",
         footerContactTitle:"ಸಂಪರ್ಕ",
         footerFollowTitle:"ಫಾಲೋ ಮಾಡಿ",
-        /* Timer strings */
-        timerLabel:"ತೆರೆಯುವ ಸಮಯ:",
-        timerCountdown:"%d ದಿನಗಳು %02d:%02d:%02d",
-        timerClock:"%02d:%02d:%02d",
-        timerFinished:"ಮುಕ್ತವಾಗಿದೆ!"
+        timerLabel:"ಪ್ರಸ್ತುತ ಸಮಯ:",
+        timerClock:"%02d:%02d:%02d"
     },
     te:{
         heroTitle:"పర్మేశ్ చాయ్ పాయింట్",
-        heroSubtitle:"హ్యాండ్‌క్రాఫ్ట్‌డ్ ప్రీమియమ్ చాయ్ • సౌకర్యవంతమైన కేఫ్‌లు • ఉచిత Wi‑Fi",
+        heroSubtitle:"హ్యాండ్‌క్రాఫ్ట్‌డ్ ప్రీమియం చాయ్ • సౌకర్యవంతమైన కేఫ్‌లు • ఉచిత Wi‑Fi",
         navAbout:"మా గురించి",
         navMenu:"మెను",
         navContact:"సంపర్కం",
@@ -611,7 +600,7 @@ const translations = {
         aboutTitle:"మా కథ",
         aboutPara1:"బెంగాళూరు పట్టణంలో వర్షపు సాయంత్రం, యువ ఛాయి‑ప్రేమికుడు <strong>పర్మేశ్</strong> ఒక చిన్న స్టాల్‌ నుంచి బాగుండి ఐశ్వర్య చాయ్‌ను పిక్కుకునే మాయను కనుగొన్నారు. ఛాయ్ వాసన, ఉష్ణం, స్టాల్ యజమాని తో చిన్న సంభాషణ – “ఈ భావనను నగరమంతా పంచవచ్చు?” అనే సరళమైన ఆలోచన సృష్టించింది.",
         aboutPara2:"భారతదేశంలోని వివిధ చాయ్ తోటల (అస్సాం, డ్రిజిల్లింగ్, నీలిగిరి) లో పర్యటించి, రైతులతో మాట్లాడి, మిశ్రమాన్ని పరిపూర్ణం చేసిన తరువాత, <strong>పర్మేశ్</strong> ఒక చిన్న టీమ్‌ను చేర్చుకుని ఈ ఆలోచనను వాస్తవంగా మార్చారు. ఫలితం: <strong>పర్మేశ్ చాయ్ పాయింట్</strong> – ప్రతి కప్ ఒక కథను చెబుతుంది, అక్కడ ప్రజలు నిలబడి, మాట్లాడి, ఇంటిగల అనుభూతి పొందుతారు.",
-        aboutCall:"<strong>మీ సహాయం అవసరం.</strong> మీరు ఒక్కసారి వచ్చి, మాట‑మాట, లేదా “ధన్యవాదాలు” అనే చిన్న మాట కూడా ఈ సంప్రదాయాన్ని కొనసాగించడంలో సహాయపడుతుంది. మనతో చాయ్ తాగి, ఈ స్నేహాన్ని పంచుకుందాం.",
+        aboutCall:"<strong>మీ సహాయం అవసరం.</strong> మీరు ఒక్కసారి వచ్చి, మాట‑మాట, “ధన్యవాదాలు” అనే చిన్న మాట కూడా ఈ సంప్రదాయాన్ని కొనసాగించడంలో సహాయపడుతుంది. మనతో చాయ్ తాగి, ఈ స్నేహాన్ని పంచుకుందాం.",
         menuTitle:"మేము అందించే వంటకాలు",
         menuClassic:"క్లాసిక్ చాయ్",
         menuClassicDesc:"అస్సాం ప్రాంతపు సంప్రదాయ చాయ్, పాలు, చక్కెర, మా ప్రత్యేక మసాలా కలయికతో.",
@@ -622,7 +611,7 @@ const translations = {
         menuCold:"కోల్‑బ్రూత్ & ఐస్ చాయ్",
         menuColdDesc:"తాజాగా, ఐస్ మీద పానీయం, నిమ్మరసం చిటుకా.",
         menuSnacks:"స్నాక్స్",
-        menuSnacksDesc:"సమోసా, పనీర్ టిక్కా, చీజ్ టోస్ట్, బrownies – తగిన సహచరులు.",
+        menuSnacksDesc:"సమోసా, పనీర్ టిక్కా, చీజ్ టోస్ట్, బbrownies – తగిన సహచరులు.",
         menuDesserts:"డెజర్ట్స్",
         menuDessertsDesc:"గులాబ్ జామున్, రసగుల్లా, కుల్ఫీ‑స్టైల్ ఐస్‌క్రీమ్.",
         contactTitle:"మమ్మల్ని సంప్రదించండి",
@@ -639,11 +628,8 @@ const translations = {
         footerLinksTitle:"త్వరిత లింక్స్",
         footerContactTitle:"సంపర్కం",
         footerFollowTitle:"ఫాలో చేయండి",
-        /* Timer strings */
-        timerLabel:"తెరువుకు సమయం:",
-        timerCountdown:"%d రోజుల %02d:%02d:%02d",
-        timerClock:"%02d:%02d:%02d",
-        timerFinished:"ఇది ఇప్పుడే తెరుచుకుంది!"
+        timerLabel:"ప్రస్తుతం సమయం:",
+        timerClock:"%02d:%02d:%02d"
     },
     ta:{
         heroTitle:"பார்மேஷ் சாய் பாயிண்ட்",
@@ -653,8 +639,8 @@ const translations = {
         navContact:"தொடர்பு",
         navFeedback:"பின்னூட்டம்",
         aboutTitle:"எங்களின் கதைய்",
-        aboutPara1:"பெங்களூரில் ஒரு மழை மாலை, இளம் சாய்‑இஷ்டமான <strong>பார்மேஷ்</strong> ஒரு சாதாரண கடை விட செய்த சூடான சாய் வாணிகத்தை கண்டார். அவரின் உஷ்ணம், வாசனை, முன்னிறப்பு உரையாடல் – “இந்த உணர்வை நகரம் ஒவ்வொரு மூலையிலும் கொண்டு வர‐லாம்?” என்ற சுருக்கமான யோசனை உருவானது.",
-        aboutPara2:"இந்தியாவின் தேயிலை வேளாண்மை பகுதிகளில் (அஸ்ஸாம், டார்ஜில்லிங், நீல்கிரி) பயணம் செய்து, விவசாயிகளுடன் பேசிக் கற்றுவித்து, கலவை பொருந்திய பின்பு, <strong>பார்மேஷ்</strong> ஒரு சிறிய குழுவை ஒன்று கூட்டு‑இந்த யோசனையை நிஜமாக்கினார். விளைவு: <strong>பார்மேஷ் சாய் பாயிண்ட்</strong> – ஒவ்வொரு கோப்பையும் ஒரு கதையை சொல்லும், மக்கள் நிற்க, பேச, வீட்டைப் போன்ற உணர்வு பெறும் இடம்.",
+        aboutPara1:"பெங்களூரில் ஒரு மழை மாலை, இளம் சாய்‑இஷ்டமான <strong>பார்மேஷ்</strong> ஒரு சாதாரண கடை விட செய்த சூடான சாய் வாணிகத்தை கண்டார். அவரின் உஷ்ணம், வாசனை, முன்னிறப்பு உரையாடல் – “இந்த உணர்வை நகரம் ஒவ்வொரு மூலையிலும் கொண்டு வர‑லாம்?” என்ற சுருக்கமான யோசனை உருவானது.",
+        aboutPara2:"இந்தியாவின் தேயிலை வேளாண்மை பகுதிகளில் (அஸ்ஸாம், டார்ஜில்லிங், நீல்கிரி) பயணம் செய்து, விவசாயிகளுடன் பேசிக் கற்றுவித்து, கலவை பொருந்திய பின்பு, <strong>பார்மேஷ்</strong> ஒரு சிறிய குழுவை ஒன்று கூட்டு‑இந்த யோசனையை நிஜமாக்கினர். விளைவு: <strong>பார்மேஷ் சாய் பாயிண்ட்</strong> – ஒவ்வொரு கோப்பிலும் ஒரு கதையை சொல்லும், மக்கள் நிற்க, பேச, வீட்டைப் போன்ற உணர்வு பெறும் இடம்.",
         aboutCall:"<strong>உங்கள் ஆதரவு அவசியம்.</strong> ஒருமுறை வர, வாய்மொழி பரப்பு, “நன்றி” என்று சொல்லியதும், இந்த பரம்பரையைப் பாதுகாப்பதற்கு உதவுகிறது. எங்களுடன் சாய் குடித்து, இந்த அன்பை பகிர்ந்து கொள்ளுங்கள்.",
         menuTitle:"நாங்கள் வழங்குவது",
         menuClassic:"கிளாசிக் சாய்",
@@ -683,117 +669,71 @@ const translations = {
         footerLinksTitle:"விரைவு இணைப்புகள்",
         footerContactTitle:"தொடர்பு",
         footerFollowTitle:"எங்களை பின்தொடர்க",
-        /* Timer strings */
-        timerLabel:"திறப்பின் நேரம்:",
-        timerCountdown:"%d நாட்கள் %02d:%02d:%02d",
-        timerClock:"%02d:%02d:%02d",
-        timerFinished:"இப்போதே திறந்துவிட்டோம்!"
+        timerLabel:"தற்போதைய நேரம்:",
+        timerClock:"%02d:%02d:%02d"
     }
 };
 
-/* ---------- 2️⃣ TIMER LOGIC ----------
-   – mode: "countdown" → counts down to a fixed date  
-   – mode: "clock"     → shows current local time
-   – Change timerConfig below to suit your needs.
+/* ---------- 2️⃣ CLOCK LOGIC ----------
+   • timerLabel is the text before the time
+   • timerClock is the formatting string – currently hh:mm:ss
+   • Runs once per second and re‑renders when the language changes
 */
-const timerConfig = {
-    mode: "countdown",                 // "countdown" or "clock"
-    /* If countdown, set the target ISO date/time (UTC or local – whichever you prefer) */
-    targetDate: "2026-12-31T23:59:59"   // example: New‑Year Eve 2026
-};
-
-/* Helper – zero‑pad numbers */
-function pad2(n){ return n<10 ? '0'+n : ''+n; }
-
-/* Render the timer (called every second & on language change) */
-function renderTimer(){
+function renderClock(){
     const el = $('#timer');
     if (!el) return;
-
     const dict = translations[document.documentElement.lang] || {};
 
-    const label = dict.timerLabel || '';
+    const label = dict.timerLabel || 'Time:';
+    const now   = new Date();
+    const h = now.getHours();
+    const m = now.getMinutes();
+    const s = now.getSeconds();
 
-    if (timerConfig.mode === "clock"){
-        const now = new Date();
-        const timeStr = dict.timerClock
-            ? dict.timerClock.replace('%02d:%02d:%02d',
-                `${pad2(now.getHours())}:${pad2(now.getMinutes())}:${pad2(now.getSeconds())}`)
-            : `${pad2(now.getHours())}:${pad2(now.getMinutes())}:${pad2(now.getSeconds())}`;
-        el.textContent = `${label} ${timeStr}`;
-    }else{
-        // countdown
-        const now   = new Date();
-        const target= new Date(timerConfig.targetDate);
-        const diff  = target - now;            // ms remaining
+    const timeStr = dict.timerClock
+        ? dict.timerClock.replace('%02d:%02d:%02d', `${pad2(h)}:${pad2(m)}:${pad2(s)}`)
+        : `${pad2(h)}:${pad2(m)}:${pad2(s)}`;
 
-        if (diff <= 0){
-            el.textContent = dict.timerFinished || "We’re open now!";
-            return;
-        }
-        const days = Math.floor(diff/(1000*60*60*24));
-        const hrs  = Math.floor(diff/(1000*60*60) % 24);
-        const mins = Math.floor(diff/(1000*60) % 60);
-        const secs = Math.floor(diff/1000 % 60);
-
-        const timeStr = dict.timerCountdown
-            ? dict.timerCountdown
-                .replace('%d', days)
-                .replace('%02d:%02d:%02d', `${pad2(hrs)}:${pad2(mins)}:${pad2(secs)}`)
-            : `${days}d ${pad2(hrs)}:${pad2(mins)}:${pad2(secs)}`;
-
-        el.textContent = `${label} ${timeStr}`;
-    }
-}
-
-/* Start the ticking interval (1 second) */
-let timerInterval;
-function startTimer(){
-    renderTimer();                 // immediate first render
-    clearInterval(timerInterval);
-    timerInterval = setInterval(renderTimer, 1000);
+    el.textContent = `${label} ${timeStr}`;
 }
 
 /* ---------- 3️⃣ LANGUAGE SWITCHER ----------
-   – Updates every `[data-i18n]` element
-   – Stores choice in localStorage
-   – Calls renderTimer() so the label switches instantly
-*/
+   – Same as before, but also calls renderClock() */
 function setLanguage(lang){
     const dict = translations[lang];
     if (!dict) return;
 
-    $$('[data-i18n]').forEach(el=> {
+    $$('[data-i18n]').forEach(el=>{
         const key = el.dataset.i18n;
         if (typeof dict[key] === 'string') el.innerHTML = dict[key];
     });
 
-    // update <html lang>
     document.documentElement.lang = lang;
-
-    // translate page <title> as well
     if (dict.heroTitle) document.title = `${dict.heroTitle} – Interactive Site`;
 
-    // language‑switcher UI
     $$(`.lang-switcher button`).forEach(btn=>{
         const active = btn.dataset.lang===lang;
         btn.classList.toggle('active',active);
         btn.setAttribute('aria-pressed',active);
     });
 
-    // re‑render timer label
-    renderTimer();
+    // Refresh the clock label immediately after language change
+    renderClock();
 
     localStorage.setItem('lang',lang);
 }
 
-/* ---------- 4️⃣ INITIALISATION ----------
+/* ---------- 4️⃣ HELPERS ----------
+   (pad2 used by the clock) */
+function pad2(n){ return n<10 ? '0'+n : ''+n; }
+
+/* ---------- 5️⃣ INITIALISATION ----------
    • Load saved language
-   • Lazy‑load hero background (IntersectionObserver)
-   • Hook up language buttons
+   • Lazy‑load hero background
+   • Bind language buttons
    • Tab navigation
    • Formspree status
-   • Start timer
+   • Start clock interval
 */
 document.addEventListener('DOMContentLoaded',()=>{
 
@@ -832,20 +772,21 @@ document.addEventListener('DOMContentLoaded',()=>{
             const target = link.getAttribute('href').substring(1);
             $$('.tab-link').forEach(l=>l.classList.remove('active'));
             link.classList.add('active');
-            $$('.section').forEach(sec=>sec.classList.toggle('active',sec.id===target));
+            $$('.section')
+                .forEach(sec=>sec.classList.toggle('active', sec.id===target));
         });
     });
 
-    // ---- Formspree feedback ----
+    // ---- Formspree status ----
     const form = $('.contact');
     const status = $('#form-status');
     if (form){
         form.addEventListener('submit',()=>{ status.textContent='Sending…';});
-        // If you want to show the success/error message, you could use fetch() instead of a plain POST.
     }
 
-    // ---- start timer ----
-    startTimer();
+    // ---- start digital clock ----
+    renderClock();                       // first immediate render
+    setInterval(renderClock,1000);       // update every second
 });
 </script>
 </body>
