@@ -7,6 +7,15 @@
 <meta name="description"
       content="Parmesh Chai Point – handcrafted chai, cozy cafés and free Wi‑Fi across India.">
 
+<!-- -------------------------------------------------
+     9️⃣ ENHANCED META (Open Graph, Twitter) – helps when sharing
+  ------------------------------------------------- -->
+<meta property="og:title" content="Parmesh Chai Point – Interactive Site">
+<meta property="og:description" content="Premium handcrafted chai • Cozy cafés • Free Wi‑Fi">
+<meta property="og:image" content="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80">
+<meta property="og:url" content="https://example.com/">
+<meta name="twitter:card" content="summary_large_image">
+
 <style>
 /* -------------------------------------------------
    1️⃣ BASIC RESET & VARIABLES
@@ -39,7 +48,9 @@ body{
     position:absolute; left:-9999px; top:-9999px;
     background:#000;color:#fff;padding:.5rem;z-index:1000;
 }
-.skip-link:focus{left:1rem;top:1rem}
+.skip-link:focus{
+    left:1rem;top:1rem;
+}
 
 /* -------------------------------------------------
    3️⃣ HEADER – COFFEE MUG BACKGROUND
@@ -54,6 +65,22 @@ header{
 }
 header h1{font-size:2.5rem;margin-bottom:.5rem;}
 header p{font-size:1.1rem;}
+
+/* -------------------------------------------------
+   10️⃣ TIMER STYLES
+   ------------------------------------------------- */
+.timer{
+    margin-top:1rem;
+    font-size:1.2rem;
+    font-weight:600;
+    color:var(--clr-light);
+    text-shadow:0 0 4px rgba(0,0,0,.6);
+    animation:fadeIn .4s ease-in;
+}
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
 
 /* -------------------------------------------------
    4️⃣ NAVIGATION (tabs) + Language selector
@@ -90,7 +117,6 @@ nav a:focus{background:rgba(0,0,0,.2);}
     display:flex;
     gap:.5rem;
     z-index:2;               /* above the nav list */
-    pointer-events:auto;
 }
 .lang-switcher button{
     background:rgba(255,255,255,.2);
@@ -103,6 +129,9 @@ nav a:focus{background:rgba(0,0,0,.2);}
 }
 .lang-switcher button.active,
 .lang-switcher button:hover{background:rgba(255,255,255,.4);}
+.lang-switcher button:focus{
+    outline:2px solid var(--clr-light);
+}
 
 /* -------------------------------------------------
    5️⃣ MAIN SECTIONS (only one visible)
@@ -217,6 +246,15 @@ footer{
     header{padding:4rem 1rem 2rem;}
     header h1{font-size:2rem;}
 }
+
+/* -------------------------------------------------
+   11️⃣ GLOBAL FOCUS OUTLINE (helps keyboard users)
+   ------------------------------------------------- */
+a, button, input, textarea{outline:none;}
+a:focus, button:focus, input:focus, textarea:focus{
+    outline:2px solid var(--clr-primary);
+    outline-offset:2px;
+}
 </style>
 </head>
 
@@ -228,13 +266,16 @@ footer{
 <header>
     <h1 data-i18n="heroTitle">Parmesh Chai Point</h1>
     <p data-i18n="heroSubtitle">Premium handcrafted chai • Cozy cafés • Free Wi‑Fi</p>
+
+    <!-- ★ NEW TIMER ★ -->
+    <div id="timer" class="timer" aria-live="polite" role="timer"></div>
 </header>
 
 <!-- ==================== NAV (TAB STYLE) + LANG SWITCHER ==================== -->
 <nav aria-label="Primary navigation">
     <!-- Language selector -->
     <div class="lang-switcher">
-        <button data-lang="en" class="active">EN</button>
+        <button data-lang="en" class="active" aria-pressed="true">EN</button>
         <button data-lang="hi">हिन्द</button>
         <button data-lang="kn">ಕನ್ನಡ</button>
         <button data-lang="te">తెలుగు</button>
@@ -377,7 +418,7 @@ footer{
             <h4 data-i18n="footerFollowTitle">Follow Us</h4>
             <div class="social-icons">
                 <!-- Facebook -->
-                <a href="https://facebook.com/your-page" target="_blank" rel="noopener"
+                <a href="https://facebook.com/your-page" target="_blank" rel="noopener noreferrer"
                    aria-label="Facebook">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M22.675 0h-21.35C.597 0 0 .597 0 1.326v21.348C0 23.403.597 24 1.326 24h11.493V14.709h-3.13v-3.622h3.13V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.466.099 2.797.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.762v2.31h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.326-.597 1.326-1.326V1.326C24 .597 23.403 0 22.675 0z"/>
@@ -385,7 +426,7 @@ footer{
                 </a>
 
                 <!-- Instagram -->
-                <a href="https://instagram.com/your-profile" target="_blank" rel="noopener"
+                <a href="https://instagram.com/your-profile" target="_blank" rel="noopener noreferrer"
                    aria-label="Instagram">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.206.056 1.97.246 2.428.413a4.92 4.92 0 011.715 1.001 4.92 4.92 0 011.001 1.715c.167.458.357 1.222.413 2.428.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.056 1.206-.246 1.97-.413 2.428a4.92 4.92 0 01-1.001 1.715 4.92 4.92 0 01-1.715 1.001c-.458.167-1.222.357-2.428.413-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.206-.056-1.97-.246-2.428-.413a4.92 4.92 0 01-1.715-1.001 4.92 4.92 0 01-1.001-1.715c-.167-.458-.357-1.222-.413-2.428-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.848c.056-1.206.246-1.97.413-2.428a4.92 4.92 0 011.001-1.715 4.92 4.92 0 011.715-1.001c.458-.167 1.222-.357 2.428-.413 1.266-.058 1.646-.07 4.85-.07zm0-2.163C8.735 0 8.332.013 7.052.072 5.771.13 4.816.341 4.06.659c-.78.329-1.44.77-2.099 1.428-.658.658-1.099 1.318-1.428 2.099-.318.756-.529 1.711-.587 2.992C0 .332 0 .735 0 12c0 11.265.332 11.668.072 12.948.058 1.281.269 2.236.587 2.992.329.78.77 1.44 1.428 2.099.658.658 1.318 1.099 2.099 1.428.756.318 1.711.529 2.992.587C8.332 24 8.735 24 12 24s3.668-.013 4.948-.072c1.281-.058 2.236-.269 2.992-.587.78-.329 1.44-.77 2.099-1.428.658-.658 1.099-1.318 1.428-2.099.318-.756.529-1.711.587-2.992.06-1.28.072-1.683.072-4.948s-.013-3.668-.072-4.948c-.058-1.281-.269-2.236-.587-2.992a5.378 5.378 0 00-1.428-2.099 5.378 5.378 0 00-2.099-1.428c-.756-.318-1.711-.529-2.992-.587C15.668 0 15.265 0 12 0z"/>
@@ -394,7 +435,7 @@ footer{
                 </a>
 
                 <!-- Twitter -->
-                <a href="https://twitter.com/your-handle" target="_blank" rel="noopener"
+                <a href="https://twitter.com/your-handle" target="_blank" rel="noopener noreferrer"
                    aria-label="Twitter">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M23.954 4.569c-.885.392-1.83.656-2.825.775 1.014-.608 1.794-1.574 2.163-2.724-.951.564-2.005.974-3.127 1.195-.897-.959-2.178-1.559-3.594-1.559-2.724 0-4.928 2.204-4.928 4.928 0 .386.045.762.127 1.124-4.094-.205-7.725-2.165-10.152-5.144-.424.724-.666 1.562-.666 2.457 0 1.697.862 3.192 2.174 4.069-.8-.025-1.555-.245-2.212-.612v.062c0 2.367 1.684 4.342 3.918 4.788-.41.111-.842.171-1.287.171-.314 0-.618-.03-.916-.086.619 1.931 2.416 3.335 4.543 3.376-1.666 1.306-3.765 2.084-6.045 2.084-.393 0-.779-.023-1.158-.069 2.157 1.381 4.716 2.188 7.475 2.188 8.973 0 13.878-7.43 13.878-13.872 0-.211-.004-.423-.014-.633.954-.689 1.78-1.55 2.438-2.531z"/>
@@ -402,7 +443,7 @@ footer{
                 </a>
 
                 <!-- LinkedIn -->
-                <a href="https://linkedin.com/company/your-company" target="_blank" rel="noopener"
+                <a href="https://linkedin.com/company/your-company" target="_blank" rel="noopener noreferrer"
                    aria-label="LinkedIn">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.327-.024-3.036-1.85-3.036-1.851 0-2.136 1.445-2.136 2.94v5.665h-3.554V9h3.412v1.561h.049c.475-.9 1.637-1.85 3.368-1.85 3.603 0 4.268 2.369 4.268 5.452v6.289zM5.337 7.433c-1.144 0-2.069-.925-2.069-2.069S4.193 3.295 5.337 3.295c1.144 0 2.069.925 2.069 2.069s-.925 2.069-2.069 2.069zm1.777 13.019H3.558V9h3.556v11.452zM22.225 0H1.771C.792 0 0 .771 0 1.723v20.554C0 23.229.792 24 1.771 24h20.451c.979 0 1.777-.771 1.777-1.723V1.723C24 .771 23.204 0 22.225 0z"/>
@@ -417,249 +458,395 @@ footer{
 </footer>
 
 <!-- -------------------------------------------------
-     9️⃣ MINIMAL JS – Language switcher + Tab switching
-     ------------------------------------------------- -->
+     9️⃣ ENHANCED JS – accessibility, lazy‑load, Formspree feedback,
+     language <html lang=""> sync, graceful fallback, **timer**
+  ------------------------------------------------- -->
 <script>
-/* ---------- TRANSLATIONS ---------- */
+/* ---------- 0️⃣ HELPERS ---------- */
+const $  = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+/* ---------- 1️⃣ TRANSLATIONS ----------
+   Added timer‑related keys for every language */
 const translations = {
-    en: {
-        heroTitle: "Parmesh Chai Point",
-        heroSubtitle: "Premium handcrafted chai • Cozy cafés • Free Wi‑Fi",
-        navAbout: "About",
-        navMenu: "Menu",
-        navContact: "Contact",
-        navFeedback: "Feedback",
-        aboutTitle: "Our Story",
-        aboutPara1: "One rainy evening in Bangalore, a young tea‑lover named <strong>Parmesh</strong> discovered the magic of a steaming cup of chai served from a humble stall. The warmth, the aroma, and the brief conversation with the stall‑owner sparked a simple idea: “What if we could bring that feeling to every corner of the city?”",
-        aboutPara2: "After years of traveling India’s tea‑growing regions, learning from farmers, and perfecting the blend, <strong>Parmesh</strong> gathered a small team to turn the idea into reality. The result is <strong>Parmesh Chai Point</strong> – a space where every cup tells a story, where people can pause, share, and feel at home.",
-        aboutCall: "<strong>We need your support.</strong> Whether it’s a visit, a word‑of‑mouth, or a simple “thank you”, every bit helps us keep the tradition alive. Join us, sip with us, and let’s spread the love for chai together.",
-        menuTitle: "What We Serve",
-        menuClassic: "Classic Chai",
-        menuClassicDesc: "Traditional Assam tea with milk, sugar and our signature spice blend.",
-        menuMasala: "Masala Chai",
-        menuMasalaDesc: "Cardamom, ginger, cinnamon, clove & pepper – the classic Indian favorite.",
-        menuSeasonal: "Seasonal Specials",
-        menuSeasonalDesc: "Rotating flavors like Rose‑Petal, Tulsi‑Lemon, Mango‑Mint.",
-        menuCold: "Cold Brew & Iced Chai",
-        menuColdDesc: "Refreshingly cool, served over ice with a dash of lemon.",
-        menuSnacks: "Snacks",
-        menuSnacksDesc: "Samosas, paneer tikka, cheese toast, brownies – perfect companions.",
-        menuDesserts: "Desserts",
-        menuDessertsDesc: "Gulab jamun, rasgulla, kulfi‑style ice‑cream.",
-        contactTitle: "Get in Touch",
-        contactName: "Name",
-        contactEmail: "Email",
-        contactMessage: "Message",
-        contactSend: "Send Message",
-        contactAddrLabel: "Address:",
-        contactPhoneLabel: "Phone:",
-        contactEmailLabel: "Email:",
-        feedbackTitle: "Customer Feedback",
-        feedbackIntro: "We value your thoughts. Please fill out the short form below.",
-        footerTagline: "Serving happiness in every cup ☕",
-        footerLinksTitle: "Quick Links",
-        footerContactTitle: "Contact",
-        footerFollowTitle: "Follow Us"
+    en:{
+        heroTitle:"Parmesh Chai Point",
+        heroSubtitle:"Premium handcrafted chai • Cozy cafés • Free Wi‑Fi",
+        navAbout:"About",
+        navMenu:"Menu",
+        navContact:"Contact",
+        navFeedback:"Feedback",
+        aboutTitle:"Our Story",
+        aboutPara1:"One rainy evening in Bangalore, a young tea‑lover named <strong>Parmesh</strong> discovered the magic of a steaming cup of chai served from a humble stall. The warmth, the aroma, and the brief conversation with the stall‑owner sparked a simple idea: “What if we could bring that feeling to every corner of the city?”",
+        aboutPara2:"After years of traveling India’s tea‑growing regions, learning from farmers, and perfecting the blend, <strong>Parmesh</strong> gathered a small team to turn the idea into reality. The result is <strong>Parmesh Chai Point</strong> – a space where every cup tells a story, where people can pause, share, and feel at home.",
+        aboutCall:"<strong>We need your support.</strong> Whether it’s a visit, a word‑of‑mouth, or a simple “thank you”, every bit helps us keep the tradition alive. Join us, sip with us, and let’s spread the love for chai together.",
+        menuTitle:"What We Serve",
+        menuClassic:"Classic Chai",
+        menuClassicDesc:"Traditional Assam tea with milk, sugar and our signature spice blend.",
+        menuMasala:"Masala Chai",
+        menuMasalaDesc:"Cardamom, ginger, cinnamon, clove & pepper – the classic Indian favorite.",
+        menuSeasonal:"Seasonal Specials",
+        menuSeasonalDesc:"Rotating flavors like Rose‑Petal, Tulsi‑Lemon, Mango‑Mint.",
+        menuCold:"Cold Brew & Iced Chai",
+        menuColdDesc:"Refreshingly cool, served over ice with a dash of lemon.",
+        menuSnacks:"Snacks",
+        menuSnacksDesc:"Samosas, paneer tikka, cheese toast, brownies – perfect companions.",
+        menuDesserts:"Desserts",
+        menuDessertsDesc:"Gulab jamun, rasgulla, kulfi‑style ice‑cream.",
+        contactTitle:"Get in Touch",
+        contactName:"Name",
+        contactEmail:"Email",
+        contactMessage:"Message",
+        contactSend:"Send Message",
+        contactAddrLabel:"Address:",
+        contactPhoneLabel:"Phone:",
+        contactEmailLabel:"Email:",
+        feedbackTitle:"Customer Feedback",
+        feedbackIntro:"We value your thoughts. Please fill out the short form below.",
+        footerTagline:"Serving happiness in every cup ☕",
+        footerLinksTitle:"Quick Links",
+        footerContactTitle:"Contact",
+        footerFollowTitle:"Follow Us",
+        /* Timer strings */
+        timerLabel:"Open in:",
+        timerCountdown:"%d days %02d:%02d:%02d",
+        timerClock:"%02d:%02d:%02d",
+        timerFinished:"We’re open now!"
     },
-    hi: {
-        heroTitle: "पर्मेश चाय पॉइंट",
-        heroSubtitle: "प्रीमियम हस्तनिर्मित चाय • कोज़ी कैफ़े • फ्री वाई‑फ़ाई",
-        navAbout: "हमारे बारे में",
-        navMenu: "मेन्यू",
-        navContact: "संपर्क",
-        navFeedback: "प्रतिक्रिया",
-        aboutTitle: "हमारी कहानी",
-        aboutPara1: "बेंगलुरु की बारिश वाली शाम में, एक युवा चाय‑प्रेमी <strong>परमेश</strong> ने एक साधारण स्टॉल से गरम चाय के जादू को महसूस किया। चाय की गर्मी, खुशबू और दुकानदारी की छोटी‑सी बातचीत ने एक सरल विचार को जन्म दिया: “क्या हम इस अहसास को शहर के हर कोने में ला सकते हैं?”",
-        aboutPara2: "भारत के चाय‑बागों में विभिन्न क्षेत्रों (असम, डार्जिलिंग, नीलिगिरी) में यात्रा करके, किसानों से सीखकर और मिश्रण को परिपूर्ण करने के बाद, <strong>परमेश</strong> ने एक छोटी टीम इकट्ठा करके इस विचार को हकीकत में बदला। परिणाम है <strong>परमेश चाय पॉइंट</strong> – एक ऐसी जगह जहाँ हर कप एक कहानी बताता है, जहाँ लोग रुक‑सकते, बात‑चीत कर‑सकते और घर जैसा महसूस कर‑सकते हैं।",
-        aboutCall: "<strong>हमें आपका सहयोग चाहिए।</strong> चाहे आप एक बार आएँ, मुंह‑से‑मुंह बताएँ, या बस “धन्यवाद” कहें—हर योगदान से हम इस परम्परा को जीवित रख सकते हैं। आएँ, हमारे साथ चाय पिएँ और इस प्यार को फैलाएँ।",
-        menuTitle: "हम क्या पेश करते हैं",
-        menuClassic: "क्लासिक चाय",
-        menuClassicDesc: "परम्परागत असम चाय, दूध, चीनी और हमारी विशेष मसाला मिश्रण के साथ।",
-        menuMasala: "मसाला चाय",
-        menuMasalaDesc: "इलायची, अदरक, दालचीनी, लौंग एवं काली मिर्च – क्लासिक भारतीय पसंद।",
-        menuSeasonal: "सीज़नल स्पेशल्स",
-        menuSeasonalDesc: "रोज‑पेटल, तुलसी‑नींबू, मैंगो‑मिंट जैसी मौसमी फ्लेवर।",
-        menuCold: "कोल्ड ब्रू एवं आइस चाय",
-        menuColdDesc: "ठंडा और ताज़ा, बर्फ़ के साथ नींबू का एक छींटा।",
-        menuSnacks: "स्नैक्स",
-        menuSnacksDesc: "समोसे, पनीर टिक्का, चीज़ टोस्ट, ब्राउनी – परफेक्ट साथी।",
-        menuDesserts: "डेज़र्ट्स",
-        menuDessertsDesc: "गुलाब जामुन, रसगुल्ला, कु्ल्फी‑स्टाइल आइस‑क्रीम।",
-        contactTitle: "हमसे संपर्क करें",
-        contactName: "नाम",
-        contactEmail: "ई‑मेल",
-        contactMessage: "संदेश",
-        contactSend: "भेजें",
-        contactAddrLabel: "पता:",
-        contactPhoneLabel: "फ़ोन:",
-        contactEmailLabel: "ई‑मेल:",
-        feedbackTitle: "ग्राहक प्रतिक्रिया",
-        feedbackIntro: "हम आपके विचारों की क़द्र करते हैं। कृपया नीचे छोटा फ़ॉर्म भरें।",
-        footerTagline: "हर कप में ख़ुशी सर्व करें ☕",
-        footerLinksTitle: "त्वरित लिंक",
-        footerContactTitle: "संपर्क",
-        footerFollowTitle: "फ़ॉलो करें"
+    hi:{
+        heroTitle:"पर्मेश चाय पॉइंट",
+        heroSubtitle:"प्रीमियम हस्तनिर्मित चाय • कोज़ी कैफ़े • फ्री वाई‑फ़ाई",
+        navAbout:"हमारे बारे में",
+        navMenu:"मेन्यू",
+        navContact:"संपर्क",
+        navFeedback:"प्रतिक्रिया",
+        aboutTitle:"हमारी कहानी",
+        aboutPara1:"बेंगलुरु की बारिश वाली शाम में, एक युवा चाय‑प्रेमी <strong>परमेश</strong> ने एक साधारण स्टॉल से गरम चाय के जादू को महसूस किया। चाय की गर्मी, खुशबू और दुकानदारी की छोटी‑सी बातचीत – “क्या हम इस अहसास को शहर के हर कोने में ला सकते हैं?”",
+        aboutPara2:"भारत के चाय‑बागों में विभिन्न क्षेत्रों (असम, डार्जिलिंग, नीलिगिरी) में यात्रा करके, किसानों से सीखकर और मिश्रण को परिपूर्ण करने के बाद, <strong>परमेश</strong> ने एक छोटी टीम इकट्ठा करके इस विचार को हकीकत में बदला। परिणाम है <strong>परमेश चाय पॉइंट</strong> – एक ऐसी जगह जहाँ हर कप एक कहानी बताता है, जहाँ लोग रुक‑सकते, बात‑चीत कर‑सकते और घर जैसा महसूस कर‑सकते हैं।",
+        aboutCall:"<strong>हमें आपका सहयोग चाहिए।</strong> चाहे आप एक बार आएँ, मुंह‑से‑मुंह बताएँ, या बस “धन्यवाद” कहें—हर योगदान से हम इस परम्परा को जीवित रख सकते हैं। आएँ, हमारे साथ चाय पिएँ और इस प्यार को फैलाएँ।",
+        menuTitle:"हम क्या पेश करते हैं",
+        menuClassic:"क्लासिक चाय",
+        menuClassicDesc:"परम्परागत असम चाय, दूध, चीनी और हमारी विशेष मसाला मिश्रण के साथ।",
+        menuMasala:"मसाला चाय",
+        menuMasalaDesc:"इलायची, अदरक, दालचीनी, लौंग एवं काली मिर्च – क्लासिक भारतीय पसंद।",
+        menuSeasonal:"सीज़नल स्पेशल्स",
+        menuSeasonalDesc:"रोज‑पेटल, तुलसी‑नींबू, मैंगो‑मिंट जैसी मौसमी फ्लेवर।",
+        menuCold:"कोल्ड ब्रू एवं आइस चाय",
+        menuColdDesc:"ठंडा और ताज़ा, बर्फ़ के साथ नींबू का एक छींटा।",
+        menuSnacks:"स्नैक्स",
+        menuSnacksDesc:"समोसे, पनीर टिक्का, चीज़ टोस्ट, ब्राउनी – परफेक्ट साथी।",
+        menuDesserts:"डेज़र्ट्स",
+        menuDessertsDesc:"गुलाब जामुन, रसगुल्ला, कु्ल्फी‑स्टाइल आइस‑क्रीम।",
+        contactTitle:"हमसे संपर्क करें",
+        contactName:"नाम",
+        contactEmail:"ई‑मेल",
+        contactMessage:"संदेश",
+        contactSend:"भेजें",
+        contactAddrLabel:"पता:",
+        contactPhoneLabel:"फ़ोन:",
+        contactEmailLabel:"ई‑मेल:",
+        feedbackTitle:"ग्राहक प्रतिक्रिया",
+        feedbackIntro:"हम आपके विचारों की क़द्र करते हैं। कृपया नीचे छोटा फ़ॉर्म भरें।",
+        footerTagline:"हर कप में ख़ुशी सर्व करें ☕",
+        footerLinksTitle:"त्वरित लिंक",
+        footerContactTitle:"संपर्क",
+        footerFollowTitle:"फ़ॉलो करें",
+        /* Timer strings */
+        timerLabel:"खुलने का समय:",
+        timerCountdown:"%d दिन %02d:%02d:%02d",
+        timerClock:"%02d:%02d:%02d",
+        timerFinished:"हम अभी खुले हैं!"
     },
-    kn: {
-        heroTitle: "ಪರ್ಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್",
-        heroSubtitle: "ಹಸ್ತ ನಿರ್ಮಿತ ಪ್ರೀಮಿಯಮ್ ಛಾಯಿ • ಆರಾಮದಾಯಕ ಕಾಫೆಗಳು • ಉಚಿತ Wi‑Fi",
-        navAbout: "ನಮ್ಮ ಬಗ್ಗೆ",
-        navMenu: "ಮೆನು",
-        navContact: "ಸಂಪರ್ಕ",
-        navFeedback: "ಪ್ರತಿಕ್ರಿಯೆ",
-        aboutTitle: "ನಮ್ಮ ಕಥೆ",
-        aboutPara1: "ಬೆಂಗಾಳೂರಿನ ಮಳೆಯ ಸಾಯಂಕಾಲ, ಯುವ ಛಾಯಿ ಪ್ರೇಮಿ <strong>ಪರ್ಮೇಶ್</strong> ಒಂದು ಸರಳ ಸ್ಟಾಲ್‌ದಿಂದ ಬಿಸಿ ಛಾಯಿಯನ್ನು ಕುಡಿಯುವ ಮೂಲಕ ಮಾಯೆ ಕಂಡುಹಿಡಿದರು. ಛಾಯಿಯ ತಾಪ, ಸುಗಂಧ ಹಾಗೂ ಅಂಗಡಿ ಮಾಲೀಕರೊಂದಿಗೆ ಚಿಕ್ಕ ಸಂಭಾಷಣೆ – “ಈ ಭಾವನೆಯನ್ನು ಎಲ್ಲಾ ನಗರದ ಮೂಲೆಗಳಲ್ಲಿ ಹಂಚಬಹುದೇ?” ಎಂಬ ಸರಳ ಕಲ್ಪನೆ ಉಂಟಾಯಿತು.",
-        aboutPara2: "ಭಾರತದ ಛಾಯಿ ತೋಟಗಳಾದ ಅಸ್ಸಾಂ, ಡಾರ್ಜಿಲ್ಲಿಂಗ್, ನೀಲಿಗಿರಿಗಳಲ್ಲಿ ಪಯಣಿಸಿ, ರೈತರಿಂದ ಕಲಿತು, ಮಿಶ್ರಣವನ್ನು ಪರಿಪೂರ್ಣಗೊಳಿಸಿದ ನಂತರ, <strong>ಪರ್ಮೇಶ್</strong> ಒಂದು ಚಿಕ್ಕ ತಂಡವನ್ನು ಸೇರಿಸಿ ಈ ಕಲ್ಪನೆಯನ್ನು ವಾಸ್ತವಗೊಳಿಸಿದರು. ಫಲಿತಾಂಶ: <strong>ಪರ್ಮೇಶ್ ಛಾಯಿ ಪಾಯಿಂಟ್</strong> – ಪ್ರತಿ ಕಪ್ ಒಂದು ಕಥೆ ಹೇಳುವ, ಜನರು ನಿಲ್ಲಿಸಿ, ಮಾತನಾಡಿ, ಮನೆ ಸೂಕ್ತ ಅನುಭವಿಸುವ ಸ್ಥಳ.",
-        aboutCall: "<strong>ನಾವು ನಿಮ್ಮ ಬೆಂಬಲವನ್ನು ಅಗತ್ಯಪಡಿಸುತ್ತೇವೆ.</strong> ಒಂದೇ ಭೇಟಿ, ಮಾತು‑ಮತ್ತು‑ಮಾತು, “ಧನ್ಯವಾಡು” ಎಂಬ ಸರಳ ಹೇಳಿಕೆಯೂ ಈ ಪರಂಪರೆಯನ್ನು ಉಳಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಸೇರಿ, ಛಾಯನ್ನು ಸವಿದು, ಈ ಪ್ರೀತಿಯನ್ನು ಹಂಚಿಕೊಳ್ಳೋಣ.",
-        menuTitle: "ನಾವು ಏನು ನೀಡುತ್ತೇವೆ",
-        menuClassic: "ಕ್ಲಾಸಿಕ್ ಛಾಯಿ",
-        menuClassicDesc: "ಪಾರಂಪರಿಕ ಅಸ್ಸಾಂ ಛಾಯಿ, ಹಾಲು, ಸಕ್ಕರೆ ಹಾಗೂ ನಮ್ಮ ವಿಶೇಷ ಮಸಾಲಾ ಮಿಶ್ರಣ.",
-        menuMasala: "ಮಸಾಲಾ ಛಾಯಿ",
-        menuMasalaDesc: "ಏಲಕ್ಕಿ, ಹ ginger, ದಾಲ್ಚಿನ್ನಿ, ಲವಂಗ ಹಾಗೂ ಮೆಣಸು – ಪ್ರಾಚೀನ ಭಾರತೀಯ ಪ್ರಿಯ.",
-        menuSeasonal: "ಕಾಲದ ವಿಶೇಷಗಳು",
-        menuSeasonalDesc: "ರೋಸ್‑ಪೆಟಲ್, ತುಲಸಿ‑ನಿಂಬೆ, ಮ್ಯಾಂಗೋ‑ಮಿಂಟ್ ಮುಂತಾದ ಋತುವಿನ ರುಚಿಗಳು.",
-        menuCold: "ಕೋಲ್ಡ್ ಬ್ರೂ & ಐಸ್ ಛಾಯಿ",
-        menuColdDesc: "ತಾಜಾ, ಹಿಮದ ಮೇಲೆ ನಿಂಬೆ ರುಚಿ.",
-        menuSnacks: "ಸ್ನ್ಯಾಕ್‌ಗಳು",
-        menuSnacksDesc: "ಸಮೋಸಾ, ಪನೀರ್ ಟಿಕ್ಕಾ, ಚೀಸ್ ಟೋಸ್ಟ್, ಬ್ರೌನಿ – ಸೂಕ್ತ ಸಂಗಾತಿಗಳು.",
-        menuDesserts: "ಡೆಸೆರ್ಟ್‌ಗಳು",
-        menuDessertsDesc: "ಗುಲಾಬ್ ಜಾಮುನ್, ರಸಗುಲ್ಲಾ, ಕುಲ್ಫಿ‑ಸ್ಟೈಲ್ ಐಸ್‑ಕ್ರೀಮ್.",
-        contactTitle: "ಸಂಪರ್ಕಿಸಿ",
-        contactName: "ಹೆಸರು",
-        contactEmail: "ಇಮೇಲ್",
-        contactMessage: "ಸಂದೇಶ",
-        contactSend: "ಕಳುಹಿಸಿ",
-        contactAddrLabel: "ವಿಳಾಸ:",
-        contactPhoneLabel: "ಫೋನ್:",
-        contactEmailLabel: "ಇಮೇಲ್:",
-        feedbackTitle: "ಗ್ರಾಹಕ ಪ್ರತಿಕ್ರಿಯೆ",
-        feedbackIntro: "ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವನ್ನು ನಾವು ಮೌಲ್ಯಮಾಪನ ಮಾಡುತ್ತೇವೆ. ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಸಂಕ್ಷಿಪ್ತ ಫಾರ್ಮ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.",
-        footerTagline: "ಪ್ರತಿ ಕಪ್‌ನಲ್ಲಿ ಸಂತೋಷ ನೀಡಿ ☕",
-        footerLinksTitle: "ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು",
-        footerContactTitle: "ಸಂಪರ್ಕ",
-        footerFollowTitle: "ಫಾಲೋ ಮಾಡಿ"
+    kn:{
+        heroTitle:"ಪರ್ಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್",
+        heroSubtitle:"ಹಸ್ತ ನಿರ್ಮಿತ ಪ್ರೀಮಿಯಮ್ ಛಾಯಿ • ಆರಾಮದಾಯಕ ಕಾಫೆಗಳು • ಉಚಿತ Wi‑Fi",
+        navAbout:"ನಮ್ಮ ಬಗ್ಗೆ",
+        navMenu:"ಮೆನು",
+        navContact:"ಸಂಪರ್ಕ",
+        navFeedback:"ಪ್ರತಿಕ್ರಿಯೆ",
+        aboutTitle:"ನಮ್ಮ ಕಥೆ",
+        aboutPara1:"ಬೆಂಗಾಳೂರಿನ ಮಳೆಯ ಸಾಯಂಕಾಲ, ಯುವ ಛಾಯಿ ಪ್ರೇಮಿ <strong>ಪರ್ಮೇಶ್</strong> ಒಂದು ಸರಳ ಸ್ಟಾಲ್‌ದಿಂದ ಬಿಸಿ ಛಾಯಿಯನ್ನು ಕುಡಿಯುವ ಮೂಲಕ ಮಾಯೆ ಕಂಡುಹಿಡಿದರು. ಛಾಯಿಯ ತಾಪ, ಸುಗಂಧ ಹಾಗೂ ಅಂಗಡಿ ಮಾಲೀಕರೊಂದಿಗೆ ಚಿಕ್ಕ ಸಂಭಾಷಣೆ – “ಈ ಭಾವನೆಯನ್ನು ಎಲ್ಲಾ ನಗರದ ಮೂಲೆಗಳಲ್ಲಿ ಹಂಚಬಹುದೇ?” ಎಂಬ ಸರಳ ಕಲ್ಪನೆ ಉಂಟಾಯಿತು.",
+        aboutPara2:"ಭಾರತದ ಛಾಯಿ ತೋಟಗಳಾದ ಅಸ್ಸಾಂ, ಡಾರ್ಜಿಲ್ಲಿಂಗ್, ನೀಲಿಗಿರಿಗಳಲ್ಲಿ ಪಯಣಿಸಿ, ರೈತರಿಂದ ಕಲಿತು, ಮಿಶ್ರಣವನ್ನು ಪರಿಪೂರ್ಣಗೊಳಿಸಿದ ನಂತರ, <strong>ಪರ್ಮೇಶ್</strong> ಒಂದು ಚಿಕ್ಕ ತಂಡವನ್ನು ಸೇರಿಸಿ ಈ ಕಲ್ಪನೆಯನ್ನು ವಾಸ್ತವಗೊಳಿಸಿದರು. ಫಲಿತಾಂಶ: <strong>ಪರ್ಮೇಶ್ ಛಾಯಿ ಪಾಯಿಂಟ್</strong> – ಪ್ರತಿ ಕಪ್ ಒಂದು ಕಥೆ ಹೇಳುವ, ಜನರು ನಿಲ್ಲಿಸಿ, ಮಾತನಾಡಿ, ಮನೆ ಸೂಕ್ತ ಅನುಭವಿಸುವ ಸ್ಥಳ.",
+        aboutCall:"<strong>ನಾವು ನಿಮ್ಮ ಬೆಂಬಲವನ್ನು ಅಗತ್ಯಪಡಿಸುತ್ತೇವೆ.</strong> ಒಂದೇ ಭೇಟಿ, ಮಾತು‑ಮತ್ತು‑ಮಾತು, “ಧನ್ಯವಾದ” ಎಂಬ ಸರಳ ಹೇಳಿಕೆಯೂ ಈ ಪರಂಪರೆಯನ್ನು ಉಳಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಸೇರಿ, ಛಾಯನ್ನು ಸವಿದು, ಈ ಪ್ರೀತಿಯನ್ನು ಹಂಚಿಕೊಳ್ಳೋಣ.",
+        menuTitle:"ನಾವು ಏನು ನೀಡುತ್ತೇವೆ",
+        menuClassic:"ಕ್ಲಾಸಿಕ್ ಛಾಯಿ",
+        menuClassicDesc:"ಪಾರಂಪರಿಕ ಅಸ್ಸಾಂ ಛಾಯಿ, ಹಾಲು, ಸಕ್ಕರೆ ಹಾಗೂ ನಮ್ಮ ವಿಶೇಷ ಮಸಾಲಾ ಮಿಶ್ರಣ.",
+        menuMasala:"ಮಸಾಲಾ ಛಾಯಿ",
+        menuMasalaDesc:"ಏಲಕ್ಕಿ, ಅಲಕ್ಕಿ, ದಾಲ್ಚಿನ್ನಿ, ಲವಂಗ ಹಾಗೂ ಮೆಣಸು – ಪ್ರಾಚೀನ ಭಾರತೀಯ ಪ್ರಿಯ.",
+        menuSeasonal:"ಕಾಲದ ವಿಶೇಷಗಳು",
+        menuSeasonalDesc:"ರೋಸ್‑ಪೆಟಲ್, ತುಲಸಿ‑ನಿಂಬೆ, ಮ್ಯಾಂಗೋ‑ಮಿಂಟ್ ಮುಂತಾದ ಋತುವಿನ ರುಚಿಗಳು.",
+        menuCold:"ಕೋಲ್ಡ್ ಬ್ರೂ & ಐಸ್ ಛಾಯಿ",
+        menuColdDesc:"ತಾಜಾ, ಹಿಮದ ಮೇಲೆ ನಿಂಬೆ ರುಚಿ.",
+        menuSnacks:"ಸ್ನ್ಯಾಕ್‌ಗಳು",
+        menuSnacksDesc:"ಸಮೋಸಾ, ಪನೀರ್ ಟಿಕ್ಕಾ, ಚೀಸ್ ಟೋಸ್ಟ್, ಬ್ರೌನಿ – ಸೂಕ್ತ ಸಂಗಾತಿಗಳು.",
+        menuDesserts:"ಡೆಸೆರ್ಟ್‌ಗಳು",
+        menuDessertsDesc:"ಗುಲಾಬ್ ಜಾಮುನ್, ರಸಗುಲ್ಲಾ, ಕುಲ್ಫಿ‑ಸ್ಟೈಲ್ ಐಸ್‑ಕ್ರೀಮ್.",
+        contactTitle:"ಸಂಪರ್ಕಿಸಿ",
+        contactName:"ಹೆಸರು",
+        contactEmail:"ಇಮೇಲ್",
+        contactMessage:"ಸಂದೇಶ",
+        contactSend:"ಕಳುಹಿಸಿ",
+        contactAddrLabel:"ವಿಳಾಸ:",
+        contactPhoneLabel:"ಫೋನ್:",
+        contactEmailLabel:"ಇಮೇಲ್:",
+        feedbackTitle:"ಗ್ರಾಹಕ ಪ್ರತಿಕ್ರಿಯೆ",
+        feedbackIntro:"ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವನ್ನು ಮೌಲ್ಯಮಾಪನ ಮಾಡುತ್ತೇವೆ. ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಫಾರ್ಮ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.",
+        footerTagline:"ಪ್ರತಿ ಕಪ್‌ನಲ್ಲಿ ಸಂತೋಷ ನೀಡಿ ☕",
+        footerLinksTitle:"ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು",
+        footerContactTitle:"ಸಂಪರ್ಕ",
+        footerFollowTitle:"ಫಾಲೋ ಮಾಡಿ",
+        /* Timer strings */
+        timerLabel:"ತೆರೆಯುವ ಸಮಯ:",
+        timerCountdown:"%d ದಿನಗಳು %02d:%02d:%02d",
+        timerClock:"%02d:%02d:%02d",
+        timerFinished:"ಮುಕ್ತವಾಗಿದೆ!"
     },
-    te: {
-        heroTitle: "పర్మేశ్ చాయ్ పాయింట్",
-        heroSubtitle: "హ్యాండ్‌క్రాఫ్ట్‌డ్ ప్రీమియమ్ చాయ్ • సౌకర్యవంతమైన కేఫ్‌లు • ఉచిత Wi‑Fi",
-        navAbout: "మా గురించి",
-        navMenu: "మెను",
-        navContact: "సంపర్కం",
-        navFeedback: "ఫీడ్‌బ్యాక్",
-        aboutTitle: "మా కథ",
-        aboutPara1: "బెంగాళూరు పట్టణంలో వర్షపు సాయంత్రం, యువ ఛాయి‑ప్రేమికుడు <strong>పర్మేశ్</strong> ఒక చిన్న స్టాల్‌ నుండి బాగుండి ఐశ్వర్య చాయ్‌ను పిక్కుకునే మాయను కనుగొన్నారు. చాయ్ వాసన, వేడి, స్టాల్ యజమాని తో చిన్న సంభాషణ – “ఈ భావనను నగరమంతా పంచవచ్చు?” అనే సరళమైన ఆలోచన సృష్టించింది.",
-        aboutPara2: "భారతదేశంలోని వివిధ చాయ్ తోటల (అస్సాం, డ్రిజిల్లింగ్, నీలిగిరి) లో పర్యటించి, రైతులతో మాట్లాడి, మిశ్రమాన్ని పరిపూర్ణం చేసిన తరువాత, <strong>పర్మేశ్</strong> ఒక చిన్న టీమ్‌ను చేర్చుకుని ఈ ఆలోచనను వాస్తవంగా మార్చారు. ఫలితం: <strong>పర్మేశ్ చాయ్ పాయింట్</strong> – ప్రతి కప్ ఒక కథను చెబుతుంది, అక్కడ ప్రజలు నిలబడి, మాట్లాడి, ఇంటిగల అనుభూతి పొందుతారు.",
-        aboutCall: "<strong>మీ సహాయం అవసరం.</strong> మీరు ఒక్కసారి వచ్చి, మాట‑మాట, లేదా “ధన్యవాదాలు” అనే చిన్న మాట కూడా ఈ సంప్రదాయాన్ని కొనసాగించడంలో సహాయపడుతుంది. మనతో చాయ్ తాగి, ఈ స్నేహాన్ని పంచుకుందాం.",
-        menuTitle: "మేము అందించే వంటకాలు",
-        menuClassic: "క్లాసిక్ చాయ్",
-        menuClassicDesc: "అస్సాం ప్రాంతపు సంప్రదాయ చాయ్, పాలు, చక్కెర, మా ప్రత్యేక మసాలా కలయికతో.",
-        menuMasala: "మసాలా చాయ్",
-        menuMasalaDesc: "ఏలకులు, అల్లం, దాల్చిన చెక్క, లవంగం, మిరపకాయి – క్లాసిక్ ఇండియన్ ఇష్టమైనది.",
-        menuSeasonal: "సీజనల్ స్పెషల్స్",
-        menuSeasonalDesc: "రోస్‑పెట్టల్, తులసి‑నిమ్మ, మామిడి‑మింట్ వంటి మారుతున్న రుచి.",
-        menuCold: "కోల్‑బ్రూత్ & ఐస్ చాయ్",
-        menuColdDesc: "తాజాగా, ఐస్ మీద పానీయం, నిమ్మరసం చిటుకా.",
-        menuSnacks: "స్నాక్స్",
-        menuSnacksDesc: "సమోసా, పనీర్ టిక్కా, చీజ్ టోస్ట్, బrownies – తగిన సహచరులు.",
-        menuDesserts: "డెజర్ట్స్",
-        menuDessertsDesc: "గులాబ్ జామున్, రసగుల్లా, కుల్ఫీ‑స్టైల్ ఐస్‌క్రీమ్.",
-        contactTitle: "మమ్మల్ని సంప్రదించండి",
-        contactName: "పేరు",
-        contactEmail: "ఇ‑మెయిల్",
-        contactMessage: "సందేశం",
-        contactSend: "పంపండి",
-        contactAddrLabel: "చిరునామా:",
-        contactPhoneLabel: "ఫోన్:",
-        contactEmailLabel: "ఇ‑మెయిల్:",
-        feedbackTitle: "కస్టమర్ ఫీడ్‌బ్యాక్",
-        feedbackIntro: "మీ అభిప్రాయాన్ని మేము విలువిస్తాం. దయవు చేసి క్రింది ఫారమ్‌ను పూరించండి.",
-        footerTagline: "ప్రతి కప్పులో ఆనందాన్ని అందించండి ☕",
-        footerLinksTitle: "త్వరిత లింక్స్",
-        footerContactTitle: "సంపర్కం",
-        footerFollowTitle: "ఫాలో చేయండి"
+    te:{
+        heroTitle:"పర్మేశ్ చాయ్ పాయింట్",
+        heroSubtitle:"హ్యాండ్‌క్రాఫ్ట్‌డ్ ప్రీమియమ్ చాయ్ • సౌకర్యవంతమైన కేఫ్‌లు • ఉచిత Wi‑Fi",
+        navAbout:"మా గురించి",
+        navMenu:"మెను",
+        navContact:"సంపర్కం",
+        navFeedback:"ఫీడ్‌బ్యాక్",
+        aboutTitle:"మా కథ",
+        aboutPara1:"బెంగాళూరు పట్టణంలో వర్షపు సాయంత్రం, యువ ఛాయి‑ప్రేమికుడు <strong>పర్మేశ్</strong> ఒక చిన్న స్టాల్‌ నుంచి బాగుండి ఐశ్వర్య చాయ్‌ను పిక్కుకునే మాయను కనుగొన్నారు. ఛాయ్ వాసన, ఉష్ణం, స్టాల్ యజమాని తో చిన్న సంభాషణ – “ఈ భావనను నగరమంతా పంచవచ్చు?” అనే సరళమైన ఆలోచన సృష్టించింది.",
+        aboutPara2:"భారతదేశంలోని వివిధ చాయ్ తోటల (అస్సాం, డ్రిజిల్లింగ్, నీలిగిరి) లో పర్యటించి, రైతులతో మాట్లాడి, మిశ్రమాన్ని పరిపూర్ణం చేసిన తరువాత, <strong>పర్మేశ్</strong> ఒక చిన్న టీమ్‌ను చేర్చుకుని ఈ ఆలోచనను వాస్తవంగా మార్చారు. ఫలితం: <strong>పర్మేశ్ చాయ్ పాయింట్</strong> – ప్రతి కప్ ఒక కథను చెబుతుంది, అక్కడ ప్రజలు నిలబడి, మాట్లాడి, ఇంటిగల అనుభూతి పొందుతారు.",
+        aboutCall:"<strong>మీ సహాయం అవసరం.</strong> మీరు ఒక్కసారి వచ్చి, మాట‑మాట, లేదా “ధన్యవాదాలు” అనే చిన్న మాట కూడా ఈ సంప్రదాయాన్ని కొనసాగించడంలో సహాయపడుతుంది. మనతో చాయ్ తాగి, ఈ స్నేహాన్ని పంచుకుందాం.",
+        menuTitle:"మేము అందించే వంటకాలు",
+        menuClassic:"క్లాసిక్ చాయ్",
+        menuClassicDesc:"అస్సాం ప్రాంతపు సంప్రదాయ చాయ్, పాలు, చక్కెర, మా ప్రత్యేక మసాలా కలయికతో.",
+        menuMasala:"మసాలా చాయ్",
+        menuMasalaDesc:"ఏలకులు, అల్లం, దాల్చిన చెక్క, లవంగ & మిరపకాయ – క్లాసిక్ ఇండియన్ ఇష్టమైనది.",
+        menuSeasonal:"సీజనల్ స్పెషల్స్",
+        menuSeasonalDesc:"రోస్‑పెట్టల్, తులసి‑నిమ్మ, మామిడి‑మింట్ వంటి మారుతున్న రుచి.",
+        menuCold:"కోల్‑బ్రూత్ & ఐస్ చాయ్",
+        menuColdDesc:"తాజాగా, ఐస్ మీద పానీయం, నిమ్మరసం చిటుకా.",
+        menuSnacks:"స్నాక్స్",
+        menuSnacksDesc:"సమోసా, పనీర్ టిక్కా, చీజ్ టోస్ట్, బrownies – తగిన సహచరులు.",
+        menuDesserts:"డెజర్ట్స్",
+        menuDessertsDesc:"గులాబ్ జామున్, రసగుల్లా, కుల్ఫీ‑స్టైల్ ఐస్‌క్రీమ్.",
+        contactTitle:"మమ్మల్ని సంప్రదించండి",
+        contactName:"పేరు",
+        contactEmail:"ఇ‑మెయిల్",
+        contactMessage:"సందేశం",
+        contactSend:"పంపండి",
+        contactAddrLabel:"చిరునామా:",
+        contactPhoneLabel:"ఫోన్:",
+        contactEmailLabel:"ఇ‑మెయిల్:",
+        feedbackTitle:"కస్టమర్ ఫీడ్‌బ్యాక్",
+        feedbackIntro:"మీ అభిప్రాయాన్ని మేము విలువిస్తాం. దయవు చేసి క్రింది ఫార్మ్‌ను పూరించండి.",
+        footerTagline:"ప్రతి కప్పులో ఆనందాన్ని అందించండి ☕",
+        footerLinksTitle:"త్వరిత లింక్స్",
+        footerContactTitle:"సంపర్కం",
+        footerFollowTitle:"ఫాలో చేయండి",
+        /* Timer strings */
+        timerLabel:"తెరువుకు సమయం:",
+        timerCountdown:"%d రోజుల %02d:%02d:%02d",
+        timerClock:"%02d:%02d:%02d",
+        timerFinished:"ఇది ఇప్పుడే తెరుచుకుంది!"
     },
-    ta: {
-        heroTitle: "பார்மேஷ் சாய் பாயிண்ட்",
-        heroSubtitle: "கைமுறையாக 만든 பிரீமியம் சாய் • சுகமாக்கும் கஃபேகள் • இலவச Wi‑Fi",
-        navAbout: "எங்களைப் பற்றி",
-        navMenu: "மெனு",
-        navContact: "தொடர்பு",
-        navFeedback: "பின்னூட்டம்",
-        aboutTitle: "எங்களின் கதைய்",
-        aboutPara1: "பெங்களூரில் ஒரு மழை மாலை, இளம் சாய்‑இஷ்டமான <strong>பார்மேஷ்</strong> ஒரு சாதாரண கடை விட செய்த சூடான சாய் வாணிகத்தை கண்டார். அவரின் உஷ்ணம், வாசனை, முன்னிறப்பு உரையாடல் – “இந்த உணர்வை நகரம் ஒவ்வொரு மூலையிலும் கொண்டு வரலாம்?” என்ற சுருக்கமான யோசனை உருவானது.",
-        aboutPara2: "இந்தியாவின் தேயிலை வேளாண்மை பகுதிகளில் (அஸ்ஸாம், டார்ஜில்லிங், நீல்கிரி) பயணம் செய்து, விவசாயிகளுடன் பேசிக் கற்றுவித்து, கலவை பொருந்திய பின்பு, <strong>பார்மேஷ்</strong> ஒரு சிறிய குழுவை ஒன்று கூட்டு‑இந்த யோசனையை நிஜமாக்கினார். விளைவு: <strong>பார்மேஷ் சாய் பாயிண்ட்</strong> – ஒவ்வொரு கோப்பையும் ஒரு கதையை சொல்லும், மக்கள் நிற்க, பேச, வீட்டைப் போன்ற உணர்வு பெறும் இடம்.",
-        aboutCall: "<strong>உங்கள் ஆதரவு அவசியம்.</strong> ஒருமுறை வர, வாய்மொழி பரப்பு, “நன்றி” என்று சொல்லியதும், இந்த பரம்பரையைப் பாதுகாப்பதற்கு உதவுகிறது. எங்களுடன் சாய் குடித்து, இந்த அன்பை பகிர்ந்து கொள்ளுங்கள்.",
-        menuTitle: "நாங்கள் வழங்குவது",
-        menuClassic: "கிளாசிக் சாய்",
-        menuClassicDesc: "பாரம்பரிய அஸ்ஸாம் சாய், பால், சர்க்கரை மற்றும் எங்கள் குறிப்பிட்ட மசாலா கலவை.",
-        menuMasala: "மசாலா சாய்",
-        menuMasalaDesc: "எலுமிச்சை, இஞ்சி, இலவங்கப்பட்டை, கிராம்பு & மிளகு – பாரம்பரிய இந்திய விருப்பம்.",
-        menuSeasonal: "காலநிலை ஸ்பெஷல்கள்",
-        menuSeasonalDesc: "ரோஸ்‑பெட்டல், துளசி‑லெமன், மாம்பழ‑மின்ட் போன்ற மாற்றும் சுவைகள்.",
-        menuCold: "குளிர் பிரூ & ஐஸ் சாய்",
-        menuColdDesc: "அதிகம் குளிராக, பனி மீது எலுமிச்சை இளஞ்சிவப்பு.",
-        menuSnacks: "உப்புமெனிகள்",
-        menuSnacksDesc: "சமோசா, பனீர் டிக்கா, சீஸ் டோஸ்ட், ப்ரவுனி – சரியான துணை.",
-        menuDesserts: "இனிப்புகள்",
-        menuDessertsDesc: "குளாப் ஜாமுன், ரச்குல்லா, கூற்‑ஸ்டைல் ஐஸ்‑க்ரீம்.",
-        contactTitle: "எங்களை தொடர்பு கொள்ளுங்கள்",
-        contactName: "பெயர்",
-        contactEmail: "மின்னஞ்சல்",
-        contactMessage: "செய்தி",
-        contactSend: "அனுப்பு",
-        contactAddrLabel: "முகவரி:",
-        contactPhoneLabel: "தொலைபேசி:",
-        contactEmailLabel: "மின்னஞ்சல்:",
-        feedbackTitle: "வாடிக்கையாளர் பின்னூட்டம்",
-        feedbackIntro: "உங்கள் கருத்தை மதிக்கிறோம். தயவுசெய்து கீழேயுள்ள சிறிய படிவத்தை பூர்த்தி செய்யவும்.",
-        footerTagline: "ஒவ்வொரு கோப்பிலும் மகிழ்ச்சி வழங்குங்கள் ☕",
-        footerLinksTitle: "விரைவு இணைப்புகள்",
-        footerContactTitle: "தொடர்பு",
-        footerFollowTitle: "எங்களை பின்தொடர்க"
+    ta:{
+        heroTitle:"பார்மேஷ் சாய் பாயிண்ட்",
+        heroSubtitle:"கைமுறையாக 만든 பிரீமியம் சாய் • சுகமான கஃபேகள் • இலவச Wi‑Fi",
+        navAbout:"எங்களைப் பற்றி",
+        navMenu:"மெனு",
+        navContact:"தொடர்பு",
+        navFeedback:"பின்னூட்டம்",
+        aboutTitle:"எங்களின் கதைய்",
+        aboutPara1:"பெங்களூரில் ஒரு மழை மாலை, இளம் சாய்‑இஷ்டமான <strong>பார்மேஷ்</strong> ஒரு சாதாரண கடை விட செய்த சூடான சாய் வாணிகத்தை கண்டார். அவரின் உஷ்ணம், வாசனை, முன்னிறப்பு உரையாடல் – “இந்த உணர்வை நகரம் ஒவ்வொரு மூலையிலும் கொண்டு வர‐லாம்?” என்ற சுருக்கமான யோசனை உருவானது.",
+        aboutPara2:"இந்தியாவின் தேயிலை வேளாண்மை பகுதிகளில் (அஸ்ஸாம், டார்ஜில்லிங், நீல்கிரி) பயணம் செய்து, விவசாயிகளுடன் பேசிக் கற்றுவித்து, கலவை பொருந்திய பின்பு, <strong>பார்மேஷ்</strong> ஒரு சிறிய குழுவை ஒன்று கூட்டு‑இந்த யோசனையை நிஜமாக்கினார். விளைவு: <strong>பார்மேஷ் சாய் பாயிண்ட்</strong> – ஒவ்வொரு கோப்பையும் ஒரு கதையை சொல்லும், மக்கள் நிற்க, பேச, வீட்டைப் போன்ற உணர்வு பெறும் இடம்.",
+        aboutCall:"<strong>உங்கள் ஆதரவு அவசியம்.</strong> ஒருமுறை வர, வாய்மொழி பரப்பு, “நன்றி” என்று சொல்லியதும், இந்த பரம்பரையைப் பாதுகாப்பதற்கு உதவுகிறது. எங்களுடன் சாய் குடித்து, இந்த அன்பை பகிர்ந்து கொள்ளுங்கள்.",
+        menuTitle:"நாங்கள் வழங்குவது",
+        menuClassic:"கிளாசிக் சாய்",
+        menuClassicDesc:"பாரம்பரிய அஸ்ஸாம் சாய், பால், சர்க்கரை மற்றும் எங்கள் குறிப்பிட்ட மசாலா கலவை.",
+        menuMasala:"மசாலா சாய்",
+        menuMasalaDesc:"எலுமிச்சை, இஞ்சி, இலவங்கப்பட்டை, கிராம்பு & மிளகு – பாரம்பரிய இந்திய விருப்பம்.",
+        menuSeasonal:"காலநிலை ஸ்பெஷல்கள்",
+        menuSeasonalDesc:"ரோஸ்‑பெட்டல், துளசி‑லெமன், மாம்பழ‑மின்ட் போன்ற மாற்றும் சுவைகள்.",
+        menuCold:"குளிர் பிரூ & ஐஸ் சாய்",
+        menuColdDesc:"அதிகம் குளிராக, பனி மீது எலுமிச்சை இளஞ்சிவப்பு.",
+        menuSnacks:"உப்புமெனிகள்",
+        menuSnacksDesc:"சமோசா, பனீர் டிக்கா, சீஸ் டோஸ்ட், ப்ரௌனி – சரியான துணை.",
+        menuDesserts:"இனிப்புகள்",
+        menuDessertsDesc:"குளாப் ஜாமுன், ரச்குல்லா, கூற்‑ஸ்டைல் ஐஸ்‑க்ரீம்.",
+        contactTitle:"எங்களை தொடர்பு கொள்ளுங்கள்",
+        contactName:"பெயர்",
+        contactEmail:"மின்னஞ்சல்",
+        contactMessage:"செய்தி",
+        contactSend:"அனுப்பு",
+        contactAddrLabel:"முகவரி:",
+        contactPhoneLabel:"தொலைபேசி:",
+        contactEmailLabel:"மின்னஞ்சல்:",
+        feedbackTitle:"வாடிக்கையாளர் பின்னூட்டம்",
+        feedbackIntro:"உங்கள் கருத்தை மதிக்கிறோம். தயவுசெய்து கீழேயுள்ள சிறிய படிவத்தை பூர்த்தி செய்யவும்.",
+        footerTagline:"ஒவ்வொரு கோப்பிலும் மகிழ்ச்சி வழங்குங்கள் ☕",
+        footerLinksTitle:"விரைவு இணைப்புகள்",
+        footerContactTitle:"தொடர்பு",
+        footerFollowTitle:"எங்களை பின்தொடர்க",
+        /* Timer strings */
+        timerLabel:"திறப்பின் நேரம்:",
+        timerCountdown:"%d நாட்கள் %02d:%02d:%02d",
+        timerClock:"%02d:%02d:%02d",
+        timerFinished:"இப்போதே திறந்துவிட்டோம்!"
     }
 };
 
-/* ---------- LANGUAGE SWITCHER ---------- */
-function setLanguage(lang) {
+/* ---------- 2️⃣ TIMER LOGIC ----------
+   – mode: "countdown" → counts down to a fixed date  
+   – mode: "clock"     → shows current local time
+   – Change timerConfig below to suit your needs.
+*/
+const timerConfig = {
+    mode: "countdown",                 // "countdown" or "clock"
+    /* If countdown, set the target ISO date/time (UTC or local – whichever you prefer) */
+    targetDate: "2026-12-31T23:59:59"   // example: New‑Year Eve 2026
+};
+
+/* Helper – zero‑pad numbers */
+function pad2(n){ return n<10 ? '0'+n : ''+n; }
+
+/* Render the timer (called every second & on language change) */
+function renderTimer(){
+    const el = $('#timer');
+    if (!el) return;
+
+    const dict = translations[document.documentElement.lang] || {};
+
+    const label = dict.timerLabel || '';
+
+    if (timerConfig.mode === "clock"){
+        const now = new Date();
+        const timeStr = dict.timerClock
+            ? dict.timerClock.replace('%02d:%02d:%02d',
+                `${pad2(now.getHours())}:${pad2(now.getMinutes())}:${pad2(now.getSeconds())}`)
+            : `${pad2(now.getHours())}:${pad2(now.getMinutes())}:${pad2(now.getSeconds())}`;
+        el.textContent = `${label} ${timeStr}`;
+    }else{
+        // countdown
+        const now   = new Date();
+        const target= new Date(timerConfig.targetDate);
+        const diff  = target - now;            // ms remaining
+
+        if (diff <= 0){
+            el.textContent = dict.timerFinished || "We’re open now!";
+            return;
+        }
+        const days = Math.floor(diff/(1000*60*60*24));
+        const hrs  = Math.floor(diff/(1000*60*60) % 24);
+        const mins = Math.floor(diff/(1000*60) % 60);
+        const secs = Math.floor(diff/1000 % 60);
+
+        const timeStr = dict.timerCountdown
+            ? dict.timerCountdown
+                .replace('%d', days)
+                .replace('%02d:%02d:%02d', `${pad2(hrs)}:${pad2(mins)}:${pad2(secs)}`)
+            : `${days}d ${pad2(hrs)}:${pad2(mins)}:${pad2(secs)}`;
+
+        el.textContent = `${label} ${timeStr}`;
+    }
+}
+
+/* Start the ticking interval (1 second) */
+let timerInterval;
+function startTimer(){
+    renderTimer();                 // immediate first render
+    clearInterval(timerInterval);
+    timerInterval = setInterval(renderTimer, 1000);
+}
+
+/* ---------- 3️⃣ LANGUAGE SWITCHER ----------
+   – Updates every `[data-i18n]` element
+   – Stores choice in localStorage
+   – Calls renderTimer() so the label switches instantly
+*/
+function setLanguage(lang){
     const dict = translations[lang];
     if (!dict) return;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
+
+    $$('[data-i18n]').forEach(el=> {
         const key = el.dataset.i18n;
-        if (dict[key]) el.innerHTML = dict[key];
+        if (typeof dict[key] === 'string') el.innerHTML = dict[key];
     });
-    document.querySelectorAll('.lang-switcher button')
-            .forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
-    localStorage.setItem('lang', lang);
+
+    // update <html lang>
+    document.documentElement.lang = lang;
+
+    // translate page <title> as well
+    if (dict.heroTitle) document.title = `${dict.heroTitle} – Interactive Site`;
+
+    // language‑switcher UI
+    $$(`.lang-switcher button`).forEach(btn=>{
+        const active = btn.dataset.lang===lang;
+        btn.classList.toggle('active',active);
+        btn.setAttribute('aria-pressed',active);
+    });
+
+    // re‑render timer label
+    renderTimer();
+
+    localStorage.setItem('lang',lang);
 }
 
-/* Load saved language */
-document.addEventListener('DOMContentLoaded', () => {
+/* ---------- 4️⃣ INITIALISATION ----------
+   • Load saved language
+   • Lazy‑load hero background (IntersectionObserver)
+   • Hook up language buttons
+   • Tab navigation
+   • Formspree status
+   • Start timer
+*/
+document.addEventListener('DOMContentLoaded',()=>{
+
+    // ---- language ----
     const saved = localStorage.getItem('lang') || 'en';
     setLanguage(saved);
-});
 
-/* Click on language buttons */
-document.querySelectorAll('.lang-switcher button')
-        .forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
+    // ---- lazy hero background ----
+    const header = $('header');
+    if ('IntersectionObserver' in window){
+        const obs = new IntersectionObserver((entries,observer)=>{
+            entries.forEach(entry=>{
+                if (entry.isIntersecting){
+                    const img = new Image();
+                    img.src = "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80";
+                    img.onload = ()=>{
+                        header.style.backgroundImage =
+                            `linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)), url(${img.src})`;
+                    };
+                    observer.disconnect();
+                }
+            });
+        });
+        obs.observe(header);
+    }
 
-/* ---------- TAB SWITCHING ---------- */
-document.querySelectorAll('.tab-link').forEach(link => {
-    link.addEventListener('click', e => {
-        e.preventDefault();
-        const target = link.getAttribute('href').substring(1);
-        document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-        document.querySelectorAll('.section')
-                .forEach(sec => sec.classList.toggle('active', sec.id === target));
+    // ---- language buttons ----
+    $$(`.lang-switcher button`).forEach(btn=>{
+        btn.addEventListener('click',()=> setLanguage(btn.dataset.lang));
     });
-});
 
-/* ---------- FORMSPREE STATUS ---------- */
-const form = document.querySelector('.contact');
-const status = document.getElementById('form-status');
-if (form) {
-    form.addEventListener('submit', () => { status.textContent = 'Sending…'; });
-}
+    // ---- tab navigation ----
+    $$('.tab-link').forEach(link=>{
+        link.addEventListener('click',e=>{
+            e.preventDefault();
+            const target = link.getAttribute('href').substring(1);
+            $$('.tab-link').forEach(l=>l.classList.remove('active'));
+            link.classList.add('active');
+            $$('.section').forEach(sec=>sec.classList.toggle('active',sec.id===target));
+        });
+    });
+
+    // ---- Formspree feedback ----
+    const form = $('.contact');
+    const status = $('#form-status');
+    if (form){
+        form.addEventListener('submit',()=>{ status.textContent='Sending…';});
+        // If you want to show the success/error message, you could use fetch() instead of a plain POST.
+    }
+
+    // ---- start timer ----
+    startTimer();
+});
 </script>
 </body>
 </html>
