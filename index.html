@@ -27,6 +27,7 @@
     --clr-bg:#fafafa;
     --clr-dark:#111;
     --clr-light:#fff;
+    --clr-section-header:#2c3e50;   /* ← NEW – professional heading colour */
     --max-w:1100px;
     --gap:1.5rem;
 }
@@ -66,7 +67,7 @@ header h1{font-size:2.5rem;margin-bottom:.5rem;}
 header p{font-size:1.1rem;}
 
 /* -------------------------------------------------
-   10️⃣ DIGITAL CLOCK (now top‑right)
+   10️⃣ DIGITAL CLOCK (top‑right)
    ------------------------------------------------- */
 .timer{
     font-size:1.2rem;
@@ -148,6 +149,14 @@ section{
 section.active{display:block;}
 
 /* -------------------------------------------------
+   NEW – SECTION HEADINGS
+   ------------------------------------------------- */
+section h2{
+    color:var(--clr-section-header);   /* ← professional colour */
+    margin-bottom:1.5rem;
+}
+
+/* -------------------------------------------------
    6️⃣ CONTENT‑SPECIFIC STYLES
    ------------------------------------------------- */
 .about{
@@ -174,6 +183,7 @@ section.active{display:block;}
 }
 .menu-item h3{margin-bottom:.5rem;font-size:1.2rem;color:var(--clr-primary);}
 
+/* CONTACT FORM */
 .contact form{
     max-width:500px;
     margin:auto;
@@ -198,6 +208,11 @@ section.active{display:block;}
     border-radius:.3rem;
 }
 .contact button:hover{background:#333;}
+
+/* FEEDBACK IFRAME */
+.feedback iframe{
+    width:100%;height:600px;border:none;
+}
 
 /* -------------------------------------------------
    7️⃣ FOOTER
@@ -464,7 +479,7 @@ const $  = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
 
 /* ---------- 1️⃣ TRANSLATIONS ----------
-   (removed calendar‑related keys) */
+   (calendar removed, clock label kept) */
 const translations = {
     en:{
         heroTitle:"Parmesh Chai Point",
@@ -504,7 +519,6 @@ const translations = {
         footerLinksTitle:"Quick Links",
         footerContactTitle:"Contact",
         footerFollowTitle:"Follow Us",
-        /* Clock strings */
         timerLabel:"Current time:"
     },
     hi:{
@@ -575,13 +589,13 @@ const translations = {
         contactName:"ಹೆಸರು",
         contactEmail:"ಇಮೇಲ್",
         contactMessage:"ಸಂದೇಶ",
-        contactSend:"ಕಳುಹಿಸು",
+        contactSend:"ಕಳುಹಿಸಿ",
         contactAddrLabel:"ವಿಳಾಸ:",
         contactPhoneLabel:"ಫೋನ್:",
         contactEmailLabel:"ಇಮೇಲ್:",
         feedbackTitle:"ಗ್ರಾಹಕ ಪ್ರತಿಕ್ರಿಯೆ",
         feedbackIntro:"ನಿಮ್ಮ ಅಭಿಪ್ರಾಯವನ್ನು ಮೌಲ್ಯಮಾಪನ ಮಾಡುತ್ತೇವೆ. ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಫಾರ್ಮ್ ಅನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ.",
-        footerTagline:"ಪ್ರತಿ ಕಪ್‌ನಲ್ಲಿ ಸಂತೋಷ ನೀಡಿ ☕",
+        footerTagline:"ಪ್ರತಿ ಕಪ್ಪಿನಲ್ಲಿ ಸಂತೋಷ ನೀಡಿ ☕",
         footerLinksTitle:"ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು",
         footerContactTitle:"ಸಂಪರ್ಕ",
         footerFollowTitle:"ಫಾಲೋ ಮಾಡಿ",
@@ -595,7 +609,7 @@ const translations = {
         navContact:"సంపర్కం",
         navFeedback:"ఫీడ్‌బ్యాక్",
         aboutTitle:"మా కథ",
-        aboutPara1:"బెంగాళూరు పట్టణంలో వర్షపు సాయంత్రం, యువ ఛాయి‑ప్రేమికుడు <strong>పర్మేశ్</strong> ఒక చిన్న స్టాల్‌ నుండి బాగుండి ఐశ్వర్య చాయ్‌ను పిక్కుకునే మాయను కనుగొన్నారు. ఛాయ్ వాసన, ఉష్ణం, స్టాల్ యజమాని తో చిన్న సంభాషణ – “ఈ భావనను నగరమంతా పంచవచ్చు?” అనే సరళమైన ఆలోచన సృష్టించింది.",
+        aboutPara1:"బెంగాళూరు పట్టణంలో వర్షపు సాయంత్రం, యువ ఛాయి‑ప్రేమికుడు <strong>పర్మేశ్</strong> ఒక చిన్న స్టాల్‌ నుండి బాగుండి ఐశ్వర్య చాయ్‌ను పిక్కuvieron మాయను కనుగొన్నారు. ఛాయ్ వాసన, ఉష్ణం, స్టాల్ యజమాని తో చిన్న సంభాషణ – “ఈ భావనను నగరమంతా పంచవచ్చు?” అనే సరళమైన ఆలోచన సృష్టించింది.",
         aboutPara2:"భారతదేశంలోని వివిధ చాయ్ తోటల (అస్సాం, డ్రిజిల్లింగ్, నీలిగిరి) లో పర్యటించి, రైతులతో మాట్లాడి, మిశ్రమాన్ని పరిపూర్ణం చేసిన తరువాత, <strong>పర్మేశ్</strong> ఒక చిన్న టీమ్‌ను చేర్చుకుని ఈ ఆలోచనను వాస్తవంగా మార్చారు. ఫలితం: <strong>పర్మేశ్ చాయ్ పాయింట్</strong> – ప్రతి కప్ ఒక కథను చెబుతుంది, అక్కడ ప్రజలు నిలబడి, మాట్లాడి, ఇంటిగల అనుభూతి పొందుతారు.",
         aboutCall:"<strong>మీ సహాయం అవసరం.</strong> మీరు ఒక్కసారి వచ్చి, మాట‑మాట, “ధన్యవాదాలు” అనే చిన్న మాట కూడా ఈ సంప్రదాయాన్ని కొనసాగించడంలో సహాయపడుతుంది. మనతో చాయ్ తాగి, ఈ స్నేహాన్ని పంచుకుందాం.",
         menuTitle:"మేము అందించే వంటకాలు",
@@ -610,7 +624,7 @@ const translations = {
         menuSnacks:"స్నాక్స్",
         menuSnacksDesc:"సమోసా, పనీర్ టిక్కా, చీజ్ టోస్ట్, బbrownies – తగిన సహచరులు.",
         menuDesserts:"డెజర్ట్స్",
-        menuDessertsDesc:"గులాబ్ జామున్, రాస్గుల్లా, కుల్ఫీ‑స్టైల్ ఐస్‌క్రీమ్.",
+        menuDessertsDesc:"గులాబ్ జామున్, రసగుల్లా, కుల్ఫీ‑స్టైల్ ఐస్‌క్రీమ్.",
         contactTitle:"మమ్మల్ని సంప్రదించండి",
         contactName:"పేరు",
         contactEmail:"ఇ‑మెయిల్",
@@ -671,7 +685,7 @@ const translations = {
 
 /* ---------- 2️⃣ 12‑HOUR CLOCK ----------
    • Shows HH:MM:SS AM/PM
-   • Runs every second */
+   • Runs every second and updates after language change */
 function renderClock(){
     const el = $('#timer');
     if (!el) return;
@@ -689,14 +703,16 @@ function renderClock(){
 }
 
 /* ---------- 3️⃣ LANGUAGE SWITCHER ----------
-   • Also refreshes the clock label */
+   • Updates headings, clock label, etc. */
 function setLanguage(lang){
     const dict = translations[lang];
     if (!dict) return;
+
     $$('[data-i18n]').forEach(el=>{
         const key = el.dataset.i18n;
         if (typeof dict[key] === 'string') el.innerHTML = dict[key];
     });
+
     document.documentElement.lang = lang;
     if (dict.heroTitle) document.title = `${dict.heroTitle} – Interactive Site`;
 
@@ -706,7 +722,7 @@ function setLanguage(lang){
         btn.setAttribute('aria-pressed',active);
     });
 
-    // update clock label immediately
+    // Refresh clock label instantly
     renderClock();
 
     localStorage.setItem('lang',lang);
@@ -718,17 +734,16 @@ function pad2(n){ return n<10 ? '0'+n : ''+n; }
 /* ---------- 5️⃣ INITIALISATION ----------
    • Load saved language
    • Lazy‑load hero background
-   • Bind UI events (language, tabs)
+   • Bind UI (lang, tabs)
    • Formspree status
-   • Start the clock interval
-*/
+   • Start the clock */
 document.addEventListener('DOMContentLoaded',()=>{
 
-    // ---- language ----
+    // Language
     const saved = localStorage.getItem('lang') || 'en';
     setLanguage(saved);
 
-    // ---- lazy hero background ----
+    // Lazy hero background
     const header = $('header');
     if ('IntersectionObserver' in window){
         const obs = new IntersectionObserver((entries,observer)=>{
@@ -747,12 +762,12 @@ document.addEventListener('DOMContentLoaded',()=>{
         obs.observe(header);
     }
 
-    // ---- language buttons ----
+    // Language buttons
     $$(`.lang-switcher button`).forEach(btn=>{
         btn.addEventListener('click',()=> setLanguage(btn.dataset.lang));
     });
 
-    // ---- tab navigation (no calendar tab now) ----
+    // Tab navigation
     $$('.tab-link').forEach(link=>{
         link.addEventListener('click',e=>{
             e.preventDefault();
@@ -764,15 +779,15 @@ document.addEventListener('DOMContentLoaded',()=>{
         });
     });
 
-    // ---- Formspree status ----
+    // Formspree status
     const form = $('.contact');
     const status = $('#form-status');
     if (form){
         form.addEventListener('submit',()=>{ status.textContent='Sending…';});
     }
 
-    // ---- start the 12‑hour clock ----
-    renderClock();               // initial render
+    // Start clock
+    renderClock();               // immediate first render
     setInterval(renderClock,1000);
 });
 </script>
