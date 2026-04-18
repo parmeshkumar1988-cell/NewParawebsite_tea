@@ -60,20 +60,24 @@ header{
     color:var(--clr-light);
     text-align:center;
     padding:6rem 1rem 4rem;
+    position:relative;               /* for the absolute clock */
 }
 header h1{font-size:2.5rem;margin-bottom:.5rem;}
 header p{font-size:1.1rem;}
 
 /* -------------------------------------------------
-   10️⃣ TIMER (now DIGITAL CLOCK) STYLES
+   10️⃣ DIGITAL CLOCK (now top‑right)
    ------------------------------------------------- */
 .timer{
-    margin-top:1rem;
     font-size:1.2rem;
     font-weight:600;
     color:var(--clr-light);
     text-shadow:0 0 4px rgba(0,0,0,.6);
     animation:fadeIn .4s ease-in;
+    position:absolute;
+    top:1rem;
+    right:1rem;
+    z-index:2;
 }
 @keyframes fadeIn{
     from{opacity:0;}
@@ -108,7 +112,7 @@ nav a.active,
 nav a:hover,
 nav a:focus{background:rgba(0,0,0,.2);}
 
-/* language switcher – top‑right */
+/* language switcher – top‑right inside nav */
 .lang-switcher{
     position:absolute;
     top:0.5rem; right:0.5rem;
@@ -135,13 +139,13 @@ nav a:focus{background:rgba(0,0,0,.2);}
    5️⃣ MAIN SECTIONS (only one visible)
    ------------------------------------------------- */
 main{flex:1;}
-.section{
+section{
     max-width:var(--max-w);
     margin:auto;
     padding:3rem 1rem;
     display:none;
 }
-.section.active{display:block;}
+section.active{display:block;}
 
 /* -------------------------------------------------
    6️⃣ CONTENT‑SPECIFIC STYLES
@@ -170,12 +174,30 @@ main{flex:1;}
 }
 .menu-item h3{margin-bottom:.5rem;font-size:1.2rem;color:var(--clr-primary);}
 
-/* Calendar iframe – make it a bit taller on large screens */
-.calendar-embed{
-    border:none;
-    width:100%;
-    height:700px;
+.contact form{
+    max-width:500px;
+    margin:auto;
+    display:grid;
+    gap:.75rem;
 }
+.contact label{font-weight:bold;}
+.contact input,
+.contact textarea{
+    width:100%;
+    padding:.6rem;
+    border:1px solid #ccc;
+    border-radius:.3rem;
+    font-family:inherit;
+}
+.contact button{
+    background:var(--clr-dark);
+    color:var(--clr-light);
+    border:none;
+    padding:.75rem;
+    cursor:pointer;
+    border-radius:.3rem;
+}
+.contact button:hover{background:#333;}
 
 /* -------------------------------------------------
    7️⃣ FOOTER
@@ -243,7 +265,7 @@ a:focus, button:focus, input:focus, textarea:focus{
     <h1 data-i18n="heroTitle">Parmesh Chai Point</h1>
     <p data-i18n="heroSubtitle">Premium handcrafted chai • Cozy cafés • Free Wi‑Fi</p>
 
-    <!-- ★ DIGITAL CLOCK ★ -->
+    <!-- ★ DIGITAL CLOCK (top‑right) ★ -->
     <div id="timer" class="timer" aria-live="polite" role="timer"></div>
 </header>
 
@@ -261,7 +283,6 @@ a:focus, button:focus, input:focus, textarea:focus{
     <ul>
         <li><a href="#about"    class="tab-link active" data-i18n="navAbout">About</a></li>
         <li><a href="#menu"     class="tab-link"      data-i18n="navMenu">Menu</a></li>
-        <li><a href="#calendar" class="tab-link"      data-i18n="navCalendar">Calendar</a></li>
         <li><a href="#contact"  class="tab-link"      data-i18n="navContact">Contact</a></li>
         <li><a href="#feedback" class="tab-link"      data-i18n="navFeedback">Feedback</a></li>
     </ul>
@@ -304,22 +325,6 @@ a:focus, button:focus, input:focus, textarea:focus{
             <div class="menu-item"><h3 data-i18n="menuSnacks">Snacks</h3><p data-i18n="menuSnacksDesc">Samosas, paneer tikka, cheese toast, brownies – perfect companions.</p></div>
             <div class="menu-item"><h3 data-i18n="menuDesserts">Desserts</h3><p data-i18n="menuDessertsDesc">Gulab jamun, rasgulla, kulfi‑style ice‑cream.</p></div>
         </div>
-    </section>
-
-    <!-- CALENDAR – BANGALORE PRESS -->
-    <section id="calendar" class="section">
-        <h2 data-i18n="calendarTitle">Bangalore Press Calendar</h2>
-
-        <p data-i18n="calendarIntro">
-            Below is a public Google Calendar that aggregates press‑related events in Bangalore.  
-            (Replace the <code>src</code> URL with your actual calendar if you have one.)
-        </p>
-
-        <iframe class="calendar-embed"
-                src="https://calendar.google.com/calendar/embed?src=en.indian%23holiday%40group.v.calendar.google.com&ctz=Asia%2FKolkata"
-                loading="lazy"
-                title="Bangalore Press Calendar"
-                aria-label="Bangalore Press Calendar"></iframe>
     </section>
 
     <!-- CONTACT -->
@@ -393,7 +398,6 @@ a:focus, button:focus, input:focus, textarea:focus{
             <ul class="footer__list">
                 <li><a href="#about"    data-i18n="navAbout">About</a></li>
                 <li><a href="#menu"     data-i18n="navMenu">Menu</a></li>
-                <li><a href="#calendar" data-i18n="navCalendar">Calendar</a></li>
                 <li><a href="#contact"  data-i18n="navContact">Contact</a></li>
                 <li><a href="#feedback" data-i18n="navFeedback">Feedback</a></li>
             </ul>
@@ -452,8 +456,7 @@ a:focus, button:focus, input:focus, textarea:focus{
 </footer>
 
 <!-- -------------------------------------------------
-     9️⃣ ENHANCED JS – language switcher + 12‑hour digital clock +
-     tab navigation, Formspree status, lazy‑load background
+     9️⃣ ENHANCED JS – language switcher + 12‑hour digital clock
   ------------------------------------------------- -->
 <script>
 /* ---------- 0️⃣ HELPERS ---------- */
@@ -461,14 +464,13 @@ const $  = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
 
 /* ---------- 1️⃣ TRANSLATIONS ----------
-   Added keys for the clock label, calendar tab, and calendar intro. */
+   (removed calendar‑related keys) */
 const translations = {
     en:{
         heroTitle:"Parmesh Chai Point",
         heroSubtitle:"Premium handcrafted chai • Cozy cafés • Free Wi‑Fi",
         navAbout:"About",
         navMenu:"Menu",
-        navCalendar:"Calendar",
         navContact:"Contact",
         navFeedback:"Feedback",
         aboutTitle:"Our Story",
@@ -502,17 +504,14 @@ const translations = {
         footerLinksTitle:"Quick Links",
         footerContactTitle:"Contact",
         footerFollowTitle:"Follow Us",
-        /* Clock & Calendar strings */
-        timerLabel:"Current time:",
-        calendarTitle:"Bangalore Press Calendar",
-        calendarIntro:"Below is a public Google Calendar listing press‑related events in Bangalore."
+        /* Clock strings */
+        timerLabel:"Current time:"
     },
     hi:{
         heroTitle:"पर्मेश चाय पॉइंट",
         heroSubtitle:"प्रीमियम हस्तनिर्मित चाय • कोज़ी कैफ़े • फ्री वाई‑फ़ाई",
         navAbout:"हमारे बारे में",
         navMenu:"मेन्यू",
-        navCalendar:"कैलेंडर",
         navContact:"संपर्क",
         navFeedback:"प्रतिक्रिया",
         aboutTitle:"हमारी कहानी",
@@ -546,16 +545,13 @@ const translations = {
         footerLinksTitle:"त्वरित लिंक",
         footerContactTitle:"संपर्क",
         footerFollowTitle:"फ़ॉलो करें",
-        timerLabel:"वर्तमान समय:",
-        calendarTitle:"बेंगलुरु प्रेस कैलेंडर",
-        calendarIntro:"नीचे बेंगलुरु में प्रेस‑सम्बंधित इवेंट्स का सार्वजनिक Google कैलेंडर दिया गया है।"
+        timerLabel:"वर्तमान समय:"
     },
     kn:{
         heroTitle:"ಪರ್ಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್",
         heroSubtitle:"ಹಸ್ತ ನಿರ್ಮಿತ ಪ್ರೀಮಿಯಮ್ ಛಾಯಿ • ಆರಾಮದಾಯಕ ಕಾಫೆಗಳು • ಉಚಿತ Wi‑Fi",
         navAbout:"ನಮ್ಮ ಬಗ್ಗೆ",
         navMenu:"ಮೆನು",
-        navCalendar:"ಕ್ಯಾಲೆಂಡರ್",
         navContact:"ಸಂಪರ್ಕ",
         navFeedback:"ಪ್ರತಿಕ್ರಿಯೆ",
         aboutTitle:"ನಮ್ಮ ಕಥೆ",
@@ -564,7 +560,7 @@ const translations = {
         aboutCall:"<strong>ನಾವು ನಿಮ್ಮ ಬೆಂಬಲವನ್ನು ಅಗತ್ಯಪಡಿಸುತ್ತೇವೆ.</strong> ಒಂದೇ ಭೇಟಿ, ಮಾತು‑ಮತ್ತು‑ಮಾತು, “ಧನ್ಯವಾದ” ಎಂಬ ಸರಳ ಹೇಳಿಕೆಯೂ ಈ ಪರಂಪರೆಯನ್ನು ಉಳಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ. ಸೇರಿ, ಛಾಯನ್ನು ಸವಿದು, ಈ ಪ್ರೀತಿಯನ್ನು ಹಂಚಿಕೊಳ್ಳೋಣ.",
         menuTitle:"ನಾವು ಏನು ನೀಡುತ್ತೇವೆ",
         menuClassic:"ಕ್ಲಾಸಿಕ್ ಛಾಯಿ",
-        menuClassicDesc:"ಪಾರಂಪರಿಕ ಅಸ್ಸಾಂ ಛಾಯಿ, ಹಾಲು, ಸಕ್ಕರೆ ಮತ್ತು ನಮ್ಮ ವಿಶೇಷ ಮಸಾಲಾ ಮಿಶ್ರಣ.",
+        menuClassicDesc:"ಪಾರಂಪರಿಕ ಅಸ್ಸಾಂ ಛಾಯಿ, ಹಾಲು, ಸಕ್ಕರೆ ಹಾಗೂ ನಮ್ಮ ವಿಶೇಷ ಮಸಾಲಾ ಮಿಶ್ರಣ.",
         menuMasala:"ಮಸಾಲಾ ಛಾಯಿ",
         menuMasalaDesc:"ಏಲಕ್ಕಿ, ಅಲಕ್ಕಿ, ದಾಲ್ಚಿನ್ನಿ, ಲವಂಗ ಹಾಗೂ ಮೆಣಸು – ಪ್ರಾಚೀನ ಭಾರತೀಯ ಪ್ರಿಯ.",
         menuSeasonal:"ಕಾಲದ ವಿಶೇಷಗಳು",
@@ -579,7 +575,7 @@ const translations = {
         contactName:"ಹೆಸರು",
         contactEmail:"ಇಮೇಲ್",
         contactMessage:"ಸಂದೇಶ",
-        contactSend:"ಕಳುಹಿಸಿ",
+        contactSend:"ಕಳುಹಿಸು",
         contactAddrLabel:"ವಿಳಾಸ:",
         contactPhoneLabel:"ಫೋನ್:",
         contactEmailLabel:"ಇಮೇಲ್:",
@@ -589,16 +585,13 @@ const translations = {
         footerLinksTitle:"ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು",
         footerContactTitle:"ಸಂಪರ್ಕ",
         footerFollowTitle:"ಫಾಲೋ ಮಾಡಿ",
-        timerLabel:"ಪ್ರಸ್ತುತ ಸಮಯ:",
-        calendarTitle:"ಬೆಂಗಾಳೂರು ಪ್ರೆಸ್ ಕ್ಯಾಲೆಂಡರ್",
-        calendarIntro:"ಕೆಳಗೆ ಬೆಂಗಾಳೂರಿನಲ್ಲಿ ಪ್ರೆಸ್ ಸಂಬಂಧಿತ ಕಾರ್ಯಕ್ರಮಗಳ ಸಾರ್ವಜನಿಕ Google ಕ್ಯಾಲೆಂಡರ್ ಇದೆ."
+        timerLabel:"ಪ್ರಸ್ತುತ ಸಮಯ:"
     },
     te:{
         heroTitle:"పర్మేశ్ చాయ్ పాయింట్",
-        heroSubtitle:"హ్యాండ్‌క్రాఫ్ట్‌డ్ ప్రీమియమ్ చాయ్ • సౌకర్యవంతమైన కేఫ్‌లు • ఉచిత Wi‑Fi",
+        heroSubtitle:"హ్యాండ్‌క్రాఫ్ట్‌డ్ ప్రీమియమ్ చాయ్ • సౌకర్యవంతమైన కేఫ్‌లు • ఉచిత Wi‑FI",
         navAbout:"మా గురించి",
         navMenu:"మెను",
-        navCalendar:"క్యాలెండర్",
         navContact:"సంపర్కం",
         navFeedback:"ఫీడ్‌బ్యాక్",
         aboutTitle:"మా కథ",
@@ -617,7 +610,7 @@ const translations = {
         menuSnacks:"స్నాక్స్",
         menuSnacksDesc:"సమోసా, పనీర్ టిక్కా, చీజ్ టోస్ట్, బbrownies – తగిన సహచరులు.",
         menuDesserts:"డెజర్ట్స్",
-        menuDessertsDesc:"గులాబ్ జామున్, రసగుల్లా, కుల్ఫీ‑స్టైల్ ఐస్‌క్రీమ్.",
+        menuDessertsDesc:"గులాబ్ జామున్, రాస్గుల్లా, కుల్ఫీ‑స్టైల్ ఐస్‌క్రీమ్.",
         contactTitle:"మమ్మల్ని సంప్రదించండి",
         contactName:"పేరు",
         contactEmail:"ఇ‑మెయిల్",
@@ -632,21 +625,18 @@ const translations = {
         footerLinksTitle:"త్వరిత లింక్స్",
         footerContactTitle:"సంపర్కం",
         footerFollowTitle:"ఫాలో చేయండి",
-        timerLabel:"ప్రస్తుత సమయం:",
-        calendarTitle:"బెంగళూరు ప్రెస్ క్యాలెండర్",
-        calendarIntro:"క్రింద బెంగళూరులో ప్రెస్‑సంబంధిత ఈవెంట్‌లు కోసం పబ్లిక్ Google క్యాలెండర్ ఉంది."
+        timerLabel:"ప్రస్తుత సమయం:"
     },
     ta:{
         heroTitle:"பார்மேஷ் சாய் பாயிண்ட்",
         heroSubtitle:"கைமுறையாக 만든 பிரீமியம் சாய் • சுகமான கஃபேகள் • இலவச Wi‑Fi",
         navAbout:"எங்களைப் பற்றி",
         navMenu:"மெனு",
-        navCalendar:"காலெண்டர்",
         navContact:"தொடர்பு",
         navFeedback:"பின்னூட்டம்",
         aboutTitle:"எங்களின் கதைய்",
         aboutPara1:"பெங்களூரில் ஒரு மழை மாலை, இளம் சாய்‑இஷ்டமான <strong>பார்மேஷ்</strong> ஒரு சாதாரண கடை விட செய்த சூடான சாய் வாணிகத்தை கண்டார். அவரின் உஷ்ணம், வாசனை, முன்னிறப்பு உரையாடல் – “இந்த உணர்வை நகரம் ஒவ்வொரு மூலையிலும் கொண்டு வர‑லாம்?” என்ற சுருக்கமான யோசனை உருவானது.",
-        aboutPara2:"இந்தியாவின் தேயிலை வேளாண்மை பகுதிகளில் (அஸ்ஸாம், டார்ஜில்லிங், நீல்கிரி) பயணம் செய்து, விவசாயிகளுடன் பேசிக் கற்றுவித்து, கலவை பொருந்திய பின்பு, <strong>பார்மேஷ்</strong> ஒரு சிறிய குழுவை ஒன்று கூட்டு‑இந்த யோசனையை நிஜமாக்கினார். விளைவு: <strong>பார்மேஷ் சாய் பாயிண்ட்</strong> – ஒவ்வொரு கோப்பிலும் ஒரு கதையை சொல்கிறது, மக்கள் நிற்க, பேச, வீட்டைப் போன்ற உணர்வு பெறும் இடம்.",
+        aboutPara2:"இந்தியாவின் தேயிலை வேளாண்மை பகுதிகளில் (அஸ்ஸாம், டார்ஜில்லிங், நீல்கிரி) பயணம் செய்து, விவசாயிகளுடன் பேசிக் கற்றுவித்து, கலவை பொருந்திய பின்பு, <strong>பார்மேஷ்</strong> ஒரு சிறிய குழுவை ஒன்று கூட்டு‑இந்த யோசனையை நிஜமாக்கினார். விளைவு: <strong>பார்மேஷ் சாய் பாயிண்ட்</strong> – ஒவ்வொரு கோப்பிலும் ஒரு கதையை சொல்லும், மக்கள் நிற்க, பேச, வீட்டைப் போன்ற உணர்வு பெறும் இடம்.",
         aboutCall:"<strong>உங்கள் ஆதரவு அவசியம்.</strong> ஒருமுறை வர, வாய்மொழி பரப்பு, “நன்றி” என்று சொல்லியதும், இந்த பரம்பரையைப் பாதுகாப்பதற்கு உதவுகிறது. எங்களுடன் சாய் குடித்து, இந்த அன்பை பகிர்ந்து கொள்ளுங்கள்.",
         menuTitle:"நாங்கள் வழங்குவது",
         menuClassic:"கிளாசிக் சாய்",
@@ -675,46 +665,38 @@ const translations = {
         footerLinksTitle:"விரைவு இணைப்புகள்",
         footerContactTitle:"தொடர்பு",
         footerFollowTitle:"எங்களை பின்தொடர்க",
-        timerLabel:"தற்போதைய நேரம்:",
-        calendarTitle:"பெங்களூர் ப்ரஸ் காலெண்டர்",
-        calendarIntro:"கீழே பெங்களூரில் பத்திரிகை தொடர்பான நிகழ்வுகளைப் பார்க்கும் Google காலெண்டர் உள்ளது."
+        timerLabel:"தற்போதைய நேரம்:"
     }
 };
 
 /* ---------- 2️⃣ 12‑HOUR CLOCK ----------
-   • Shows HH:MM:SS AM/PM
-   • Uses the language‑specific timerLabel
-*/
+   • Shows HH:MM:SS AM/PM
+   • Runs every second */
 function renderClock(){
     const el = $('#timer');
     if (!el) return;
     const dict = translations[document.documentElement.lang] || {};
-
     const label = dict.timerLabel || 'Current time:';
     const now   = new Date();
-    let h       = now.getHours();
-    const ampm  = h >= 12 ? 'PM' : 'AM';
+    let h = now.getHours();
+    const ampm = h >= 12 ? 'PM' : 'AM';
     h = h % 12;
     h = h ? h : 12;               // 0 → 12
     const m = now.getMinutes();
     const s = now.getSeconds();
-
     const timeStr = `${pad2(h)}:${pad2(m)}:${pad2(s)} ${ampm}`;
     el.textContent = `${label} ${timeStr}`;
 }
 
 /* ---------- 3️⃣ LANGUAGE SWITCHER ----------
-   Re‑render the clock when the language changes.
-*/
+   • Also refreshes the clock label */
 function setLanguage(lang){
     const dict = translations[lang];
     if (!dict) return;
-
     $$('[data-i18n]').forEach(el=>{
         const key = el.dataset.i18n;
         if (typeof dict[key] === 'string') el.innerHTML = dict[key];
     });
-
     document.documentElement.lang = lang;
     if (dict.heroTitle) document.title = `${dict.heroTitle} – Interactive Site`;
 
@@ -724,7 +706,7 @@ function setLanguage(lang){
         btn.setAttribute('aria-pressed',active);
     });
 
-    // Update clock label instantly
+    // update clock label immediately
     renderClock();
 
     localStorage.setItem('lang',lang);
@@ -736,7 +718,7 @@ function pad2(n){ return n<10 ? '0'+n : ''+n; }
 /* ---------- 5️⃣ INITIALISATION ----------
    • Load saved language
    • Lazy‑load hero background
-   • Bind UI events (lang, tabs)
+   • Bind UI events (language, tabs)
    • Formspree status
    • Start the clock interval
 */
@@ -770,7 +752,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         btn.addEventListener('click',()=> setLanguage(btn.dataset.lang));
     });
 
-    // ---- tab navigation (including the new Calendar tab) ----
+    // ---- tab navigation (no calendar tab now) ----
     $$('.tab-link').forEach(link=>{
         link.addEventListener('click',e=>{
             e.preventDefault();
@@ -789,8 +771,8 @@ document.addEventListener('DOMContentLoaded',()=>{
         form.addEventListener('submit',()=>{ status.textContent='Sending…';});
     }
 
-    // ---- start 12‑hour clock ----
-    renderClock();               // first render
+    // ---- start the 12‑hour clock ----
+    renderClock();               // initial render
     setInterval(renderClock,1000);
 });
 </script>
