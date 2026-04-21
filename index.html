@@ -36,13 +36,14 @@
             background: var(--clr-bg);
             color: var(--clr-dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* -------------------------------------------------
-           2️⃣ HERO SECTION (Visual Impact)
+           2️⃣ HERO SECTION
            ------------------------------------------------- */
         header {
-            height: 100vh; /* Full screen height */
+            height: 100vh; 
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
                         url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80')
                         center/cover no-repeat;
@@ -87,9 +88,6 @@
             transform: translateY(-3px);
         }
 
-        /* -------------------------------------------------
-           3️⃣ DIGITAL CLOCK
-           ------------------------------------------------- */
         .timer {
             font-size: 0.9rem;
             color: var(--clr-light);
@@ -104,7 +102,7 @@
         }
 
         /* -------------------------------------------------
-           4️⃣ NAVIGATION (Sticky)
+           3️⃣ NAVIGATION
            ------------------------------------------------- */
         nav {
             background: var(--clr-light);
@@ -164,13 +162,20 @@
         }
 
         /* -------------------------------------------------
-           5️⃣ CONTENT SECTIONS (The "Scroll" Experience)
+           4️⃣ CONTENT SECTIONS & ANIMATIONS
            ------------------------------------------------- */
         section {
             max-width: var(--max-w);
             margin: auto;
             padding: 6rem 1.5rem;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            opacity: 0; /* For animation */
+            transform: translateY(30px); /* For animation */
+            transition: all 0.8s ease-out;
+        }
+
+        section.reveal {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         section h2 {
@@ -202,6 +207,11 @@
             width: 100%;
             border-radius: 20px;
             box-shadow: var(--shadow);
+            transition: transform 0.5s ease;
+        }
+        
+        .about-grid img:hover {
+            transform: scale(1.02);
         }
 
         .about-text p { margin-bottom: 1.5rem; font-size: 1.1rem; }
@@ -271,7 +281,6 @@
 
         .contact-form button:hover { background: var(--clr-primary); }
 
-        /* Feedback Iframe */
         .feedback-wrap {
             max-width: 800px;
             margin: auto;
@@ -283,7 +292,7 @@
         .feedback-wrap iframe { width: 100%; height: 700px; border: none; }
 
         /* -------------------------------------------------
-           6️⃣ FOOTER
+           5️⃣ FOOTER
            ------------------------------------------------- */
         footer {
             background: var(--clr-footer-bg);
@@ -318,7 +327,6 @@
             text-align: center;
         }
 
-        /* Responsive */
         @media (max-width: 600px) {
             header h1 { font-size: 2.5rem; }
             .lang-switcher { position: static; justify-content: center; margin-bottom: 1rem; }
@@ -326,9 +334,9 @@
         }
     </style>
 </head>
-<body>
+<body id="top">
 
-    <!-- HEADER / HERO -->
+    <!-- HERO -->
     <header>
         <div id="timer" class="timer"></div>
         <h1 data-i18n="heroTitle">Parmesh Chai Point</h1>
@@ -336,7 +344,7 @@
         <a href="#menu" class="cta-button" data-i18n="ctaMenu">Explore Our Menu</a>
     </header>
 
-    <!-- STICKY NAV -->
+    <!-- NAV -->
     <nav>
         <div class="lang-switcher">
             <button data-lang="en" class="active">EN</button>
@@ -345,7 +353,7 @@
             <button data-lang="te">తెలుగు</button>
             <button data-lang="ta">தமிழ்</button>
         </div>
-        <ul>
+        <ul id="nav-links">
             <li><a href="#about" class="nav-link" data-i18n="navAbout">About</a></li>
             <li><a href="#menu" class="nav-link" data-i18n="navMenu">Menu</a></li>
             <li><a href="#contact" class="nav-link" data-i18n="navContact">Contact</a></li>
@@ -353,13 +361,14 @@
         </ul>
     </nav>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN -->
     <main>
-        <!-- ABOUT SECTION -->
+        <!-- ABOUT -->
         <section id="about">
             <h2 data-i18n="aboutTitle">Our Story</h2>
             <div class="about-grid">
-                <img src="https://images.unsplash.com/photo-1544787217-f0ed0fa0a05d?auto=format&fit=crop&w=600&q=80" alt="Chai cup">
+                <!-- UPDATED IMAGE LINK FOR STABILITY AND FRESHNESS -->
+                <img src="https://images.unsplash.com/photo-1573157656152-7050489a6174?auto=format&fit=crop&w=600&q=80" alt="Handcrafted Chai Cup">
                 <div class="about-text">
                     <p data-i18n="aboutPara1">One rainy evening in Bangalore, a young tea‑lover named <strong>Parmesh</strong> discovered the magic of a steaming cup of chai served from a humble stall. The warmth and aroma sparked a simple idea: “What if we could bring that feeling to every corner of the city?”</p>
                     <p data-i18n="aboutPara2">After years of traveling India’s tea‑growing regions, Parmesh perfected a blend that balances spice and sweetness. The result is <strong>Parmesh Chai Point</strong> – a space where every cup tells a story.</p>
@@ -368,7 +377,7 @@
             </div>
         </section>
 
-        <!-- MENU SECTION -->
+        <!-- MENU -->
         <section id="menu">
             <h2 data-i18n="menuTitle">What We Serve</h2>
             <div class="menu-grid">
@@ -381,7 +390,7 @@
             </div>
         </section>
 
-        <!-- CONTACT SECTION -->
+        <!-- CONTACT -->
         <section id="contact">
             <h2 data-i18n="contactTitle">Get in Touch</h2>
             <div class="contact-container">
@@ -406,7 +415,7 @@
             </div>
         </section>
 
-        <!-- FEEDBACK SECTION -->
+        <!-- FEEDBACK -->
         <section id="feedback">
             <h2 data-i18n="feedbackTitle">Customer Feedback</h2>
             <p style="text-align:center; margin-bottom: 2rem;" data-i18n="feedbackIntro">We value your thoughts. Please fill out the short form below.</p>
@@ -420,4 +429,83 @@
     <footer>
         <div class="footer__grid">
             <div class="footer__col">
-                <svg class="footer__logo" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" stroke="#fff" stroke-width="4" fill="none"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor
+                <svg class="footer__logo" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" stroke="#fff" stroke-width="4" fill="none"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Poppins" font-size="30" fill="#fff" font-weight="bold">PCP</text></svg>
+                <p data-i18n="footerTagline">Serving happiness in every cup ☕</p>
+            </div>
+            <div class="footer__col">
+                <h4 data-i18n="footerLinksTitle">Quick Links</h4>
+                <ul class="footer__list">
+                    <li><a href="#about" data-i18n="navAbout">About</a></li>
+                    <li><a href="#menu" data-i18n="navMenu">Menu</a></li>
+                    <li><a href="#contact" data-i18n="navContact">Contact</a></li>
+                    <li><a href="#feedback" data-i18n="navFeedback">Feedback</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4 data-i18n="footerContactTitle">Connect</h4>
+                <p>📍 Bangalore, India</p>
+                <p>📞 +91 7760 887 077</p>
+            </div>
+        </div>
+        <p class="footer__bottom">© 2026 Parmesh Chai Point – All rights reserved.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        /* --- TRANSLATIONS --- */
+        const translations = {
+            en:{ heroTitle:"Parmesh Chai Point", heroSubtitle:"Premium handcrafted chai • Cozy cafés • Free Wi‑FI", ctaMenu: "Explore Our Menu", navAbout:"About", navMenu:"Menu", navContact:"Contact", navFeedback:"Feedback", aboutTitle:"Our Story", aboutPara1:"One rainy evening in Bangalore...", aboutPara2:"After years of traveling...", aboutCall:"Join us, sip with us...", menuTitle:"What We Serve", menuClassic:"Classic Chai", menuClassicDesc:"Traditional Assam tea...", contactTitle:"Get in Touch", contactName:"Name", contactEmail:"Email", contactMessage:"Message", contactSend:"Send Message", feedbackTitle:"Customer Feedback", feedbackIntro:"We value your thoughts...", footerTagline:"Serving happiness in every cup ☕", timerLabel:"Current time:" },
+            hi:{ heroTitle:"परमेश चाय पॉइंट", heroSubtitle:"प्रीमियम हस्तनिर्मित चाय • आरामदायक कैफे • फ्री वाई-फाई", ctaMenu: "हमारा मेनू देखें", navAbout:"हमारे बारे में", navMenu:"मेनू", navContact:"संपर्क", navFeedback:"प्रतिक्रिया", aboutTitle:"हमारी कहानी", aboutPara1:"बेंगलुरु की एक बारिश वाली शाम...", aboutPara2:"भारत के चाय क्षेत्रों की यात्रा...", aboutCall:"हमारे साथ जुड़ें...", menuTitle:"हम क्या परोसते हैं", menuClassic:"क्लासिक चाय", menuClassicDesc:"पारंपरिक असम की चाय...", contactTitle:"संपर्क करें", contactName:"नाम", contactEmail:"ईमेल", contactMessage:"संदेश", contactSend:"संदेश भेजें", feedbackTitle:"ग्राहक प्रतिक्रिया", feedbackIntro:"हम आपके विचारों को महत्व देते हैं...", footerTagline:"हर कप में खुशी परोसते हुए ☕", timerLabel:"वर्तमान समय:" }
+        };
+
+        /* --- DIGITAL CLOCK --- */
+        function renderClock(){
+            const el = document.querySelector('#timer');
+            if (!el) return;
+            const lang = document.documentElement.lang || 'en';
+            const label = translations[lang]?.timerLabel || 'Current time:';
+            const now = new Date();
+            let h = now.getHours();
+            const ampm = h >= 12 ? 'PM' : 'AM';
+            h = h % 12 || 12;
+            el.textContent = `${label} ${h}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')} ${ampm}`;
+        }
+
+        /* --- LANGUAGE SWITCHER --- */
+        function setLanguage(lang){
+            const dict = translations[lang];
+            if (!dict) return;
+            document.querySelectorAll('[data-i18n]').forEach(el=>{
+                const key = el.dataset.i18n;
+                if (dict[key]) el.innerHTML = dict[key];
+            });
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-switcher button').forEach(btn=> btn.classList.toggle('active', btn.dataset.lang===lang));
+            localStorage.setItem('lang',lang);
+            renderClock();
+        }
+
+        /* --- SCROLL REVEAL ANIMATION --- */
+        function revealSections() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight - 100) {
+                    section.classList.add('reveal');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded',()=>{
+            setLanguage(localStorage.getItem('lang') || 'en');
+            document.querySelectorAll('.lang-switcher button').forEach(btn=> btn.addEventListener('click',()=> setLanguage(btn.dataset.lang)));
+            
+            window.addEventListener('scroll', revealSections);
+            revealSections(); // Run once on load
+
+            setInterval(renderClock,1000);
+            renderClock();
+        });
+    </script>
+</body>
+</html>
