@@ -46,7 +46,7 @@
             height: 100vh; 
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
                         url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80')
-                        center/cover no-repeat;
+                        center/cover no-repeat;   /* ← FIXED – one extra “)” removed */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -99,6 +99,7 @@
             right: 2rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
+            white-space: nowrap;               /* prevent overflow on tiny screens */
         }
 
         /* -------------------------------------------------
@@ -154,6 +155,7 @@
             font-weight: bold;
             border-radius: 4px;
             transition: 0.3s;
+            type: button;                     /* added for safety */
         }
 
         .lang-switcher button.active {
@@ -289,7 +291,7 @@
 
         .footer__grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1f));
             max-width: var(--max-w);
             margin: auto;
             gap: 2rem;
@@ -332,11 +334,11 @@
     <!-- NAV -->
     <nav>
         <div class="lang-switcher">
-            <button data-lang="en" class="active">EN</button>
-            <button data-lang="hi">हिन्द</button>
-            <button data-lang="kn">ಕನ್ನಡ</button>
-            <button data-lang="te">తెలుగు</button>
-            <button data-lang="ta">தமிழ்</button>
+            <button type="button" data-lang="en" class="active">EN</button>
+            <button type="button" data-lang="hi">हिन्द</button>
+            <button type="button" data-lang="kn">ಕನ್ನಡ</button>
+            <button type="button" data-lang="te">తెలుగు</button>
+            <button type="button" data-lang="ta">தமிழ்</button>
         </div>
         <ul>
             <li><a href="#about" class="nav-link" data-i18n="navAbout">About</a></li>
@@ -352,7 +354,7 @@
         <section id="about">
             <h2 data-i18n="aboutTitle">Our Story</h2>
             <div class="about-grid">
-                <img id="story-img" src="" alt="Handcrafted Chai Cup">
+                <img id="story-img" src="" alt="Handcrafted chai cup – random image" loading="lazy">
                 <div class="about-text">
                     <p data-i18n="aboutPara1">One rainy evening in Bangalore, a young tea‑lover named <strong>Parmesh</strong> discovered the magic of a steaming cup of chai served from a humble stall. The warmth and aroma sparked a simple idea: “What if we could bring that feeling to every corner of the city?”</p>
                     <p data-i18n="aboutPara2">After years of traveling India’s tea‑growing regions, Parmesh perfected a blend that balances spice and sweetness. The result is <strong>Parmesh Chai Point</strong> – a space where every cup tells a story.</p>
@@ -448,68 +450,202 @@
             const imgElement = document.getElementById('story-img');
             if (imgElement) {
                 const randomIdx = Math.floor(Math.random() * teaImages.length);
-                // Adding a random query string forces the browser to refresh the image
-                const cacheBuster = "?auto=format&fit=crop&w=600&q=80&random=" + new Date().getTime();
+                const cacheBuster = "?auto=format&fit=crop&w=600&q=80&rand=" + Date.now();
                 imgElement.src = teaImages[randomIdx] + cacheBuster;
             }
         }
 
         /* --- COMPLETE TRANSLATIONS --- */
         const translations = {
-            en: { 
-                heroTitle: "Parmesh Chai Point", heroSubtitle: "Premium handcrafted chai • Cozy cafés • Free Wi‑FI", ctaMenu: "Explore Our Menu", 
-                navAbout: "About", navMenu: "Menu", navContact: "Contact", navFeedback: "Feedback", 
-                aboutTitle: "Our Story", aboutPara1: "One rainy evening in Bangalore, a young tea‑lover named <strong>Parmesh</strong> discovered the magic of a steaming cup of chai served from a humble stall. The warmth and aroma sparked a simple idea: “What if we could bring that feeling to every corner of the city?”", 
-                aboutPara2: "After years of traveling India’s tea‑growing regions, Parmesh perfected a blend that balances spice and sweetness. The result is <strong>Parmesh Chai Point</strong> – a space where every cup tells a story.", 
-                aboutCall: "Join us, sip with us, and let’s spread the love for chai together.", 
-                menuTitle: "What We Serve", menuClassic: "Classic Chai", menuClassicDesc: "Traditional Assam tea with milk and our signature spice blend.", 
-                contactTitle: "Get in Touch", contactName: "Name", contactEmail: "Email", contactMessage: "Message", contactSend: "Send Message", 
-                feedbackTitle: "Customer Feedback", feedbackIntro: "We value your thoughts. Please fill out the short form below.", 
-                footerTagline: "Serving happiness in every cup ☕", timerLabel: "Current time:" 
+            en: {
+                heroTitle: "Parmesh Chai Point",
+                heroSubtitle: "Premium handcrafted chai • Cozy cafés • Free Wi‑FI",
+                ctaMenu: "Explore Our Menu",
+                navAbout: "About",
+                navMenu: "Menu",
+                navContact: "Contact",
+                navFeedback: "Feedback",
+                aboutTitle: "Our Story",
+                aboutPara1: "One rainy evening in Bangalore, a young tea‑lover named <strong>Parmesh</strong> discovered the magic of a steaming cup of chai served from a humble stall. The warmth and aroma sparked a simple idea: “What if we could bring that feeling to every corner of the city?”",
+                aboutPara2: "After years of traveling India’s tea‑growing regions, Parmesh perfected a blend that balances spice and sweetness. The result is <strong>Parmesh Chai Point</strong> – a space where every cup tells a story.",
+                aboutCall: "Join us, sip with us, and let’s spread the love for chai together.",
+                menuTitle: "What We Serve",
+                menuClassic: "Classic Chai",
+                menuClassicDesc: "Traditional Assam tea with milk and our signature spice blend.",
+                menuMasala: "Masala Chai",
+                menuMasalaDesc: "Cardamom, ginger, cinnamon, clove &amp; pepper – the classic favorite.",
+                menuSeasonal: "Seasonal Specials",
+                menuSeasonalDesc: "Rotating flavors like Rose‑Petal and Mango‑Mint.",
+                menuCold: "Cold Brew Chai",
+                menuColdDesc: "Refreshingly cool, served over ice with a dash of lemon.",
+                menuSnacks: "Savory Snacks",
+                menuSnacksDesc: "Samosas, paneer tikka, and cheese toast.",
+                menuDesserts: "Sweet Treats",
+                menuDessertsDesc: "Gulab jamun, rasgulla, and kulfi‑style ice‑cream.",
+                contactTitle: "Get in Touch",
+                contactName: "Name",
+                contactEmail: "Email",
+                contactMessage: "Message",
+                contactSend: "Send Message",
+                contactAddrLabel: "Address:",
+                contactPhoneLabel: "Phone:",
+                contactEmailLabel: "Email:",
+                feedbackTitle: "Customer Feedback",
+                feedbackIntro: "We value your thoughts. Please fill out the short form below.",
+                footerTagline: "Serving happiness in every cup ☕",
+                timerLabel: "Current time:"
             },
-            hi: { 
-                heroTitle: "परमेश चाय पॉइंट", heroSubtitle: "प्रीमियम हस्तनिर्मित चाय • आरामदायक कैफे • फ्री वाई-फाई", ctaMenu: "हमारा मेनू देखें", 
-                navAbout: "हमारे बारे में", navMenu: "मेनू", navContact: "संपर्क", navFeedback: "प्रतिक्रिया", 
-                aboutTitle: "हमारी कहानी", aboutPara1: "बेंगलुरु की एक बारिश वाली शाम को, चाय प्रेमी <strong>परमेश</strong> ने एक साधारण दुकान से मिलने वाली चाय के जादू को महसूस किया। उस गर्माहट और खुशबू ने एक विचार दिया: “क्या हम इस एहसास को शहर के हर कोने में ला सकते हैं?”", 
-                aboutPara2: "भारत के चाय क्षेत्रों की यात्रा करने के बाद, परमेश ने एक ऐसा मिश्रण तैयार किया जो मसालों और मिठास का सही संतुलन है। परिणाम है <strong>परमेश चाय पॉइंट</strong> – एक ऐसी जगह जहाँ हर कप एक कहानी कहता है।", 
-                aboutCall: "हमारे साथ जुड़ें और चाय के इस प्यार को साथ मिलकर फैलाएं।", 
-                menuTitle: "हम क्या परोसते हैं", menuClassic: "क्लासिक चाय", menuClassicDesc: "दूध और हमारे विशेष मसाला मिश्रण के साथ पारंपरिक असम की चाय।", 
-                contactTitle: "संपर्क करें", contactName: "नाम", contactEmail: "ईमेल", contactMessage: "संदेश", contactSend: "संदेश भेजें", 
-                feedbackTitle: "ग्राहक प्रतिक्रिया", feedbackIntro: "हम आपके विचारों को महत्व देते हैं। कृपया नीचे दिए गए फॉर्म को भरें।", 
-                footerTagline: "हर कप में खुशी परोसते हुए ☕", timerLabel: "वर्तमान समय:" 
+            hi: {
+                heroTitle: "परमेश चाय पॉइंट",
+                heroSubtitle: "प्रीमियम हस्तनिर्मित चाय • आरामदायक कैफे • फ्री वाई-फाई",
+                ctaMenu: "हमारा मेनू देखें",
+                navAbout: "हमारे बारे में",
+                navMenu: "मेनू",
+                navContact: "संपर्क",
+                navFeedback: "प्रतिक्रिया",
+                aboutTitle: "हमारी कहानी",
+                aboutPara1: "बेंगलुरु की एक बारिश वाली शाम को, चाय प्रेमी <strong>परमेश</strong> ने एक साधारण दुकान से मिलने वाली चाय के जादू को महसूस किया। उस गर्माहट और खुशबू ने एक विचार दिया: “क्या हम इस एहसास को शहर के हर कोने में ला सकते हैं?”",
+                aboutPara2: "भारत के चाय क्षेत्रों की यात्रा करने के बाद, परमेश ने एक ऐसा मिश्रण तैयार किया जो मसालों और मिठास का सही संतुलन है। परिणाम है <strong>परमेश चाय पॉइंट</strong> – एक ऐसी जगह जहाँ हर कप एक कहानी कहता है।",
+                aboutCall: "हमारे साथ जुड़ें और चाय के इस प्यार को साथ मिलकर फैलाएं।",
+                menuTitle: "हम क्या परोसते हैं",
+                menuClassic: "क्लासिक चाय",
+                menuClassicDesc: "दूध और हमारे विशेष मसाला मिश्रण के साथ पारंपरिक असम की चाय।",
+                menuMasala: "मसाला चाय",
+                menuMasalaDesc: "इलायची, अदरक, दालचीनी, लौंग और काली मिर्च – क्लासिक पसंद।",
+                menuSeasonal: "सीजनल स्पेशल्स",
+                menuSeasonalDesc: "रोज़‑पेटल और मैंगो‑मिंट जैसे फ्लेवर रोटेट होते हैं।",
+                menuCold: "कोल्ड ब्रू चाय",
+                menuColdDesc: "बर्फ के साथ ठंडी, नींबू की एक बूंद के साथ परोसी जाती है।",
+                menuSnacks: "सैवरी स्नैक्स",
+                menuSnacksDesc: "समोसें, पनीर टिक्का और चीज़ टोस्ट।",
+                menuDesserts: "स्वीट ट्रीट्स",
+                menuDessertsDesc: "गुलेब जामुन, रसगुल्ला, और कुल्फी‑स्टाइल आइस‑क्रीम।",
+                contactTitle: "संपर्क करें",
+                contactName: "नाम",
+                contactEmail: "ईमेल",
+                contactMessage: "संदेश",
+                contactSend: "संदेश भेजें",
+                contactAddrLabel: "पता:",
+                contactPhoneLabel: "फ़ोन:",
+                contactEmailLabel: "ईमेल:",
+                feedbackTitle: "ग्राहक प्रतिक्रिया",
+                feedbackIntro: "हम आपके विचारों को महत्व देते हैं। कृपया नीचे दिया गया फ़ॉर्म भरें।",
+                footerTagline: "हर कप में खुशी परोसते हुए ☕",
+                timerLabel: "वर्तमान समय:"
             },
-            kn: { 
-                heroTitle: "ಪರಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್", heroSubtitle: "ಪ್ರೀಮಿಯಂ ಕೈಯಿಂದ ತಯಾರಿಸಿದ ಚಾಯ್ • ಆರಾಮದಾಯಕ ಕೆಫೆಗಳು • ಉಚಿತ ವೈ-ಫೈ", ctaMenu: "ನಮ್ಮ ಮೆನು ನೋಡಿ", 
-                navAbout: "ನಮ್ಮ ಬಗ್ಗೆ", navMenu: "ಮೆನು", navContact: "ಸಂಪರ್ಕಿಸಿ", navFeedback: "ಪ್ರತಿಕ್ರಿಯೆ", 
-                aboutTitle: "ನಮ್ಮ ಕಥೆ", aboutPara1: "ಬೆಂಗಳೂರಿನ ಒಂದು ಮಳೆಬನಿ ಸಂಜೆ, <strong>ಪರಮೇಶ್</strong> ಎಂಬ ಚಹಾ ಪ್ರೇಮಿ ಒಬ್ಬ ಸಾಮಾನ್ಯ ಅಂಗಡಿಯಿಂದ ಬಿಸಿಬಿಸಿ ಚಹಾದ ಮಾಯೆಯನ್ನು ಕಂಡರು. ಆ ಬೆಚ್ಚನೆಯ ಅನುಭವವು ಒಂದು ಸರಳ ಆಲೋಚನೆಯನ್ನು ನೀಡಿತು: “ಈ ಅನುಭವವನ್ನು ನಗರದ ಪ್ರತಿ ಮೂಲೆಯಲ್ಲೂ ತರಬಹುದಲ್ಲವೇ?”", 
-                aboutPara2: "ಭಾರತದ ಚಹಾ ಬೆಳೆಯುವ ಪ್ರದೇಶಗಳನ್ನು ಪ್ರವಾಸ ಮಾಡ Nachdem, ಪರಮೇಶ್ ಮಸಾಲೆಯು ಮತ್ತು ಸಿಹಿಯ ಸಮತೋಲನವನ್ನು ಹೊಂದಿರುವ ಮಿಶ್ರಣವನ್ನು ತಯಾರಿಸಿದರು. ಅದರ ಫಲಿತಾಂಶವೇ <strong>ಪರಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್</strong>.", 
-                aboutCall: "ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ, ಚಹಾವನ್ನು ಸವಿಯಿರಿ ಮತ್ತು ಚಹಾದ ಮೇಲಿನ ಪ್ರೀತಿಯನ್ನು ಒಟ್ಟಾಗಿ ಹಂಚಿಕೊಳ್ಳೋಣ.", 
-                menuTitle: "ನಾವು ನೀಡುವ ಪದಾರ್ಥಗಳು", menuClassic: "ಕ್ಲಾಸಿಕ್ ಚಾಯ್", menuClassicDesc: "ಸಾಂಪ್ರದಾಯಿಕ ಅಸ್ಸಾಂ ಚಹಾ, ಹಾಲು ಮತ್ತು ನಮ್ಮ ವಿಶೇಷ ಮಸಾಲಾ ಮಿಶ್ರಣದೊಂದಿಗೆ.", 
-                contactTitle: "ಸಂಪರ್ಕಿಸಿ", contactName: "ಹೆಸರು", contactEmail: "ಇಮೇಲ್", contactMessage: "ಸಂದೇಶ", contactSend: "ಸಂದೇಶ ಕಳುಹಿಸಿ", 
-                feedbackTitle: "ಗ್ರಾಹಕರ ಪ್ರತಿಕ್ರಿಯೆ", feedbackIntro: "ನಿಮ್ಮ ಅನಿಸಿಕೆಗಳು ನಮಗೆ ಮುಖ್ಯ. ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಫಾರ್ಮ್ ಅನ್ನು ತುಂಬಿ.", 
-                footerTagline: "ಪ್ರತಿ ಕಪ್‌ನಲ್ಲಿ ಸಂತೋಷವನ್ನು ನೀಡುತ್ತಿದ್ದೇವೆ ☕", timerLabel: "ಪ್ರಸ್ತುತ ಸಮಯ:" 
+            kn: {
+                heroTitle: "ಪರಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್",
+                heroSubtitle: "ಪ್ರೀಮಿಯಂ ಕೈಯಿಂದ ತಯಾರಿಸಿದ ಚಾಯ್ • ಆರಾಮದಾಯಕ ಕೆಫೆಗಳು • ಉಚಿತ ವೈ‑ಫೈ",
+                ctaMenu: "ನಮ್ಮ ಮೆನು ನೋಡಿ",
+                navAbout: "ನಮ್ಮ ಬಗ್ಗೆ",
+                navMenu: "ಮೆನು",
+                navContact: "ಸಂಪರ್ಕಿಸಿ",
+                navFeedback: "ಪ್ರತಿಕ್ರಿಯೆ",
+                aboutTitle: "ನಮ್ಮ ಕಥೆ",
+                aboutPara1: "ಬೆಂಗಳೂರಿನ ಒಂದು ಮಳೆಬನಿ ಸಂಜೆ, <strong>ಪರಮೇಶ್</strong> ಎಂಬ ಚಹಾ ಪ್ರೇಮಿ ಒಬ್ಬ ಸಾಮಾನ್ಯ ಅಂಗಡಿಯಿಂದ ಬಿಸಿಬಿಸಿ ಚಹಾದ ಮಾಯೆಯನ್ನು ಕಂಡರು. ಆ ಬೆಚ್ಚನೆಯ ಅನುಭವವು ಒಂದು ಸರಳ ಆಲೋಚನೆಯನ್ನು ನೀಡಿತು: “ಈ ಅನುಭವವನ್ನು ನಗರದ ಪ್ರತಿ ಮೂಲೆಯಲ್ಲೂ ತರಬಹುದಲ್ಲವೇ?”",
+                aboutPara2: "ಭಾರತದ ಚಹಾ ಬೆಳೆಯುವ ಪ್ರದೇಶಗಳನ್ನು ಪ್ರವಾಸ ಮಾಡಿದ ಮೇಲೆ, ಪರಮೇಶ್ ಮಸಾಲೆಯು ಮತ್ತು ಸಿಹಿಯ ಸಮತೋಲನವನ್ನು ಹೊಂದಿರುವ ಮಿಶ್ರಣವನ್ನು ತಯಾರಿಸಿದರು. ಅದರ ಫಲಿತಾಂಶವೇ <strong>ಪರಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್</strong>.",
+                aboutCall: "ನಮ್ಮೊಡನೆ ಸೇರಿ, ಚಹಾವನ್ನು ಆಸ್ವಾದಿಸಿ, ಮತ್ತು ಚಹಾದ ಮೇಲಿನ ಪ್ರೀತಿಯನ್ನು ಒಟ್ಟಾಗಿ ಹಂಚಿಕೊಳ್ಳೋಣ.",
+                menuTitle: "ನಾವು ನೀಡುವ ಪದಾರ್ಥಗಳು",
+                menuClassic: "ಕ್ಲಾಸಿಕ್ ಚಾಯ್",
+                menuClassicDesc: "ಸಾಂಪ್ರದಾಯಿಕ ಅಸ್ಸಾಂ ಚಹಾ, ಹಾಲು ಮತ್ತು ನಮ್ಮ ವಿಶೇಷ ಮಸಾಲಾ ಮಿಶ್ರಣದೊಂದಿಗೆ.",
+                menuMasala: "ಮಸಾಲಾ ಚಾಯ್",
+                menuMasalaDesc: "ಎಲಕ್ಕಿ, ಶುಂಠಿ, ದಾಲ್ಚಿನ್ನಿ, ಲವಂಗ ಮತ್ತು ಕಾಯಿ – ಕ್ಲಾಸಿಕ್ ಪ್ರಿಯ.",
+                menuSeasonal: "ಸೀಸನಲ್ ಸ್ಪೆಷಲ್ಸ್",
+                menuSeasonalDesc: "ರೋಸ್‑ಪೆಟಲ್ ಹಾಗೂ ಮ್ಯಾಂಗೋ‑ಮಿಂಟ್ ಮುಂತಾದ ರುಚಿಗಳು ಹಂತ ಹಂತವಾಗಿ ಬದಲಾಗುತ್ತವೆ.",
+                menuCold: "ಕೋಲ್ಡ್ ಬ್ರೂ ಚಾಯ್",
+                menuColdDesc: "ಬರಫಿನ ಮೇಲೆ ಸಿಡು ಕಟ್ಟಿದ ಈ ಚಹಾ, ನಿಂಬು ಚುಕ್ಕೆ ಸಹಿತ ನೀಡಲಾಗುತ್ತದೆ.",
+                menuSnacks: "ಸ್ವಾದಿಷ್ಟ ಆಹಾರ",
+                menuSnacksDesc: "ಸಮೋಸಾ, ಪನೀರ್ ಟಿಕ್ಕಾ ಹಾಗೂ ಚೀಸ್ ಟೋಸ್ಟ್.",
+                menuDesserts: "ಮಿಠಾಯಿ",
+                menuDessertsDesc: "ಗುಲೆಯಲ್ಲಿ ಜಾಮುನ್, ರಸಗುಲ್ಲಾ ಮತ್ತು ಕುಲ್ಫಿ‑ಸ್ಟೈಲ್ ಐಸ್‑ಕ್ರೀಮ್.",
+                contactTitle: "ಸಂಪರ್ಕಿಸಿ",
+                contactName: "ಹೆಸರು",
+                contactEmail: "ಇಮೇಲ್",
+                contactMessage: "ಸಂದೇಶ",
+                contactSend: "ಸಂದೇಶ ಕಳುಹಿಸಿ",
+                contactAddrLabel: "ವಿಳಾಸ:",
+                contactPhoneLabel: "ಫೋನ್:",
+                contactEmailLabel: "ಇಮೇಲ್:",
+                feedbackTitle: "ಗ್ರಾಹಕರ ಪ್ರತಿಕ್ರಿಯೆ",
+                feedbackIntro: "ನಿಮ್ಮ ಅಭಿಪ್ರಾಯಗಳು ನಮಗೆ ಮುಖ್ಯ. ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಫಾರ್ಮ್ ಅನ್ನು ಭರ್ತಿ ಮಾಡಿ.",
+                footerTagline: "ಪ್ರತಿ ಕಪ್‌ನಲ್ಲಿ ಸಂತೋಷವನ್ನು ನೀಡುತ್ತಿದ್ದೇವೆ ☕",
+                timerLabel: "ಪ್ರಸ್ತುತ ಸಮಯ:"
             },
-            te: { 
-                heroTitle: "పరమేష్ చాయ్ పాయింట్", heroSubtitle: "ప్రీమియం చేయ})" hand-crafted చాయ్ • సౌకర్యవంతమైన కేఫ్‌లు • ఉచిత వై-ఫై", ctaMenu: "మా మెనూ చూడండి", 
-                navAbout: "మా గురించి", navMenu: "మెనూ", navContact: "సంప్రదించండి", navFeedback: "ఫీడ్‌బ్యాక్", 
-                aboutTitle: "మా కథ", aboutPara1: "బెంగళూరులోని ఒక മഴពេលపు సాయంత్రం, <strong>పరమేష్</strong> అనే టీ ప్రేమికుడు ఒక సాధారణ బండిపై వేడివేడిగా వడ్డించే చాయ్ మాయను చూశారు. ఆ వెచ్చదనం ఒక ఆలోచనను కలిగించింది: “ఈ అనుభూతిని నగరం అంతటా తీసుకురావచ్చా?”", 
-                aboutPara2: "భారతదేశంలోని టీ ಬೆlegrowing ప్రాంతాలను సందర్శించిన తర్వాత, పరమేష్ మసాలా మరియు తీపి సమతుల్యతతో కూడిన మిశ్రమాన్ని తయారుచేశారు. ఫలితమే <strong>పరమేష్ చాయ్ పాయింట్</strong>.", 
-                aboutCall: "మాతో చేరండి, చాయ్ సేవించండి, మరియు అందరికీ ఈ చాయ్ ప్రేమను పంచండి.", 
-                menuTitle: "మేము అందించేవి", menuClassic: "క్లాసిక్ చాయ్", menuClassicDesc: "సాంప్రదాయ అస్సాం టీ, పాలు మరియు మా ప్రత్యేక మసాలా మిశ్రమంతో.", 
-                contactTitle: "సంప్రదించండి", contactName: "పేరు", contactEmail: "ఈమెయిల్", contactMessage: "సందేశం", contactSend: "సందేశం పంపండి", 
-                feedbackTitle: "కస్టమర్ ఫీడ్‌బ్యాక్", feedbackIntro: "మీ అభిప్రాయాలు మాకు ముఖ్యం. దయచేసి ಕೆಳಗಿನ ఫారమ్‌ను పూరించండి.", 
-                footerTagline: "ప్రతి కప్పులో సంతోషాన్ని వడ్డిస్తున్నాము ☕", timerLabel: "ప్రస్తుత సమయం:" 
+            te: {
+                heroTitle: "పరమేష్ చాయ్ పాయింట్",
+                heroSubtitle: "ప్రీమియం హ్యాండ్‑క్రాఫ్టెడ్ చాయ్ • సౌకర్యవంతమైన కేఫ్‌లు • ఉచిత వై‑ఫై",
+                ctaMenu: "మా మెనూ చూడండి",
+                navAbout: "మా గురించి",
+                navMenu: "మెనూ",
+                navContact: "సంప్రదించండి",
+                navFeedback: "ఫీడ్‌బ్యాక్",
+                aboutTitle: "మా కథ",
+                aboutPara1: "బెంగళూరులో ఒక శీతల వర్షపు సాయంత్రం, <strong>పరమేష్</strong> అనే టీ ప్రేమికుడు ఒక సాదాసీదా దుకాణంలో వేడిగా వడ్డించే చాయ్ మాయను చూసాడు. ఆ వేడి ఒక ఆలోచనను తీసుకురావడానికి ప్రేరేపించింది: “ఈ అనుభూతిని నగరం అంతటా తీసుకురావచ్చా?”",
+                aboutPara2: "భారతదేశంలోని టీ పెరుగుతున్న ప్రాంతాలను సందర్శించిన తర్వాత, పరమేష్ మసాలా మరియు తీపి సమతుల్యతతో కూడిన మిశ్రమాన్ని రూపొందించారు. ఫలితంగా <strong>పరమేష్ చాయ్ పాయింట్</strong> ఏర్పడింది.",
+                aboutCall: "మాతో చేరండి, చాయ్ సేవించండి, మరియు అందరికీ ఈ చాయ్ ప్రేమను పంచండి.",
+                menuTitle: "మేము అందించేవి",
+                menuClassic: "క్లాసిక్ చాయ్",
+                menuClassicDesc: "సాంప్రదాయ అస్సాం టీ, పాలు మరియు మా ప్రత్యేక మసాలా మిశ్రమంతో.",
+                menuMasala: "మసాలా చాయ్",
+                menuMasalaDesc: "ఏలకులు, అల్లం, దార్చిన చెక్క, లవంగ, మిరప – క్లాసిక్ ఫేవరైట్.",
+                menuSeasonal: "సీజనల్ స్పెషల్స్",
+                menuSeasonalDesc: "రోస్‑పెటల్, మాంగో‑మింట్ వంటి రుచులు మారుతుంటాయి.",
+                menuCold: "కోల్డ్ బ్రూ చాయ్",
+                menuColdDesc: "బ్రాక్ మీద ఐస్, ఒక చుక్క నిమ్మకాయతో అందించబడుతుంది.",
+                menuSnacks: "సావరీ స్నాక్స్",
+                menuSnacksDesc: "సమోసాలు, paneer టిక్కా, చీజ్ టోస్ట్.",
+                menuDesserts: "స్వీట్ ట్రీట్స్",
+                menuDessertsDesc: "గులాబ్ జామున్, రసం‑గుల్లా, కుల్ఫీ‑స్టైల్ ఐస్‑క్రీమ్.",
+                contactTitle: "సంప్రదించండి",
+                contactName: "పేరు",
+                contactEmail: "ఈమెయిల్",
+                contactMessage: "సందేశం",
+                contactSend: "సందేశం పంపండి",
+                contactAddrLabel: "చిరునామా:",
+                contactPhoneLabel: "ఫోన్:",
+                contactEmailLabel: "ఈమెయిల్:",
+                feedbackTitle: "కస్టమర్ ఫీడ్‌బ్యాక్",
+                feedbackIntro: "మీ అభిప్రాయాలు మాకు ముఖ్యం. దయచేసి క్రింది ఫారమ్‌ను పూరించండి.",
+                footerTagline: "ప్రతి కప్పులో సంతోషాన్ని వడ్డిస్తున్నాము ☕",
+                timerLabel: "ప్రస్తుత సమయం:"
             },
-            ta: { 
-                heroTitle: "பর্মেஷ் சாய் பாயிண்ட்", heroSubtitle: "பிரீமியம் கைவினை சாய் • வசதியான கஃபேக்கள் • இலவச வை-ஃபை", ctaMenu: "எங்கள் மெனுவை பார்க்கவும்", 
-                navAbout: "எங்களைப் பற்றி", navMenu: "மெனு", navContact: "தொடர்பு", navFeedback: "கருத்து", 
-                aboutTitle: "எங்கள் கதை", aboutPara1: "பெங்களூருவின் ஒரு மழைக்கால மாலையில், <strong>பর্মেஷ்</strong> என்ற தேநீர் ప్రేಮಿ, ஒரு சாதாரணக் கடையில் வழங்கப்பட்ட சூடான சாயின் மாயத்தை உணர்ந்தார். அந்த வெப்பம் ஒரு எளிய யோசனையைத் தூண்டியது: “இந்த உணர்வை நகரத்தின் ஒவ்வொரு மூலையிலும் கொண்டு வர முடியுமா?”", 
-                aboutPara2: "இந்தியாவின் தேயிலை வளரும் பகுதிகளைப் பயணம் செய்த பிறகு, பর্মেஷ் மசாலா மற்றும் இனிப்பு சமநிலையான ஒரு கலவையை உருவாக்கினார். அதன் விளைவே <strong>பর্মেஷ் சாய் பாயிண்ட்</strong>.", 
-                aboutCall: "எங்களுடன் இணையுங்கள், தேநீர் அருந்துங்கள், மற்றும் தேநீர் மீதான அன்பைப் பரப்புவோம்.", 
-                menuTitle: "நாங்கள் வழங்குபவை", menuClassic: "கிளாசிக் சாய்", menuClassicDesc: "பாரம்பரிய அசாம் தேயிலை, பால் மற்றும் எங்கள் சிறப்பு மசாலா கலவையுடன்.", 
-                contactTitle: "தொடர்பு கொள்ள", contactName: "பெயர்", contactEmail: "மின்னஞ்சல்", contactMessage: "செய்தி", contactSend: "செய்தியை அனுப்பவும்", 
-                feedbackTitle: "வாடிக்கையாளர் கருத்து", feedbackIntro: "உங்கள் கருத்துக்கள் எங்களுக்கு முக்கியம். தயவுசெய்து கீழே உள்ள படிவத்தை நிரப்பவும்.", 
-                footerTagline: "ஒவ்வொரு கப்பும் மகிழ்ச்சியை வழங்குகிறது ☕", timerLabel: "தற்போதைய நேரம்:" 
+            ta: {
+                heroTitle: "பர்மேஷ் சாய் பாயிண்ட்",
+                heroSubtitle: "பிரீமியம் கைப்பயிற்சித் தயாரித்த சாய் • வசதியான கஃபேக்கள் • இலவச வை‑ஃபை",
+                ctaMenu: "எங்கள் மெனுவை பார்க்கவும்",
+                navAbout: "எங்களைப் பற்றி",
+                navMenu: "மெனு",
+                navContact: "தொடர்பு",
+                navFeedback: "கருத்து",
+                aboutTitle: "எங்கள் கதை",
+                aboutPara1: "பெங்களூருவின் ஒரு மழைக்கால மாலையில், <strong>பர்மேஷ்</strong> என்ற தேநீர் ஆர்வலர், ஒரு சாதாரண கடையில் வழங்கப்பட்ட சூடான சாய் மாயத்தை உணர்ந்தார். அந்த வெப்பம் ஒரு எளிய யோசனையைத் தூண்டியது: “இந்த உணர்வை நகரத்தின் ஒவ்வொரு மூலையிலும் கொண்டு வர முடியுமா?”",
+                aboutPara2: "இந்தியாவின் தேயிலையப் பகுதிகளைப் பயணம் செய்த பிறகு, பர்மேஷ் மசாலா மற்றும் இனிப்பு சமநிலையான ஒரு கலவையை உருவாக்கினார். அதன் விளைவே <strong>பர்மேஷ் சாய் பாயிண்ட்</strong> உருவானது.",
+                aboutCall: "எங்களுடன் இணையுங்கள், தேநீர் அருந்துங்கள், மற்றும் தேநீர் மீதான அன்பைப் பரப்புவோம்.",
+                menuTitle: "நாங்கள் வழங்குகின்றோம்",
+                menuClassic: "க்ளாசிக் சாய்",
+                menuClassicDesc: "பாரம்பரிய அசாம் தேநீர், பால் மற்றும் எங்கள் சிறப்பு மசாலா கலவையுடன்.",
+                menuMasala: "மசாலா சாய்",
+                menuMasalaDesc: "ஏலக்காய், இஞ்சி, இலவங்கப்பட்டை, கிராம்பு &amp; மிளகு – கிளாசிக் பிடித்தது.",
+                menuSeasonal: "சீசனல் ஸ்பெஷல்ஸ்",
+                menuSeasonalDesc: "ரோஸ்‑பேட்டல், மாங்கோ‑மின்ட் போன்ற ருசிகள் மாறி வருகிறது.",
+                menuCold: "கோல்ட் ப்ரூ சாய்",
+                menuColdDesc: "பனியில் சூடாக, ஒரு தேன் கலவையுடன் வழங்கப்படுகிறது.",
+                menuSnacks: "சுவையான ஸ்நாக்ஸ்",
+                menuSnacksDesc: "சாமோசா, பனீர் டிக்கா, சீஸ் 토ஸ்ட்.",
+                menuDesserts: "இனிப்பு டிரீட்ஸ்",
+                menuDessertsDesc: "குலாப் ஜாமுன், ரஸ்குல்லா, குல்ஃபி‑ஸ்டைல் ஐஸ்‑க்ரீம்.",
+                contactTitle: "தொடர்பு கொள்ள",
+                contactName: "பெயர்",
+                contactEmail: "மின்னஞ்சல்",
+                contactMessage: "செய்தி",
+                contactSend: "செய்தியை அனுப்பவும்",
+                contactAddrLabel: "முகவரி:",
+                contactPhoneLabel: "தொலைபேசி:",
+                contactEmailLabel: "மின்னஞ்சல்:",
+                feedbackTitle: "வாடிக்கையாளர் கருத்து",
+                feedbackIntro: "உங்கள் கருத்துகள் எங்களுக்கு முக்கியம். தயவுசெய்து கீழே உள்ள படிவத்தை நிரப்பவும்.",
+                footerTagline: "ஒவ்வொரு கப்பும் மகிழ்ச்சியை வழங்குகிறது ☕",
+                timerLabel: "தற்போதைய நேரம்:"
             }
         };
 
@@ -535,22 +671,19 @@
                 if (dict[key]) el.innerHTML = dict[key];
             });
             document.documentElement.lang = lang;
-            document.querySelectorAll('.lang-switcher button').forEach(btn=> btn.classList.toggle('active', btn.dataset.lang===lang));
-            localStorage.setItem('lang',lang);
+            document.querySelectorAll('.lang-switcher button')
+                    .forEach(btn=> btn.classList.toggle('active', btn.dataset.lang===lang));
+            localStorage.setItem('lang', lang);
             renderClock();
         }
 
         document.addEventListener('DOMContentLoaded',()=>{
-            // 1. Set Dynamic Image
-            randomizeImage();
-
-            // 2. Set Language
-            setLanguage(localStorage.getItem('lang') || 'en');
-            document.querySelectorAll('.lang-switcher button').forEach(btn=> btn.addEventListener('click',()=> setLanguage(btn.dataset.lang)));
-            
-            // 3. Start Clock
-            setInterval(renderClock,1000);
-            renderClock();
+            randomizeImage();                 // 1️⃣ set a random tea picture
+            setLanguage(localStorage.getItem('lang') || 'en'); // 2️⃣ language
+            document.querySelectorAll('.lang-switcher button')
+                    .forEach(btn=> btn.addEventListener('click',()=> setLanguage(btn.dataset.lang)));
+            setInterval(renderClock, 1000);
+            renderClock();                    // immediate first draw
         });
     </script>
 </body>
