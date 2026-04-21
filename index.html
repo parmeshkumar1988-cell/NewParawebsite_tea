@@ -19,10 +19,10 @@
             --clr-primary: #B07D62;          /* Warm Terracotta */
             --clr-accent: #D4A373;           /* Golden Tea */
             --clr-bg: #FDF8F1;               /* Creamy Parchment */
-            --clr-dark: #3E2723;             /* Deep Cocoa */
+            --clr-dark: #3E2723;            /* Deep Cocoa */
             --clr-light: #fff;
             --clr-section-header: #6B4226;   /* Rich Brown */
-            --clr-footer-bg: #2D1B15;        /* Roasted Bean Dark */
+            --clr-footer-bg: #2D1B15;       /* Roasted Bean Dark */
             --clr-footer-text: #E6D5C3;
             --max-w: 1100px;
             --gap: 2rem;
@@ -31,7 +31,7 @@
 
         html { scroll-behavior: smooth; }
 
-        body {
+        body{
             font-family: var(--font-main);
             background: var(--clr-bg);
             color: var(--clr-dark);
@@ -42,282 +42,263 @@
         /* -------------------------------------------------
            2️⃣ HERO SECTION
            ------------------------------------------------- */
-        header {
-            height: 100vh; 
+        header{
+            height: 100vh;
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
                         url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80')
-                        center/cover no-repeat;   /* ← FIXED – one extra “)” removed */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--clr-light);
-            padding: 1rem;
-            position: relative;
+                        center/cover no-repeat;   /* ← fixed typo */
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            color:var(--clr-light);
+            padding:1rem;
+            position:relative;
         }
 
-        header h1 {
-            font-size: clamp(2.5rem, 8vw, 4.5rem);
-            margin-bottom: 1rem;
-            font-weight: 700;
-            text-shadow: 2px 4px 10px rgba(0,0,0,0.3);
+        header h1{
+            font-size:clamp(2.5rem,8vw,4.5rem);
+            margin-bottom:1rem;
+            font-weight:700;
+            text-shadow:2px 4px 10px rgba(0,0,0,0.3);
         }
 
-        header p {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.9;
-            font-weight: 300;
+        header p{
+            font-size:1.2rem;
+            margin-bottom:2.5rem;
+            opacity:0.9;
+            font-weight:300;
         }
 
-        .cta-button {
-            display: inline-block;
-            background: var(--clr-primary);
-            color: white;
-            padding: 1rem 2.5rem;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: 0.3s ease;
-            box-shadow: 0 4px 15px rgba(176, 125, 98, 0.4);
+        .cta-button{
+            display:inline-block;
+            background:var(--clr-primary);
+            color:#fff;
+            padding:1rem 2.5rem;
+            text-decoration:none;
+            border-radius:50px;
+            font-weight:600;
+            transition:0.3s ease;
+            box-shadow:0 4px 15px rgba(176,125,98,0.4);
         }
+        .cta-button:hover{background:var(--clr-accent);transform:translateY(-3px);}
 
-        .cta-button:hover {
-            background: var(--clr-accent);
-            transform: translateY(-3px);
-        }
-
-        .timer {
-            font-size: 0.9rem;
-            color: var(--clr-light);
-            background: rgba(0,0,0,0.4);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
-            white-space: nowrap;               /* prevent overflow on tiny screens */
+        .timer{
+            font-size:0.9rem;
+            color:var(--clr-light);
+            background:rgba(0,0,0,0.4);
+            padding:0.5rem 1rem;
+            border-radius:20px;
+            position:absolute;
+            top:2rem;
+            right:2rem;
+            backdrop-filter:blur(10px);
+            border:1px solid rgba(255,255,255,0.2);
+            white-space:nowrap;
         }
 
         /* -------------------------------------------------
            3️⃣ NAVIGATION
            ------------------------------------------------- */
-        nav {
-            background: var(--clr-light);
-            text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow);
-            padding: 0.5rem 0;
+        nav{
+            background:var(--clr-light);
+            text-align:center;
+            position:sticky;
+            top:0;
+            z-index:1000;
+            box-shadow:var(--shadow);
+            padding:0.5rem 0;
         }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
+        nav ul{
+            list-style:none;
+            display:flex;
+            justify-content:center;
+            flex-wrap:wrap;
+        }
+        nav li{margin:0 1rem;}
+        nav a{
+            text-decoration:none;
+            color:var(--clr-dark);
+            font-weight:600;
+            padding:.8rem 1rem;
+            transition:.3s;
+            border-radius:5px;
+        }
+        nav a:hover,
+        nav a.active{
+            color:var(--clr-primary);
+            background:rgba(176,125,98,0.1);
         }
 
-        nav li { margin: 0 1rem; }
-
-        nav a {
-            text-decoration: none;
-            color: var(--clr-dark);
-            font-weight: 600;
-            padding: 0.8rem 1rem;
-            transition: 0.3s;
-            border-radius: 5px;
+        .lang-switcher{
+            position:absolute;
+            top:.5rem;
+            right:1rem;
+            display:flex;
+            gap:.4rem;
         }
-
-        nav a:hover, nav a.active {
-            color: var(--clr-primary);
-            background: rgba(176, 125, 98, 0.1);
+        .lang-switcher button{
+            background:#eee;
+            border:none;
+            padding:.3rem .5rem;
+            cursor:pointer;
+            font-size:.7rem;
+            font-weight:bold;
+            border-radius:4px;
+            transition:.3s;
         }
-
-        .lang-switcher {
-            position: absolute;
-            top: 0.5rem;
-            right: 1rem;
-            display: flex;
-            gap: 0.4rem;
-        }
-
-        .lang-switcher button {
-            background: #eee;
-            border: none;
-            padding: 0.3rem 0.5rem;
-            cursor: pointer;
-            font-size: 0.7rem;
-            font-weight: bold;
-            border-radius: 4px;
-            transition: 0.3s;
-            type: button;                     /* added for safety */
-        }
-
-        .lang-switcher button.active {
-            background: var(--clr-primary);
-            color: white;
+        .lang-switcher button.active{
+            background:var(--clr-primary);
+            color:#fff;
         }
 
         /* -------------------------------------------------
            4️⃣ CONTENT SECTIONS
            ------------------------------------------------- */
-        section {
-            max-width: var(--max-w);
-            margin: auto;
-            padding: 6rem 1.5rem;
+        section{
+            max-width:var(--max-w);
+            margin:auto;
+            padding:6rem 1.5rem;
+        }
+        section h2{
+            color:var(--clr-section-header);
+            font-size:2.5rem;
+            text-align:center;
+            margin-bottom:3rem;
+            position:relative;
+        }
+        section h2::after{
+            content:'';
+            display:block;
+            width:50px;
+            height:3px;
+            background:var(--clr-primary);
+            margin:10px auto;
         }
 
-        section h2 {
-            color: var(--clr-section-header);
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
+        .about-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+            gap:3rem;
+            align-items:center;
+        }
+        .about-grid img{
+            width:100%;
+            border-radius:20px;
+            box-shadow:var(--shadow);
+            transition:transform .5s ease;
+        }
+        .about-text p{margin-bottom:1.5rem;font-size:1.1rem;}
+
+        .menu-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:2rem;
+        }
+        .menu-item{
+            background:#fff;
+            padding:2rem;
+            border-radius:20px;
+            text-align:center;
+            box-shadow:var(--shadow);
+            transition:.3s ease;
+            border:1px solid rgba(0,0,0,0.03);
+        }
+        .menu-item:hover{
+            transform:translateY(-10px);
+            border-color:var(--clr-primary);
+        }
+        .menu-item h3{
+            color:var(--clr-primary);
+            margin-bottom:1rem;
+            font-size:1.4rem;
         }
 
-        section h2::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 3px;
-            background: var(--clr-primary);
-            margin: 10px auto;
+        .contact-container{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+            gap:4rem;
         }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-            align-items: center;
+        .contact-form{
+            background:#fff;
+            padding:2.5rem;
+            border-radius:20px;
+            box-shadow:var(--shadow);
+            display:grid;
+            gap:1.2rem;
         }
-
-        .about-grid img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            transition: transform 0.5s ease;
+        .contact-form input,
+        .contact-form textarea{
+            width:100%;
+            padding:.8rem;
+            border:1px solid #ddd;
+            border-radius:8px;
+            font-family:inherit;
         }
-
-        .about-text p { margin-bottom: 1.5rem; font-size: 1.1rem; }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+        .contact-form button{
+            background:var(--clr-dark);
+            color:#fff;
+            padding:1rem;
+            border:none;
+            border-radius:8px;
+            font-weight:600;
+            cursor:pointer;
+            transition:.3s;
         }
+        .contact-form button:hover{background:var(--clr-primary);}
 
-        .menu-item {
-            background: white;
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.03);
+        .feedback-wrap{
+            max-width:800px;
+            margin:auto;
+            box-shadow:var(--shadow);
+            border-radius:20px;
+            overflow:hidden;
         }
-
-        .menu-item:hover {
-            transform: translateY(-10px);
-            border-color: var(--clr-primary);
-        }
-
-        .menu-item h3 {
-            color: var(--clr-primary);
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-
-        .contact-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 4rem;
-        }
-
-        .contact-form {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            display: grid;
-            gap: 1.2rem;
-        }
-
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: inherit;
-        }
-
-        .contact-form button {
-            background: var(--clr-dark);
-            color: white;
-            padding: 1rem;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .contact-form button:hover { background: var(--clr-primary); }
-
-        .feedback-wrap {
-            max-width: 800px;
-            margin: auto;
-            box-shadow: var(--shadow);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .feedback-wrap iframe { width: 100%; height: 700px; border: none; }
+        .feedback-wrap iframe{width:100%;height:700px;border:none;}
 
         /* -------------------------------------------------
            5️⃣ FOOTER
            ------------------------------------------------- */
-        footer {
-            background: var(--clr-footer-bg);
-            color: var(--clr-footer-text);
-            text-align: center;
-            padding: 4rem 1rem 2rem;
-            margin-top: auto;
+        footer{
+            background:var(--clr-footer-bg);
+            color:var(--clr-footer-text);
+            text-align:center;
+            padding:4rem 1rem 2rem;
+            margin-top:auto;
+        }
+        .footer__grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+            max-width:var(--max-w);
+            margin:auto;
+            gap:2rem;
+            text-align:left;
+        }
+        .footer__col h4{color:#fff;margin-bottom:1.5rem;}
+        .footer__list{list-style:none;}
+        .footer__list li{margin-bottom:.5rem;}
+        .footer__list a{
+            color:var(--clr-footer-text);
+            text-decoration:none;
+            transition:.3s;
+        }
+        .footer__list a:hover{color:var(--clr-accent);}
+        .footer__logo{width:60px;margin-bottom:1rem;fill:#fff;}
+        .footer__bottom{
+            margin-top:3rem;
+            padding-top:2rem;
+            border-top:1px solid rgba(255,255,255,.1);
+            font-size:.9rem;
+            color:rgba(255,255,255,.5);
+            text-align:center;
         }
 
-        .footer__grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1f));
-            max-width: var(--max-w);
-            margin: auto;
-            gap: 2rem;
-            text-align: left;
-        }
-
-        .footer__col h4 { color: white; margin-bottom: 1.5rem; }
-        .footer__list { list-style: none; }
-        .footer__list li { margin-bottom: 0.5rem; }
-        .footer__list a { color: var(--clr-footer-text); text-decoration: none; transition: 0.3s; }
-        .footer__list a:hover { color: var(--clr-accent); }
-        
-        .footer__logo { width: 60px; margin-bottom: 1rem; fill: white; }
-        .footer__bottom {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.5);
-            text-align: center;
-        }
-
-        @media (max-width: 600px) {
-            header h1 { font-size: 2.5rem; }
-            .lang-switcher { position: static; justify-content: center; margin-bottom: 1rem; }
-            nav ul { flex-direction: column; gap: 0.5rem; }
+        @media (max-width:600px){
+            header h1{font-size:2.5rem;}
+            .lang-switcher{position:static;justify-content:center;margin-bottom:1rem;}
+            nav ul{flex-direction:column;gap:.5rem;}
         }
     </style>
 </head>
@@ -331,7 +312,7 @@
         <a href="#menu" class="cta-button" data-i18n="ctaMenu">Explore Our Menu</a>
     </header>
 
-    <!-- NAV -->
+    <!-- NAVIGATION -->
     <nav>
         <div class="lang-switcher">
             <button type="button" data-lang="en" class="active">EN</button>
@@ -348,17 +329,17 @@
         </ul>
     </nav>
 
-    <!-- MAIN -->
+    <!-- MAIN CONTENT -->
     <main>
         <!-- ABOUT -->
         <section id="about">
             <h2 data-i18n="aboutTitle">Our Story</h2>
             <div class="about-grid">
-                <img id="story-img" src="" alt="Handcrafted chai cup – random image" loading="lazy">
+                <img id="story-img" src="" alt="Hand‑crafted chai cup – random image" loading="lazy">
                 <div class="about-text">
                     <p data-i18n="aboutPara1">One rainy evening in Bangalore, a young tea‑lover named <strong>Parmesh</strong> discovered the magic of a steaming cup of chai served from a humble stall. The warmth and aroma sparked a simple idea: “What if we could bring that feeling to every corner of the city?”</p>
                     <p data-i18n="aboutPara2">After years of traveling India’s tea‑growing regions, Parmesh perfected a blend that balances spice and sweetness. The result is <strong>Parmesh Chai Point</strong> – a space where every cup tells a story.</p>
-                    <p data-i18n="aboutCall" style="font-weight: 600; color: var(--clr-primary);">Join us, sip with us, and let’s spread the love for chai together.</p>
+                    <p data-i18n="aboutCall" style="font-weight:600;color:var(--clr-primary);">Join us, sip with us, and let’s spread the love for chai together.</p>
                 </div>
             </div>
         </section>
@@ -388,13 +369,14 @@
                     <label data-i18n="contactMessage">Message</label>
                     <textarea name="message" rows="4" placeholder="How can we help?" required></textarea>
                     <button type="submit" data-i18n="contactSend">Send Message</button>
-                    <p id="form-status" style="text-align:center; font-size: 0.9rem;"></p>
+                    <p id="form-status" style="text-align:center;font-size:.9rem;"></p>
                 </form>
+
                 <div class="contact-info">
                     <p><strong data-i18n="contactAddrLabel">Address:</strong> Bangalore, India</p>
-                    <p><strong data-i18n="contactPhoneLabel">Phone:</strong> +91 7760 887 077</p>
+                    <p><strong data-i18n="contactPhoneLabel">Phone:</strong> +91 7760 887 077</p>
                     <p><strong data-i18n="contactEmailLabel">Email:</strong> <a href="mailto:sasvadash@gmail.com" style="color:var(--clr-primary)">sasvadash@gmail.com</a></p>
-                    <div style="margin-top: 2rem; background: white; padding: 1.5rem; border-radius: 20px; box-shadow: var(--shadow);">
+                    <div style="margin-top:2rem;background:#fff;padding:1.5rem;border-radius:20px;box-shadow:var(--shadow);">
                         <p><em>"The perfect spot for a quick break or a long conversation."</em></p>
                     </div>
                 </div>
@@ -404,7 +386,7 @@
         <!-- FEEDBACK -->
         <section id="feedback">
             <h2 data-i18n="feedbackTitle">Customer Feedback</h2>
-            <p style="text-align:center; margin-bottom: 2rem;" data-i18n="feedbackIntro">We value your thoughts. Please fill out the short form below.</p>
+            <p style="text-align:center;margin-bottom:2rem;" data-i18n="feedbackIntro">We value your thoughts. Please fill out the short form below.</p>
             <div class="feedback-wrap">
                 <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc19WAQGvHrXOz3lKsCxBnISWNiNh0EA1ZNJL7WnMfEqnfU0g/viewform?embedded=true" loading="lazy"></iframe>
             </div>
@@ -430,14 +412,17 @@
             <div class="footer__col">
                 <h4 data-i18n="footerContactTitle">Connect</h4>
                 <p>📍 Bangalore, India</p>
-                <p>📞 +91 7760 887 077</p>
+                <p>📞 +91 7760 887 077</p>
             </div>
         </div>
         <p class="footer__bottom">© 2026 Parmesh Chai Point – All rights reserved.</p>
     </footer>
 
+    <!-- -------------------------------------------------
+         SCRIPT – Image, Clock, & Language Switcher
+      ------------------------------------------------- -->
     <script>
-        /* --- IMAGE RANDOMIZER --- */
+        /* ---------- RANDOM IMAGE ---------- */
         const teaImages = [
             "https://images.unsplash.com/photo-1573157656152-7050489a6174",
             "https://images.unsplash.com/photo-1544787217-f0ed0fa0a05d",
@@ -445,17 +430,16 @@
             "https://images.unsplash.com/photo-1563911382351-8579f170283a",
             "https://images.unsplash.com/photo-1597333334515-2333b156143b"
         ];
-
         function randomizeImage() {
-            const imgElement = document.getElementById('story-img');
-            if (imgElement) {
-                const randomIdx = Math.floor(Math.random() * teaImages.length);
-                const cacheBuster = "?auto=format&fit=crop&w=600&q=80&rand=" + Date.now();
-                imgElement.src = teaImages[randomIdx] + cacheBuster;
+            const img = document.getElementById('story-img');
+            if (img) {
+                const idx = Math.floor(Math.random() * teaImages.length);
+                // cache‑buster forces a fresh request each load
+                img.src = teaImages[idx] + "?auto=format&fit=crop&w=600&q=80&rand=" + Date.now();
             }
         }
 
-        /* --- COMPLETE TRANSLATIONS --- */
+        /* ---------- TRANSLATIONS ---------- */
         const translations = {
             en: {
                 heroTitle: "Parmesh Chai Point",
@@ -543,8 +527,8 @@
                 navFeedback: "ಪ್ರತಿಕ್ರಿಯೆ",
                 aboutTitle: "ನಮ್ಮ ಕಥೆ",
                 aboutPara1: "ಬೆಂಗಳೂರಿನ ಒಂದು ಮಳೆಬನಿ ಸಂಜೆ, <strong>ಪರಮೇಶ್</strong> ಎಂಬ ಚಹಾ ಪ್ರೇಮಿ ಒಬ್ಬ ಸಾಮಾನ್ಯ ಅಂಗಡಿಯಿಂದ ಬಿಸಿಬಿಸಿ ಚಹಾದ ಮಾಯೆಯನ್ನು ಕಂಡರು. ಆ ಬೆಚ್ಚನೆಯ ಅನುಭವವು ಒಂದು ಸರಳ ಆಲೋಚನೆಯನ್ನು ನೀಡಿತು: “ಈ ಅನುಭವವನ್ನು ನಗರದ ಪ್ರತಿ ಮೂಲೆಯಲ್ಲೂ ತರಬಹುದಲ್ಲವೇ?”",
-                aboutPara2: "ಭಾರತದ ಚಹಾ ಬೆಳೆಯುವ ಪ್ರದೇಶಗಳನ್ನು ಪ್ರವಾಸ ಮಾಡಿದ ಮೇಲೆ, ಪರಮೇಶ್ ಮಸಾಲೆಯು ಮತ್ತು ಸಿಹಿಯ ಸಮತೋಲನವನ್ನು ಹೊಂದಿರುವ ಮಿಶ್ರಣವನ್ನು ತಯಾರಿಸಿದರು. ಅದರ ಫಲಿತಾಂಶವೇ <strong>ಪರಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್</strong>.",
-                aboutCall: "ನಮ್ಮೊಡನೆ ಸೇರಿ, ಚಹಾವನ್ನು ಆಸ್ವಾದಿಸಿ, ಮತ್ತು ಚಹಾದ ಮೇಲಿನ ಪ್ರೀತಿಯನ್ನು ಒಟ್ಟಾಗಿ ಹಂಚಿಕೊಳ್ಳೋಣ.",
+                aboutPara2: "ಭಾರತದ ಚಹಾ ಬೆಳೆಯುವ ಪ್ರದೇಶಗಳನ್ನು ಪ್ರವಾಸ ಮಾಡಿದ ನಂತರ, ಪರಮೇಶ್ ಮಸಾಲೆಯು ಮತ್ತು ಸಿಹಿಯ ಸಮತೋಲನವನ್ನು ಹೊಂದಿರುವ ಮಿಶ್ರಣವನ್ನು ತಯಾರಿಸಿದರು. ಅದರ ಫಲಿತಾಂಶವೇ <strong>ಪರಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್</strong>.",
+                aboutCall: "ನಮ್ಮೊಡನೆ ಸೇರಿ, ಚಹಾವನ್ನು ಆಸ್ವಾದಿಸಿ ಮತ್ತು ಚಹಾದ ಮೇಲಿನ ಪ್ರೀತಿಯನ್ನು ಒಟ್ಟಾಗಿ ಹಂಚಿಕೊಳ್ಳೋಣ.",
                 menuTitle: "ನಾವು ನೀಡುವ ಪದಾರ್ಥಗಳು",
                 menuClassic: "ಕ್ಲಾಸಿಕ್ ಚಾಯ್",
                 menuClassicDesc: "ಸಾಂಪ್ರದಾಯಿಕ ಅಸ್ಸಾಂ ಚಹಾ, ಹಾಲು ಮತ್ತು ನಮ್ಮ ವಿಶೇಷ ಮಸಾಲಾ ಮಿಶ್ರಣದೊಂದಿಗೆ.",
@@ -567,7 +551,7 @@
                 contactPhoneLabel: "ಫೋನ್:",
                 contactEmailLabel: "ಇಮೇಲ್:",
                 feedbackTitle: "ಗ್ರಾಹಕರ ಪ್ರತಿಕ್ರಿಯೆ",
-                feedbackIntro: "ನಿಮ್ಮ ಅಭಿಪ್ರಾಯಗಳು ನಮಗೆ ಮುಖ್ಯ. ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಫಾರ್ಮ್ ಅನ್ನು ಭರ್ತಿ ಮಾಡಿ.",
+                feedbackIntro: "ನಿಮ್ಮ ಅಭಿಪ್ರಾಯಗಳನ್ನು ನಮಗೆ ತಿಳಿಸಿ. ದಯವಿಟ್ಟು ಕೆಳಗಿನ ಫಾರ್ಮ್ ಅನ್ನು ಭರ್ತಿ ಮಾಡಿ.",
                 footerTagline: "ಪ್ರತಿ ಕಪ್‌ನಲ್ಲಿ ಸಂತೋಷವನ್ನು ನೀಡುತ್ತಿದ್ದೇವೆ ☕",
                 timerLabel: "ಪ್ರಸ್ತುತ ಸಮಯ:"
             },
@@ -587,7 +571,7 @@
                 menuClassic: "క్లాసిక్ చాయ్",
                 menuClassicDesc: "సాంప్రదాయ అస్సాం టీ, పాలు మరియు మా ప్రత్యేక మసాలా మిశ్రమంతో.",
                 menuMasala: "మసాలా చాయ్",
-                menuMasalaDesc: "ఏలకులు, అల్లం, దార్చిన చెక్క, లవంగ, మిరప – క్లాసిక్ ఫేవరైట్.",
+                menuMasalaDesc: "ఏలకులు, అల్లం, దార్చిన చెక్క, లవంగ, మిరప – క్లాసిక్ ఫేవరిట్.",
                 menuSeasonal: "సీజనల్ స్పెషల్స్",
                 menuSeasonalDesc: "రోస్‑పెటల్, మాంగో‑మింట్ వంటి రుచులు మారుతుంటాయి.",
                 menuCold: "కోల్డ్ బ్రూ చాయ్",
@@ -605,7 +589,7 @@
                 contactPhoneLabel: "ఫోన్:",
                 contactEmailLabel: "ఈమెయిల్:",
                 feedbackTitle: "కస్టమర్ ఫీడ్‌బ్యాక్",
-                feedbackIntro: "మీ అభిప్రాయాలు మాకు ముఖ్యం. దయచేసి క్రింది ఫారమ్‌ను పూరించండి.",
+                feedbackIntro: "మీ అభిప్రాయాలు మాకు ముఖ్యం. దయచేసి క్రింది ఫార్మ్‌ను పూరించండి.",
                 footerTagline: "ప్రతి కప్పులో సంతోషాన్ని వడ్డిస్తున్నాము ☕",
                 timerLabel: "ప్రస్తుత సమయం:"
             },
@@ -649,12 +633,12 @@
             }
         };
 
-        /* --- DIGITAL CLOCK --- */
+        /* ---------- DIGITAL CLOCK ---------- */
         function renderClock(){
-            const el = document.querySelector('#timer');
+            const el = document.getElementById('timer');
             if (!el) return;
             const lang = document.documentElement.lang || 'en';
-            const label = translations[lang]?.timerLabel || 'Current time:';
+            const label = translations[lang].timerLabel;
             const now = new Date();
             let h = now.getHours();
             const ampm = h >= 12 ? 'PM' : 'AM';
@@ -662,28 +646,35 @@
             el.textContent = `${label} ${h}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')} ${ampm}`;
         }
 
-        /* --- LANGUAGE SWITCHER --- */
+        /* ---------- LANGUAGE SWITCHER ---------- */
         function setLanguage(lang){
             const dict = translations[lang];
             if (!dict) return;
+            // replace all texts that have a data‑i18n attribute
             document.querySelectorAll('[data-i18n]').forEach(el=>{
                 const key = el.dataset.i18n;
                 if (dict[key]) el.innerHTML = dict[key];
             });
+            // update <html lang="">
             document.documentElement.lang = lang;
+            // highlight active button
             document.querySelectorAll('.lang-switcher button')
                     .forEach(btn=> btn.classList.toggle('active', btn.dataset.lang===lang));
-            localStorage.setItem('lang', lang);
-            renderClock();
+            // remember choice
+            localStorage.setItem('lang',lang);
+            renderClock();   // clock label also changes
         }
 
+        /* ---------- INITIALISE ---------- */
         document.addEventListener('DOMContentLoaded',()=>{
-            randomizeImage();                 // 1️⃣ set a random tea picture
-            setLanguage(localStorage.getItem('lang') || 'en'); // 2️⃣ language
+            randomizeImage();                                         // random story picture
+            setLanguage(localStorage.getItem('lang') || 'en');         // language
+            // language‑button click handlers
             document.querySelectorAll('.lang-switcher button')
                     .forEach(btn=> btn.addEventListener('click',()=> setLanguage(btn.dataset.lang)));
-            setInterval(renderClock, 1000);
-            renderClock();                    // immediate first draw
+            // start ticking clock
+            setInterval(renderClock,1000);
+            renderClock();                                            // initial draw
         });
     </script>
 </body>
