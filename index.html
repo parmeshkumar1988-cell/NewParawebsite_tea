@@ -269,7 +269,18 @@
             transition:.3s;
         }
         .footer__list a:hover{color:var(--clr-accent);}
-        .footer__logo{width:60px;margin-bottom:1rem;fill:#fff;}
+        
+        /* 🕉️ SHIVA LOGO STYLES */
+        .footer__logo{
+            width:80px;
+            height:80px;
+            margin-bottom:1rem;
+            border-radius:50%;
+            object-fit:cover;
+            border:2px solid rgba(255,255,255,0.3);
+            box-shadow:0 4px 15px rgba(0,0,0,0.3);
+        }
+        
         .footer__bottom{
             margin-top:3rem;
             padding-top:2rem;
@@ -383,7 +394,11 @@
     <footer>
         <div class="footer__grid">
             <div class="footer__col">
-                <svg class="footer__logo" viewBox="0 0 100 100"><circle cx="50" cy="50" r="48" stroke="#fff" stroke-width="4" fill="none"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Poppins" font-size="30" fill="#fff" font-weight="bold">PCP</text></svg>
+                <!-- 🕉️ LORD SHIVA LOGO -->
+                <img src="https://images.unsplash.com/photo-1623945032431-1f4a8c8e8e3e?auto=format&fit=crop&w=200&q=80" 
+                     alt="Lord Shiva" 
+                     class="footer__logo"
+                     onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1582510003544-4d00b74a6e78?auto=format&fit=crop&w=200&q=80';">
                 <p data-i18n="footerTagline">Serving happiness in every cup ☕</p>
             </div>
             <div class="footer__col">
@@ -421,17 +436,9 @@
         function randomizeImage() {
             const img = document.getElementById('story-img');
             if (!img) return;
-            
-            // Pick a random image from the array
             const randomIdx = Math.floor(Math.random() * teaImages.length);
-            
-            // Add timestamp to force browser to fetch fresh image (cache-buster)
             const cacheBuster = "&rand=" + Date.now();
-            
-            // Set the image source
             img.src = teaImages[randomIdx] + cacheBuster;
-            
-            // Log for debugging
             console.log('Loading random image:', img.src);
         }
 
