@@ -279,6 +279,7 @@
             object-fit:cover;
             border:2px solid rgba(255,255,255,0.3);
             box-shadow:0 4px 15px rgba(0,0,0,0.3);
+            background: #fff;
         }
         
         .footer__bottom{
@@ -394,11 +395,12 @@
     <footer>
         <div class="footer__grid">
             <div class="footer__col">
-                <!-- 🕉️ LORD SHIVA LOGO -->
-                <img src="https://images.unsplash.com/photo-1623945032431-1f4a8c8e8e3e?auto=format&fit=crop&w=200&q=80" 
+                <!-- 🕉️ LORD SHIVA LOGO - Multiple fallbacks -->
+                <img id="shiva-logo"
+                     src=""
                      alt="Lord Shiva" 
                      class="footer__logo"
-                     onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1582510003544-4d00b74a6e78?auto=format&fit=crop&w=200&q=80';">
+                     loading="lazy">
                 <p data-i18n="footerTagline">Serving happiness in every cup ☕</p>
             </div>
             <div class="footer__col">
@@ -421,7 +423,7 @@
 
     <!-- SCRIPT -->
     <script>
-        /* ---------- 1️⃣ RANDOM IMAGE (FIXED) ---------- */
+        /* ---------- 1️⃣ RANDOM TEA IMAGE ---------- */
         const teaImages = [
             "https://images.unsplash.com/photo-1573157656152-7050489a6174?auto=format&fit=crop&w=600&q=80",
             "https://images.unsplash.com/photo-1544787217-f0ed0fa0a05d?auto=format&fit=crop&w=600&q=80",
@@ -439,10 +441,56 @@
             const randomIdx = Math.floor(Math.random() * teaImages.length);
             const cacheBuster = "&rand=" + Date.now();
             img.src = teaImages[randomIdx] + cacheBuster;
-            console.log('Loading random image:', img.src);
+            console.log('Loading random tea image:', img.src);
         }
 
-        /* ---------- 2️⃣ TRANSLATIONS ---------- */
+        /* ---------- 2️⃣ SHIVA LOGO WITH MULTIPLE FALLBACKS ---------- */
+        const shivaImages = [
+            "https://images.unsplash.com/photo-1623945032431-1f4a8c8e8e3e?auto=format&fit=crop&w=200&q=80",
+            "https://images.unsplash.com/photo-1582510003544-4d00b74a6e78?auto=format&fit=crop&w=200&q=80",
+            "https://images.unsplash.com/photo-1620066923026-1b76c2536e0d?auto=format&fit=crop&w=200&q=80",
+            "https://images.unsplash.com/photo-1623945032398-24d6c83e4e9e?auto=format&fit=crop&w=200&q=80"
+        ];
+
+        function loadShivaLogo() {
+            const img = document.getElementById('shiva-logo');
+            if (!img) return;
+            
+            let attempt = 0;
+            
+            function tryNextImage() {
+                if (attempt >= shivaImages.length) {
+                    // All images failed - show a simple text fallback
+                    img.style.display = 'none';
+                    const textFallback = document.createElement('div');
+                    textFallback.innerHTML = '🕉️';
+                    textFallback.style.fontSize = '60px';
+                    textFallback.style.marginBottom = '1rem';
+                    img.parentNode.insertBefore(textFallback, img);
+                    console.log('All Shiva images failed, showing Om symbol');
+                    return;
+                }
+                
+                const cacheBuster = "&rand=" + Date.now();
+                img.src = shivaImages[attempt] + cacheBuster;
+                console.log('Trying Shiva image ' + (attempt + 1) + ':', img.src);
+                attempt++;
+            }
+            
+            img.onerror = function() {
+                console.log('Shiva image failed, trying next...');
+                tryNextImage();
+            };
+            
+            img.onload = function() {
+                console.log('Shiva logo loaded successfully!');
+            };
+            
+            // Start loading
+            tryNextImage();
+        }
+
+        /* ---------- 3️⃣ TRANSLATIONS ---------- */
         const translations = {
             en: {
                 heroTitle: "Parmesh Chai Point",
@@ -646,7 +694,7 @@
             }
         };
 
-        /* ---------- 3️⃣ DIGITAL CLOCK ---------- */
+        /* ---------- 4️⃣ DIGITAL CLOCK ---------- */
         function renderClock(){
             const el = document.getElementById('timer');
             if (!el) return;
@@ -659,7 +707,7 @@
             el.textContent = `${label} ${h}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')} ${ampm}`;
         }
 
-        /* ---------- 4️⃣ LANGUAGE SWITCHER ---------- */
+        /* ---------- 5️⃣ LANGUAGE SWITCHER ---------- */
         function setLanguage(lang){
             const dict = translations[lang];
             if (!dict) return;
@@ -674,9 +722,10 @@
             renderClock();
         }
 
-        /* ---------- 5️⃣ INITIALISE ---------- */
+        /* ---------- 6️⃣ INITIALISE ---------- */
         document.addEventListener('DOMContentLoaded',()=>{
             randomizeImage();
+            loadShivaLogo();
             setLanguage(localStorage.getItem('lang') || 'en');
             document.querySelectorAll('.lang-switcher button')
                     .forEach(btn=> btn.addEventListener('click',()=> setLanguage(btn.dataset.lang)));
