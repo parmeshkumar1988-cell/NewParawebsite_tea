@@ -4,55 +4,57 @@
     <meta charset="UTF-8">
     <title>Parmesh Chai Point – Handcrafted Tea Experience</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Google Fonts -->
+    <meta name="description"
+          content="Parmesh Chai Point – handcrafted chai, cozy cafés and free Wi‑FI across India.">
+
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
           rel="stylesheet">
+
     <style>
         /* -------------------------------------------------
-           1️⃣ DESIGN VARIABLES (Rustic & Cozy Theme)
+           DESIGN VARIABLES (Rustic & Cozy Theme)
            ------------------------------------------------- */
         *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
         :root{
-            --font-main: 'Poppins', sans-serif;
-            --clr-primary: #B07D62;          /* Warm Terracotta */
-            --clr-accent: #D4A373;           /* Golden Tea */
-            --clr-bg: #FDF8F1;                /* Creamy Parchment */
-            --clr-dark: #3E2723;             /* Deep Cocoa */
-            --clr-light: #fff;
-            --clr-section-header: #6B4226;   /* Rich Brown */
-            --clr-footer-bg: #2D1B15;        /* Roasted Bean Dark */
-            --clr-footer-text: #E6D5C3;
-            --max-w: 1100px;
-            --gap: 2rem;
-            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --font-main:'Poppins',sans-serif;
+            --clr-primary:#B07D62;        /* Warm terracotta   */
+            --clr-accent:#D4A373;         /* Golden tea        */
+            --clr-bg:#FDF8F1;             /* Creamy parchment  */
+            --clr-dark:#3E2723;           /* Deep cocoa        */
+            --clr-light:#fff;
+            --clr-section:#6B4226;        /* Rich brown header */
+            --clr-footer-bg:#2D1B15;
+            --clr-footer-text:#E6D5C3;
+            --max-w:1100px;
+            --gap:2rem;
+            --shadow:0 8px 24px rgba(0,0,0,0.07);
         }
-
-        html { scroll-behavior: smooth; }
+        html{scroll-behavior:smooth;}
 
         body{
-            font-family: var(--font-main);
-            background: var(--clr-bg);
-            color: var(--clr-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
+            font-family:var(--font-main);
+            background:var(--clr-bg);
+            color:var(--clr-dark);
+            line-height:1.6;
         }
 
         /* -------------------------------------------------
-           2️⃣ HERO SECTION
+           HERO
            ------------------------------------------------- */
         header{
             height:100vh;
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-                        url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80')
-                        center/cover no-repeat;
+            background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
+                       url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80')
+                       center/cover no-repeat;
             display:flex;
             flex-direction:column;
             justify-content:center;
             align-items:center;
             text-align:center;
             color:var(--clr-light);
-            padding:1rem;
             position:relative;
+            padding:1rem;
         }
         header h1{
             font-size:clamp(2.5rem,8vw,4.5rem);
@@ -64,7 +66,6 @@
             font-size:1.2rem;
             margin-bottom:2.5rem;
             opacity:0.9;
-            font-weight:300;
         }
         .cta-button{
             display:inline-block;
@@ -74,7 +75,7 @@
             text-decoration:none;
             border-radius:50px;
             font-weight:600;
-            transition:.3s ease;
+            transition:.3s;
             box-shadow:0 4px 15px rgba(176,125,98,0.4);
         }
         .cta-button:hover{
@@ -82,10 +83,10 @@
             transform:translateY(-3px);
         }
         .timer{
-            font-size:0.9rem;
-            color:var(--clr-light);
+            font-size:.9rem;
             background:rgba(0,0,0,0.4);
-            padding:0.5rem 1rem;
+            color:var(--clr-light);
+            padding:.5rem 1rem;
             border-radius:20px;
             position:absolute;
             top:2rem;
@@ -96,7 +97,7 @@
         }
 
         /* -------------------------------------------------
-           3️⃣ NAVIGATION
+           NAVIGATION
            ------------------------------------------------- */
         nav{
             background:var(--clr-light);
@@ -105,7 +106,7 @@
             top:0;
             z-index:1000;
             box-shadow:var(--shadow);
-            padding:0.5rem 0;
+            padding:.5rem 0;
         }
         nav ul{
             list-style:none;
@@ -127,7 +128,6 @@
             color:var(--clr-primary);
             background:rgba(176,125,98,0.1);
         }
-
         .lang-switcher{
             position:absolute;
             top:.5rem;
@@ -144,7 +144,6 @@
             font-weight:bold;
             border-radius:4px;
             transition:.3s;
-            type:button;               /* safety */
         }
         .lang-switcher button.active{
             background:var(--clr-primary);
@@ -152,7 +151,7 @@
         }
 
         /* -------------------------------------------------
-           4️⃣ CONTENT SECTIONS
+           CONTENT SECTIONS
            ------------------------------------------------- */
         section{
             max-width:var(--max-w);
@@ -160,7 +159,7 @@
             padding:6rem 1.5rem;
         }
         section h2{
-            color:var(--clr-section-header);
+            color:var(--clr-section);
             font-size:2.5rem;
             text-align:center;
             margin-bottom:3rem;
@@ -184,9 +183,12 @@
             width:100%;
             border-radius:20px;
             box-shadow:var(--shadow);
-            transition:transform .5s ease;
+            transition:transform .5s;
         }
-        .about-text p{margin-bottom:1.5rem;font-size:1.1rem;}
+        .about-text p{
+            margin-bottom:1.5rem;
+            font-size:1.1rem;
+        }
 
         .menu-grid{
             display:grid;
@@ -199,7 +201,7 @@
             border-radius:20px;
             text-align:center;
             box-shadow:var(--shadow);
-            transition:.3s ease;
+            transition:.3s;
             border:1px solid rgba(0,0,0,0.03);
         }
         .menu-item:hover{
@@ -255,7 +257,7 @@
         .feedback-wrap iframe{width:100%;height:700px;border:none;}
 
         /* -------------------------------------------------
-           5️⃣ FOOTER
+           FOOTER
            ------------------------------------------------- */
         footer{
             background:var(--clr-footer-bg);
@@ -300,7 +302,7 @@
 </head>
 <body id="top">
 
-    <!-- ==================== HERO ==================== -->
+    <!-- HERO -->
     <header>
         <div id="timer" class="timer"></div>
         <h1 data-i18n="heroTitle">Parmesh Chai Point</h1>
@@ -308,9 +310,8 @@
         <a href="#menu" class="cta-button" data-i18n="ctaMenu">Explore Our Menu</a>
     </header>
 
-    <!-- ==================== NAVIGATION ==================== -->
+    <!-- NAVIGATION -->
     <nav>
-        <!-- --------------- LANGUAGE SWITCHER --------------- -->
         <div class="lang-switcher">
             <button type="button" data-lang="en" class="active">EN</button>
             <button type="button" data-lang="hi">हिन्द</button>
@@ -318,7 +319,6 @@
             <button type="button" data-lang="te">తెలుగు</button>
             <button type="button" data-lang="ta">தமிழ்</button>
         </div>
-
         <ul>
             <li><a href="#about" class="nav-link" data-i18n="navAbout">About</a></li>
             <li><a href="#menu" class="nav-link" data-i18n="navMenu">Menu</a></li>
@@ -327,10 +327,9 @@
         </ul>
     </nav>
 
-    <!-- ==================== MAIN CONTENT ==================== -->
+    <!-- MAIN CONTENT -->
     <main>
-
-        <!-- ========= ABOUT ========= -->
+        <!-- ABOUT SECTION -->
         <section id="about">
             <h2 data-i18n="aboutTitle">Our Story</h2>
             <div class="about-grid">
@@ -338,7 +337,7 @@
                      src=""
                      alt="Hand‑crafted chai cup – random image"
                      loading="lazy"
-                     onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80';">
+                     onerror="this.onerror=null;this.src='https://source.unsplash.com/featured/?tea&fallback=1';">
                 <div class="about-text">
                     <p data-i18n="aboutPara1">One rainy evening in Bangalore, a young tea‑lover named <strong>Parmesh</strong> discovered the magic of a steaming cup of chai served from a humble stall. The warmth and aroma sparked a simple idea: “What if we could bring that feeling to every corner of the city?”</p>
                     <p data-i18n="aboutPara2">After years of traveling India’s tea‑growing regions, Parmesh perfected a blend that balances spice and sweetness. The result is <strong>Parmesh Chai Point</strong> – a space where every cup tells a story.</p>
@@ -347,7 +346,7 @@
             </div>
         </section>
 
-        <!-- ========= MENU ========= -->
+        <!-- MENU SECTION -->
         <section id="menu">
             <h2 data-i18n="menuTitle">What We Serve</h2>
             <div class="menu-grid">
@@ -360,7 +359,7 @@
             </div>
         </section>
 
-        <!-- ========= CONTACT ========= -->
+        <!-- CONTACT SECTION -->
         <section id="contact">
             <h2 data-i18n="contactTitle">Get in Touch</h2>
             <div class="contact-container">
@@ -374,7 +373,6 @@
                     <button type="submit" data-i18n="contactSend">Send Message</button>
                     <p id="form-status" style="text-align:center;font-size:.9rem;"></p>
                 </form>
-
                 <div class="contact-info">
                     <p><strong data-i18n="contactAddrLabel">Address:</strong> Bangalore, India</p>
                     <p><strong data-i18n="contactPhoneLabel">Phone:</strong> +91 7760 887 077</p>
@@ -386,18 +384,18 @@
             </div>
         </section>
 
-        <!-- ========= FEEDBACK ========= -->
+        <!-- FEEDBACK SECTION -->
         <section id="feedback">
             <h2 data-i18n="feedbackTitle">Customer Feedback</h2>
             <p style="text-align:center;margin-bottom:2rem;" data-i18n="feedbackIntro">We value your thoughts. Please fill out the short form below.</p>
             <div class="feedback-wrap">
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc19WAQGvHrXOz3lKsCxBnISWNiNh0EA1ZNJL7WnMfEqnfU0g/viewform?embedded=true" loading="lazy"></iframe>
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSc19WAQGvHrXOz3lKsCxBnISWNiNh0EA1ZNJL7WnMfEqnfU0g/viewform?embedded=true"
+                        loading="lazy"></iframe>
             </div>
         </section>
-
     </main>
 
-    <!-- ==================== FOOTER ==================== -->
+    <!-- FOOTER -->
     <footer>
         <div class="footer__grid">
             <div class="footer__col">
@@ -422,22 +420,17 @@
         <p class="footer__bottom">© 2026 Parmesh Chai Point – All rights reserved.</p>
     </footer>
 
-    <!-- ==================== SCRIPT ==================== -->
+    <!-- -------------------------------------------------
+         SCRIPT – Random Image, Clock & Language Switcher
+         ------------------------------------------------- -->
     <script>
         /* ---------- 1️⃣ RANDOM IMAGE ---------- */
-        const teaImages = [
-            "https://images.unsplash.com/photo-1573157656152-7050489a6174",
-            "https://images.unsplash.com/photo-1544787217-f0ed0fa0a05d",
-            "https://images.unsplash.com/photo-1594631252306-95f377350697",
-            "https://images.unsplash.com/photo-1563911382351-8579f170283a",
-            "https://images.unsplash.com/photo-1597333334515-2333b156143b"
-        ];
         function randomizeImage() {
             const img = document.getElementById('story-img');
             if (!img) return;
-            const idx = Math.floor(Math.random() * teaImages.length);
-            const cacheBuster = "?auto=format&fit=crop&w=600&q=80&rand=" + Date.now();
-            img.src = teaImages[idx] + cacheBuster;
+            // Unsplash random‑featured endpoint + timestamp to bust cache
+            const url = `https://source.unsplash.com/featured/?tea&v=${Date.now()}`;
+            img.src = url;
         }
 
         /* ---------- 2️⃣ TRANSLATIONS (FULL) ---------- */
@@ -532,7 +525,7 @@
                 navFeedback: "ಪ್ರತಿಕ್ರಿಯೆ",
                 aboutTitle: "ನಮ್ಮ ಕಥೆ",
                 aboutPara1: "ಬೆಂಗಳೂರಿನ ಒಂದು ಮಳೆಬನಿ ಸಂಜೆ, <strong>ಪರಮೇಶ್</strong> ಎಂಬ ಚಹಾ ಪ್ರೇಮಿ ಸಾಮಾನ್ಯ ಅಂಗಡಿಯಿಂದ ಬಿಸಿಬಿಸಿ ಚಹಾದ ಮಾಯಕವನ್ನು ಕಂಡರು. ಆ ಬೆಚ್ಚನೆಯ ಅನುಭವವು ಸರಳವಾದ ಆಲೋಚನೆಗೆ ಕಾರಣವಾಯ್ತು: “ಈ ಅನುಭವವನ್ನು ನಗರದಲ್ಲಿ ಎಲ್ಲೆಲ್ಲೂ ತರಬಹುದೇ?”",
-                aboutPara2: "ಭಾರತದ ಚಹಾ ಬೆಳೆಯುವ ಪ್ರದೇಶಗಳ ಪ್ರವಾಸದ ಬಳಿಕ, ಪರಮೇಶ್ ಮಸಾಲೆಯ ಮತ್ತು ಸಿಹಿಯ ಸಮತೋಲನವನ್ನು ಹೊಂದಿದ ಮಿಶ್ರಣವನ್ನು ತಯಾರಿಸಿದರು. ಪರಿಣಾಮವಾಯಿತು <strong>ಪರಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್</strong>.",
+                aboutPara2: "ಭಾರತದ ಚಹಾ ಬೆಳೆಯುವ ಪ್ರದೇಶಗಳ ಪ್ರವಾಸದ ನಂತರ, ಪರಮೇಶ್ ಮಸಾಲೆಯ ಮತ್ತು ಸಿಹಿಯ ಸಮತೋಲನವನ್ನು ಹೊಂದಿದ ಮಿಶ್ರಣವನ್ನು ತಯಾರಿಸಿದರು. ಪರಿಣಾಮವಾಯಿತು <strong>ಪರಮೇಶ್ ಚಾಯ್ ಪಾಯಿಂಟ್</strong>.",
                 aboutCall: "ನಮ್ಮೊಂದಿಗೆ ಸೇರಿ, ಚಾ ಅನುಭವಿಸಿ, ಮತ್ತು ಈ ಪ್ರೀತಿಯನ್ನು ವಿತರಿಸೋಣ.",
                 menuTitle: "ನಾವು ನೀಡುವ ಪದಾರ್ಥಗಳು",
                 menuClassic: "ಕ್ಲಾಸಿಕ್ ಚಾಯ್",
@@ -542,13 +535,13 @@
                 menuSeasonal: "ಸೀಸನಲ್ ಸ್ಪೆಷಲ್ಸ್",
                 menuSeasonalDesc: "ರೋಸ್‑ಪೆಟಲ, ಮ್ಯಾಂಗೋ‑ಮಿಂಟ್ ಮುಂತಾದ ರುಚಿಗಳು ಕಾಲ ಕಾಲಕ್ಕೆ ಬದಲಾಗುತ್ತವೆ.",
                 menuCold: "ಕೋಲ್ಡ್ ಬ್ರು ಚಾಯ್",
-                menuColdDesc: "ಬರಫಿನ ಮೇಲೆ ತೆಂಗು ಮತ್ತು ನಿಂಬು ಉಪ್ಪಿನ ಹನಿಯೊಂದಿಗೆ ನೀಡಲಾಗುತ್ತದೆ.",
+                menuColdDesc: "ಬರಫಿನ ಮೇಲೆ ತೆಂಗು ಮತ್ತು ನಿಂಬು ಉಪ್ಪಿನ ಹನಿಯೊಂದಿಗೆ ನೀಡಲಾಗಿದೆ.",
                 menuSnacks: "ಸ್ವಾದಿಷ್ಟ ಆಹಾರ",
                 menuSnacksDesc: "ಸಮೋಸಾ, ಪನೀರ್ ಟಿಕ್ಕಾ ಹಾಗೂ ಚೀಸ್ ಟೋಸ್ಟ್.",
                 menuDesserts: "ಮಿಠಾಯಿ",
                 menuDessertsDesc: "ಗುಲಾ ಜಮ್ಮುನ್, ರಸಗುಲ್ಲಾ, ಕುಲ್ಫಿ‑ಸ್ಟೈಲ್ ಐಸ್‑ಕ್ರೀಮ್.",
                 contactTitle: "ಸಂಪರ್ಕಿಸಿ",
-                contactName: "ಹೆಸರು",
+                contactName: "ಹೆಸರ्",
                 contactEmail: "ಇಮೇಲ್",
                 contactMessage: "ಸಂದೇಶ",
                 contactSend: "ಸಂದೇಶ ಕಳುಹಿಸಿ",
@@ -571,7 +564,7 @@
                 navContact: "సంప్రదించండి",
                 navFeedback: "ఫీడ్‌బ్యాక్",
                 aboutTitle: "మా కథ",
-                aboutPara1: "బెంగళూరులో ఒక శీతల వర్షపు సాయంత్రం, <strong>పరమేష్</strong> అనే టీ ప్రేమికుడు ఒక సాధారణ దుకాణంలో వేడిగా వడ్డించే చాయ్ మాయను చూసాడు. అది వేడి ఒక ఆలోచనకు దారి చూపింది: “ఈ అనుభూతిని నగరమంతటా తీసుకురాగలమా?”",
+                aboutPara1: "బెంగళూరులో ఒక శీతల వర్షపు సాయంత్రం, <strong>పరమేష్</strong> అనే టీ ప్రేమికుడు ఒక సాధారణ దుకాణంలో వేడిగా వడ్డించే చాయ్ మాయను చూసాడు. అది వేడి ఒక ఆలోచనకు దారి చూపించింది: “ఈ అనుభూతిని నగరమంతటా తీసుకురాగలమా?”",
                 aboutPara2: "భారతదేశంలోని టీ పెరుగుతున్న ప్రాంతాలను సందర్శించిన తర్వాత, పరమేష్ మసాలా మరియు తీపి సమతుల్యంతో కూడిన మిశ్రమాన్ని రూపొందించారు. ఫలితంగా <strong>పరమేష్ చాయ్ పాయింట్</strong> ఏర్పడింది.",
                 aboutCall: "మాతో చేరండి, చాయ్ సేవించండి, అందరికి ఈ ప్రేమను పంచుకుందాం.",
                 menuTitle: "మేము అందించేవి",
@@ -582,7 +575,7 @@
                 menuSeasonal: "సీజనల్ స్పెషల్స్",
                 menuSeasonalDesc: "రోస్‑పెటల్, మాంగో‑మింట్ వంటి రుచులు పునరావృతం అవుతాయి.",
                 menuCold: "కోల్డ్ బ్రూ చాయ్",
-                menuColdDesc: "బ్రక్ మీద ఐస్ తో, ఒక చుక్క నిమ్మకాయతో అందించబడుతుంది.",
+                menuColdDesc: "బ్రాక్ మీద ఐస్ తో, ఒక చుక్క నిమ్మకాయతో అందించబడుతుంది.",
                 menuSnacks: "సావరీ స్నాక్స్",
                 menuSnacksDesc: "సమోసాలు, Paneer టిక్కా, చీజ్ టోస్ట్.",
                 menuDesserts: "స్వీట్ ట్రీట్స్",
@@ -596,7 +589,7 @@
                 contactPhoneLabel: "ఫోన్:",
                 contactEmailLabel: "ఈమెయిల్:",
                 feedbackTitle: "కస్టమర్ ఫీడ్‌బ్యాక్",
-                feedbackIntro: "మీ అభిప్రాయాలు మాకు ముఖ్యం. దయచేసి క్రింది ఫారమ్‌ను పూరించండి.",
+                feedbackIntro: "మీ అభిప్రాయాలు మాకు ముఖ్యం. దయచేసి క్రింది ఫార్మ్‌ను పూరించండి.",
                 footerTagline: "ప్రతి కప్పులో సంతోషాన్ని వడ్డిస్తున్నాము ☕",
                 footerLinksTitle: "Quick Links",
                 footerContactTitle: "Connect",
@@ -611,7 +604,7 @@
                 navContact: "தொடர்பு",
                 navFeedback: "கருத்து",
                 aboutTitle: "எங்கள் கதை",
-                aboutPara1: "பெங்களூருவின் ஒரு மழைக்கால மாலையில், <strong>பர்மேஷ்</strong> என்ற தேநீர் ஆர்வலர், ஒரு சாதாரணக் கடையில் வழங்கப்பட்ட சூடான சாய் மாயத்தை உணர்ந்தார். அந்த வெப்பம் ஒரு எளிய யோசனையைத் தூண்டியது: “இந்த உணர்வை நகரத்தின் ஒவ்வொரு மூலையிலும் கொண்டு வர முடியுமா?”",
+                aboutPara1: "பெங்களோருவின் ஒரு மழைக்கால மாலையில், <strong>பர்மேஷ்</strong> என்ற தேநீர் ஆர்வலர், ஒரு சாதாரணக் கடையில் வழங்கப்பட்ட சூடான சாய் மாயத்தை உணர்ந்தார். அந்த வெப்பம் ஒரு எளிய யோசனையைத் தூண்டியது: “இந்த உணர்வை நகரத்தின் ஒவ்வொரு மூலையிலும் கொண்டு வர முடியுமா?”",
                 aboutPara2: "இந்தியாவின் தேயிலையப் பகுதிகளைப் பயணம் செய்த பிறகு, பர்மேஷ் மசாலா மற்றும் இனிப்பு சமநிலையான ஒரு கலவையை உருவாக்கினார். அதன் விளைவே <strong>பர்மேஷ் சாய் பாயிண்ட்</strong> உருவானது.",
                 aboutCall: "எங்களுடன் இணையுங்கள், தேநீர் அருந்துங்கள், மற்றும் தேநீர் மீதான அன்பைப் பரப்புவோம்.",
                 menuTitle: "நாங்கள் வழங்குகிறோம்",
@@ -661,32 +654,27 @@
         function setLanguage(lang){
             const dict = translations[lang];
             if (!dict) return;
-            // Replace every element that carries a data‑i18n attribute
-            document.querySelectorAll('[data-i18n]').forEach(el => {
+            document.querySelectorAll('[data-i18n]').forEach(el=>{
                 const key = el.dataset.i18n;
                 if (dict[key]) el.innerHTML = dict[key];
             });
-            // Update <html lang="">
             document.documentElement.lang = lang;
-            // Highlight the active button
             document.querySelectorAll('.lang-switcher button')
                     .forEach(btn=> btn.classList.toggle('active', btn.dataset.lang===lang));
-            // Persist choice
-            localStorage.setItem('lang', lang);
-            // Refresh clock label
-            renderClock();
+            localStorage.setItem('lang',lang);
+            renderClock();          // also update the clock label
         }
 
         /* ---------- 5️⃣ INITIALISE ---------- */
-        document.addEventListener('DOMContentLoaded', () => {
-            randomizeImage();                         // 1️⃣ random story picture
-            setLanguage(localStorage.getItem('lang') || 'en'); // 2️⃣ language
-            // 3️⃣ click‑handlers for the language buttons
+        document.addEventListener('DOMContentLoaded',()=>{
+            randomizeImage();                   // fresh story picture
+            setLanguage(localStorage.getItem('lang') || 'en'); // saved language or EN
+            // language‑button click handlers
             document.querySelectorAll('.lang-switcher button')
-                    .forEach(btn => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
-            // 4️⃣ start ticking clock
-            setInterval(renderClock, 1000);
-            renderClock();   // immediate draw
+                    .forEach(btn=> btn.addEventListener('click',()=> setLanguage(btn.dataset.lang)));
+            // start the ticking clock
+            setInterval(renderClock,1000);
+            renderClock();                     // first draw
         });
     </script>
 </body>
